@@ -1,31 +1,54 @@
 <?php
-session_start();
 class User{
-	private $connection;
-	private $data;
-	private $id;
+	private $connection; //for pgsql resource
+	private $data; //raw data dump, not yet used
+	private $id; //student id, not used anymore
 	private $url="https://ta.yrdsb.ca/yrdsb/index.php";
 	private $credentials=array();
-	private $coursedata=array();
-	private $handle;
-	private $courses=array();
-	private $achievement=array();
+	private $coursedata=array();//course codes, names, links
+	private $handle; //cURL handle
+	private $courses=array(); //not used yet
+	private $achievement=array(); //marks in a decimal
+	private $weighting=array();
+	private $lastUpdated;
 
 	private function connect(){
 		// $this->connection=pg_connect();
 	}
 
-	public function __construct($username, $password=null){
+	public function __construct($username=null, $password=null){
 		// $this->connect();
 		$this->credentials['username']=$username;
 		$this->credentials['password']=$password;
 		$this->handle=curl_init();
-		// curl_setopt($handle, CURLOPT_VERBOSE, TRUE);
+		curl_setopt($handle, CURLOPT_VERBOSE, TRUE);
 		// curl_setopt($this->handle, CURLOPT_HEADER, 1);
 		curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt');
-		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt');
+		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt'); //there's probably a security hole in here somewhere
+		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt'); //but teachassist seems to cover it, just reauth every time
+	}
+
+	public function login(){
+		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'), $this->handle);
+
+		if(strpos(curl_getinfo($this->handle)['url'], "error_message=3") !== false){
+			$this->error("Invalid credentials");
+			curl_close($this->handle); //memory leak...?
+			return false;
+		}
+		return true;
+	}
+
+	public function is_expired(){
+		if(time()-$this->lastUpdated>1800){
+			return true;
+		}
+		return false;
+	}
+
+	private function error($message){
+		echo $message;
 	}
 
 	private function curl($method, $url, $prop, $handle){
@@ -42,10 +65,8 @@ class User{
 		return curl_exec($handle);
 		// return $result;
 	}
-	public function fetch(){
 
-		//exec main page
-		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'), $this->handle);
+	public function fetch(){ //master reload EVERYTHING
 
 		//fetch links
 		$matches=array();
@@ -56,6 +77,7 @@ class User{
 
 		//parse links
 		for ($i=0; $i < count($this->coursedata[2]); $i++) { 
+			echo 'Run: '.$i;
 			if(strpos($this->coursedata[2][$i], "Please") !== false)
 				continue; // Marks have been hidden, ie: "Please see your teacher for..."
 
@@ -70,25 +92,22 @@ class User{
 			$marks=$marks->getElementsByTagName("tr"); //overwrite because the original is not important
 
 			$this->achievement[$this->coursedata[0][$i]]=array(); //we're using the course name as the index
-			for ($j=1; $j < $marks->length; $j++) { //the first iteration is simply the table titles so skip that
+			$this->weighting[$this->coursedata[0][$i]]=array();
+			for ($j=1; $j < 5; $j++) { //the first iteration is simply the table titles so skip that, hard stop at application (5)
 				//ku/ti/comm/app/other/final, each one of these iterations cycles to the next category
 				$container=$marks->item($j)->getElementsByTagName("td");
-				$this->achievement[$this->coursedata[0][$i]][$j]=$container->item($container->length-1)->textContent;
-			} //GOT IT WOOOO
+				$this->achievement[$this->coursedata[0][$i]][$j]=floatval($container->item($container->length-1)->textContent)/100; //mark is always the last one
+				$this->weighting[$this->coursedata[0][$i]][$j]=floatval($container->item(1)->textContent)/100; //weighting is always the second one
+			}
 		}
-		echo "<pre>";
-		var_dump($this->achievement);
-		echo "</pre>";
 
 		// foreach($this->courses as $course){
 		// 	echo '<pre>';
 		// 	var_dump($course);
 		// 	echo '</pre>';
 		// }
-
+		$this->lastUpdated=time();
 	}
-
-
 }
 /* Username | Password (hashed) | coursedata | Marks (array ku/ti/comm/app/other) 
 *  reconsider this data structure
