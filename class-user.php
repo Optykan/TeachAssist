@@ -12,62 +12,75 @@ class User{
 	private $weighting=array();
 	private $lastUpdated;
 
-	private function connect(){
-		// $this->connection=pg_connect();
-	}
-
 	public function __construct($username=null, $password=null){
 		// $this->connect();
 		$this->credentials['username']=$username;
 		$this->credentials['password']=$password;
 		$this->handle=curl_init();
-		curl_setopt($handle, CURLOPT_VERBOSE, TRUE);
+		curl_setopt($this->handle, CURLOPT_VERBOSE, TRUE);
 		// curl_setopt($this->handle, CURLOPT_HEADER, 1);
 		curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt'); //there's probably a security hole in here somewhere
 		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt'); //but teachassist seems to cover it, just reauth every time
 	}
+	public function __sleep(){
+		curl_close($this->handle);
+		return array_keys(get_object_vars($this));
+	}
+	public function __wakeup(){
+		var_dump($this->lastUpdated);
+		$this->handle=curl_init();
+		curl_setopt($this->handle, CURLOPT_VERBOSE, TRUE);
+		// curl_setopt($this->handle, CURLOPT_HEADER, 1);
+		curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt'); //there's probably a security hole in here somewhere
+		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt'); //but teachassist seems to cover it, just reauth every time
+		$this->update();
+	}
 
 	public function login(){
-		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'), $this->handle);
+		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'));
 
 		if(strpos(curl_getinfo($this->handle)['url'], "error_message=3") !== false){
 			$this->error("Invalid credentials");
-			curl_close($this->handle); //memory leak...?
 			return false;
 		}
-		return true;
+		return $response;
 	}
 
-	public function is_expired(){
-		if(time()-$this->lastUpdated>1800){
-			return true;
+	public function update($force=false){
+		if($force || time()-$this->lastUpdated>1800){ //10 minute cache
+			header("X-Load-From-Cache: False");
+			$this->fetch();
+		}else{
+			header("X-Load-From-Cache: True");
 		}
-		return false;
+
 	}
 
 	private function error($message){
 		echo $message;
 	}
 
-	private function curl($method, $url, $prop, $handle){
+	private function curl($method, $url, $prop){
 		$prop=http_build_query($prop);
 		if($method=='post'){
-			curl_setopt($handle, CURLOPT_URL, $url);
-			curl_setopt($handle, CURLOPT_POST, 1);
-			curl_setopt($handle, CURLOPT_POSTFIELDS, $prop);
+			curl_setopt($this->handle, CURLOPT_URL, $url);
+			curl_setopt($this->handle, CURLOPT_POST, 1);
+			curl_setopt($this->handle, CURLOPT_POSTFIELDS, $prop);
 		}else{
-			curl_setopt($handle, CURLOPT_URL, $url.$prop);
-			curl_setopt($handle, CURLOPT_POST, 0);
-			curl_setopt($handle, CURLOPT_POSTFIELDS, null);
+			curl_setopt($this->handle, CURLOPT_URL, $url.$prop);
+			curl_setopt($this->handle, CURLOPT_POST, 0);
+			curl_setopt($this->handle, CURLOPT_POSTFIELDS, null);
 		}
-		return curl_exec($handle);
+		return curl_exec($this->handle);
 		// return $result;
 	}
 
 	public function fetch(){ //master reload EVERYTHING
-
+		$response=$this->login();
 		//fetch links
 		$matches=array();
 		preg_match_all('/([A-Z]{3}[0-9][A-Z][0-z]-[0-9]{2}) : (.*)/', $response, $matches);
@@ -77,12 +90,11 @@ class User{
 
 		//parse links
 		for ($i=0; $i < count($this->coursedata[2]); $i++) { 
-			echo 'Run: '.$i;
 			if(strpos($this->coursedata[2][$i], "Please") !== false)
 				continue; // Marks have been hidden, ie: "Please see your teacher for..."
 
 			$dom=new DOMDocument();
-			@$dom->loadHTML($this->curl('get', 'https://ta.yrdsb.ca/gamma-live/students/'.$this->coursedata[2][$i], array(), $this->handle)); //suppress
+			@$dom->loadHTML($this->curl('get', 'https://ta.yrdsb.ca/gamma-live/students/'.$this->coursedata[2][$i], array())); //suppress the mass of commas
 			$tables=$dom->getElementsByTagName('table');
 			$marks=$tables->item($tables->length-2);
 
