@@ -10,6 +10,7 @@ if($_POST['action']=='login'){
 	require_once 'class-user.php';
 	$user = new User($_POST['username'], $_POST['password']);
 	if($user->login()){
+		$user->update();
 		$_SESSION['data']=serialize($user);
 		header("Location: dashboard.php");
 		exit(0);
