@@ -1,0 +1,29 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+$grey: #53585B;
+.os{
+	font-family: 'Open Sans', sans-serif;
+}
+.nav-side{
+	.nav-container{
+		margin:0;
+		list-style-type:none;
+		.nav-header{
+			text-align:center;
+			background-color:#1D9E75;
+			padding:1rem;
+			color:white;
+			@extend .os;
+		}
+		.nav-element{
+			text-align:center;
+			.fa{
+				font-size:3rem;
+				color: $grey;
+			}
+			p{
+				color: $grey;
+				@extend .os;
+			}
+		}
+	}
+}

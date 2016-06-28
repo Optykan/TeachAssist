@@ -1,0 +1,21 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans";
+.os, .nav-side .nav-container .nav-header, .nav-side .nav-container .nav-element p {
+  font-family: 'Open Sans', sans-serif; }
+
+.nav-side .nav-container {
+  margin: 0;
+  list-style-type: none; }
+  .nav-side .nav-container .nav-header {
+    text-align: center;
+    background-color: #1D9E75;
+    padding: 1rem;
+    color: white; }
+  .nav-side .nav-container .nav-element {
+    text-align: center; }
+    .nav-side .nav-container .nav-element .fa {
+      font-size: 3rem;
+      color: #53585B; }
+    .nav-side .nav-container .nav-element p {
+      color: #53585B; }
+
+/*# sourceMappingURL=dashboard.css.map */

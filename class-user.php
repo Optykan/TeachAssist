@@ -1,10 +1,10 @@
 <?php
 class User{
+	public $credentials=array();
 	private $connection; //for pgsql resource
 	private $data; //raw data dump, not yet used
 	private $id; //student id, not used anymore
 	private $url="https://ta.yrdsb.ca/yrdsb/index.php";
-	private $credentials=array();
 	private $coursedata=array();//course codes, names, links
 	private $handle; //cURL handle
 	private $courses=array(); //not used yet
@@ -29,21 +29,17 @@ class User{
 		return array_keys(get_object_vars($this));
 	}
 	public function __wakeup(){
-		var_dump($this->lastUpdated);
-		$this->handle=curl_init();
-		curl_setopt($this->handle, CURLOPT_VERBOSE, TRUE);
-		// curl_setopt($this->handle, CURLOPT_HEADER, 1);
-		curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt'); //there's probably a security hole in here somewhere
-		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt'); //but teachassist seems to cover it, just reauth every time
+		if(isset($this->credentials['password']) && isset($this->credentials['username'])){
+			$this->__construct($this->credentials['username'], $this->credentials['password']);
+		}
 		$this->update();
 	}
 
 	public function login(){
 		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'));
 
-		if(strpos(curl_getinfo($this->handle)['url'], "error_message=3") !== false){
+		if(strpos(curl_getinfo($this->handle)['url'], "ta.yrdsb.ca/yrdsb/index.php") !== false){
+			//cURL was not redirected to the dashboard
 			$this->error("Invalid credentials");
 			return false;
 		}
