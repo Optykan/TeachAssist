@@ -1,21 +1,63 @@
-@import "https://fonts.googleapis.com/css?family=Open+Sans";
-.os, .nav-side .nav-container .nav-header, .nav-side .nav-container .nav-element p {
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300";
+.os, p, .row .nav-side .nav-container .nav-header {
   font-family: 'Open Sans', sans-serif; }
 
-.nav-side .nav-container {
+ul {
   margin: 0;
-  list-style-type: none; }
-  .nav-side .nav-container .nav-header {
-    text-align: center;
-    background-color: #1D9E75;
-    padding: 1rem;
-    color: white; }
-  .nav-side .nav-container .nav-element {
-    text-align: center; }
-    .nav-side .nav-container .nav-element .fa {
-      font-size: 3rem;
-      color: #53585B; }
-    .nav-side .nav-container .nav-element p {
-      color: #53585B; }
+  padding: 0; }
+
+hr {
+  border-color: #ccc; }
+
+p {
+  margin: 0; }
+
+.row {
+  display: flex; }
+  .row .nav-side {
+    flex: 1 1 200px; }
+    .row .nav-side .nav-container {
+      list-style-type: none; }
+      .row .nav-side .nav-container .nav-header {
+        text-align: center;
+        background-color: #1D9E75;
+        padding: 1.5rem;
+        font-size: 1.25rem;
+        color: white; }
+      .row .nav-side .nav-container .nav-element {
+        text-align: center;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #ccc; }
+        .row .nav-side .nav-container .nav-element:last-child {
+          border-bottom: none; }
+        .row .nav-side .nav-container .nav-element .course-mark {
+          font-size: 2.5rem;
+          color: #53585B; }
+        .row .nav-side .nav-container .nav-element p {
+          color: #53585B; }
+
+.content {
+  flex: 1 1 calc(100% - 200px);
+  padding: 1rem;
+  box-sizing: padding-box;
+  background-color: #E4EBF3; }
+  .content .top-bar {
+    display: flex;
+    list-style: none;
+    align-items: center; }
+    .content .top-bar .top-element {
+      padding: 0 1rem; }
+      .content .top-bar .top-element .now-viewing {
+        font-size: 1.5rem; }
+      .content .top-bar .top-element:nth-child(2) {
+        margin-left: auto; }
+      .content .top-bar .top-element .ion-ios-bell-outline {
+        font-size: 2rem; }
+      .content .top-bar .top-element .ion-ios-person-outline {
+        font-size: 3rem; }
 
 /*# sourceMappingURL=dashboard.css.map */

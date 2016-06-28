@@ -1,29 +1,79 @@
-@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300';
 $grey: #53585B;
 .os{
 	font-family: 'Open Sans', sans-serif;
 }
-.nav-side{
-	.nav-container{
-		margin:0;
-		list-style-type:none;
-		.nav-header{
-			text-align:center;
-			background-color:#1D9E75;
-			padding:1rem;
-			color:white;
-			@extend .os;
-		}
-		.nav-element{
-			text-align:center;
-			.fa{
-				font-size:3rem;
-				color: $grey;
-			}
-			p{
-				color: $grey;
+ul{
+	margin:0;
+	padding:0;
+}
+hr{
+	border-color:#ccc;
+}
+p{
+	margin:0;
+	@extend .os;
+}
+.row{
+	display:flex;
+	.nav-side{
+		flex: 1 1 200px;
+		.nav-container{
+			list-style-type:none;
+			.nav-header{
+				text-align:center;
+				background-color:#1D9E75;
+				padding:1.5rem;
+				font-size: 1.25rem;
+				color:white;
 				@extend .os;
 			}
+			.nav-element{
+				text-align:center;
+				height:150px;
+				display:flex;
+				flex-direction:column;
+				align-items:center;
+				justify-content:center;
+				border-bottom: 1px solid #ccc;
+				&:last-child{
+					border-bottom:none;
+				}
+				.course-mark{
+					font-size:2.5rem;
+					color: $grey;
+				}
+				p{
+					color: $grey;
+				}
+			}
 		}
+	}
+}
+
+.content{
+	flex: 1 1 calc(100% - 200px);
+	padding:1rem;
+	box-sizing:padding-box;
+	background-color: #E4EBF3;
+	.top-bar{
+		display: flex;
+		list-style:none;
+		align-items:center;
+		.top-element{
+			padding: 0 1rem;
+			.now-viewing{
+				font-size:1.5rem;
+			}
+			&:nth-child(2){
+				margin-left:auto;
+			}
+			.ion-ios-bell-outline{
+				font-size:2rem;
+			}
+			.ion-ios-person-outline{
+				font-size:3rem;
+			}
+		}	
 	}
 }
