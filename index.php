@@ -1,5 +1,10 @@
 <?php 
-
+session_start();
+$data=unserialize($_SESSION['user']);
+if(isset($data->credentials['password']){
+	header("Location: dashboard.php");
+	exit(0);
+}
 ?>
 
 <!DOCTYPE html>
