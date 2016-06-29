@@ -1,0 +1,127 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300";
+html, body {
+  height: 100%; }
+
+.os, p, .wrapper .nav-side .nav-container .nav-header, .content .overview .block .circle, .content .overview .block .achivement, .chart-container .chart .chart-header {
+  font-family: 'Open Sans', sans-serif; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+hr {
+  border-color: #ccc; }
+
+p {
+  margin: 0; }
+
+.wrapper {
+  height: 100%;
+  display: flex; }
+  .wrapper .nav-side {
+    flex: 1 1 200px; }
+    .wrapper .nav-side .nav-container {
+      list-style-type: none; }
+      .wrapper .nav-side .nav-container .nav-header {
+        text-align: center;
+        background-color: #1D9E75;
+        padding: 1.5rem;
+        font-size: 1.25rem;
+        color: white; }
+      .wrapper .nav-side .nav-container .nav-element {
+        border-bottom: 1px solid #ccc; }
+        .wrapper .nav-side .nav-container .nav-element a {
+          text-align: center;
+          height: 150px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none; }
+        .wrapper .nav-side .nav-container .nav-element:last-child {
+          border-bottom: none; }
+        .wrapper .nav-side .nav-container .nav-element .course-mark {
+          font-size: 2.5rem;
+          color: #53585B; }
+        .wrapper .nav-side .nav-container .nav-element p {
+          color: #53585B; }
+
+.content {
+  flex: 1 1 calc(100% - 200px);
+  padding: 0.6rem 2rem;
+  box-sizing: padding-box;
+  background-color: #E4EBF3; }
+  .content .top-bar {
+    display: flex;
+    list-style: none;
+    align-items: center; }
+    .content .top-bar .top-element {
+      padding: 0 1rem; }
+      .content .top-bar .top-element .now-viewing {
+        font-size: 1.5rem; }
+      .content .top-bar .top-element:nth-child(2) {
+        margin-left: auto; }
+      .content .top-bar .top-element .ion-ios-bell-outline {
+        font-size: 2rem; }
+      .content .top-bar .top-element .ion-ios-person-outline {
+        font-size: 3rem; }
+  .content .overview {
+    margin-top: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    position: relative;
+    flex-wrap: wrap; }
+    .content .overview .block {
+      background-color: white;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      outline: 1px solid #ccc;
+      justify-content: center;
+      flex: 1 0 0; }
+      .content .overview .block:last-child {
+        border: none; }
+      .content .overview .block .circle {
+        flex: 0 0 auto;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 100px;
+        font-size: 1.5rem;
+        color: white; }
+      .content .overview .block .achivement {
+        padding: 1rem;
+        margin-left: 10%;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        text-align: center; }
+      .content .overview .block.term .circle {
+        background-color: #40ACC6; }
+      .content .overview .block.course .circle {
+        background-color: #FFB901; }
+      .content .overview .block.status .circle {
+        background-color: #87D04D; }
+        .content .overview .block.status .circle .icon {
+          font-size: 5rem; }
+          .content .overview .block.status .circle .icon:before {
+            line-height: 100px; }
+
+.chart-container {
+  display: flex;
+  flex-wrap: wrap; }
+  .chart-container .chart {
+    flex: 0 0 calc(50% - 1rem);
+    background-color: white;
+    margin-top: 2rem; }
+    .chart-container .chart:first-child {
+      margin-right: 1rem; }
+    .chart-container .chart:last-child {
+      margin-left: 1rem; }
+    .chart-container .chart .chart-header {
+      background-color: #F8F9FE;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ccc; }
+
+/*# sourceMappingURL=dashboard.css.map */
