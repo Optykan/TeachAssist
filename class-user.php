@@ -1,13 +1,13 @@
 <?php
 class User{
-	public $weighting=array();
+	public $weighting=array(); //whats the weight
 	public $coursedata=array();//course codes, names, links
 	public $achievement=array(); //marks in a decimal
 	public $credentials=array();
+	public $courseCount;
+	private $temp=array(); //for mark comparison
 	private $connection; //for pgsql resource
 	private $data; //raw data dump, not yet used
-	private $id; //student id, not used anymore
-	private $url="https://ta.yrdsb.ca/yrdsb/index.php";
 	private $handle; //cURL handle
 	private $courses=array(); //not used yet
 	private $lastUpdated;
@@ -34,25 +34,65 @@ class User{
 		}
 		$this->update();
 	}
-	public function getAverage($course){
+	public function getCourse($index, $prop){
+		switch ($prop) {
+			case 'name':
+			return $this->coursedata[1][$index];
+			break;
+			case 'id':
+			return $this->coursedata[0][$index];
+			break;
+			default:
+				# code...
+			break;
+		}
+		return false;
+	}
+	public function toName($course){
+		$index=array_search($course, $this->coursedata[0]);
+		return $this->coursedata[1][$index];
+	}
+	public function getTermAverage($course){
 		if(!isset($this->achievement[$course][1]))
 			return false;
 		$total=0;
-		for($i=1; $i<=count($this->achievement[$course]); $i++){
+		for($i=1; $i<= 4; $i++){ 
+		//we're assuming that there's only ku/ti/comm/app (oops?)
 			$total+=$this->achievement[$course][$i]*$this->weighting[$course][$i];
 		}
 		return $total;
 	}
+	public function getCourseAverage($course){
+		if(!isset($this->achievement[$course][1]))
+			return false;
+		$total=0;
+		$examWeighting=end($this->weighting[$course]);
+		for($i=1; $i<=4; $i++){ //hopefully it ends at app
+			$total+=$this->achievement[$course][$i]*round((1.0-$examWeighting)*$this->weighting[$course][$i], 2);
+		}
+		$total+=end($this->achievement[$course])*$examWeighting;
+		return $total;
+	}
+	public function getAverage($course){
+		if(end($this->achievement[$course]) != 0){
+			//we're trusting that nobody get's a 0 on their exam
+			return $this->getCourseAverage($course);
+		}
+		return $this->getTermAverage($course);
+	}
+
 	public function getLastMark($course){
-		return 0;
+		$last=end($this->achievement[$course]);
+		if(!isset($last)){
+			return 0;
+		}
+		return $last;
 	}
 
 	public function login(){
-		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'));
-
-		if(strpos(curl_getinfo($this->handle)['url'], "ta.yrdsb.ca/yrdsb/index.php") !== false){
+		$response=$this->curl('post', "https://ta.yrdsb.ca/yrdsb/index.php", array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'));
+		if(preg_match("/ta\.yrdsb\.ca\/(gamma-live)?(yrdsb)?\/index\.php/", curl_getinfo($this->handle)['url']) === 1){
 			//cURL was not redirected to the dashboard
-			$this->error("Invalid credentials");
 			return false;
 		}
 		return $response;
@@ -60,8 +100,8 @@ class User{
 
 	public function update($force=false){
 		var_dump($this->lastUpdated);
-		if($force || time()-$this->lastUpdated>41400){ //30 minute cache
-			header("X-Load-From-Cache: False, ".time()." - ".$this->lastUpdated);
+		if($force || time()-$this->lastUpdated>600){ //10 minute cache (41400)
+			header("X-Load-From-Cache: False");
 			//but somehow time is appearing 12 hours in the past?
 			$this->fetch();
 		}else{
@@ -114,10 +154,13 @@ class User{
 
 			$this->achievement[$this->coursedata[0][$i]]=array(); //we're using the course name as the index
 			$this->weighting[$this->coursedata[0][$i]]=array();
-			for ($j=1; $j < 5; $j++) { //the first iteration is simply the table titles so skip that, hard stop at application (5)
+			for ($j=1; $j < $marks->length; $j++) { //the first iteration is simply the table titles so skip that
 				//ku/ti/comm/app/other/final, each one of these iterations cycles to the next category
+				if($j==5)
+					continue; //skip the 'other' category
 				$container=$marks->item($j)->getElementsByTagName("td");
 				$this->achievement[$this->coursedata[0][$i]][$j]=floatval($container->item($container->length-1)->textContent)/100; //mark is always the last one
+				
 				$this->weighting[$this->coursedata[0][$i]][$j]=floatval($container->item(1)->textContent)/100; //weighting is always the second one
 			}
 		}
@@ -127,8 +170,8 @@ class User{
 		// 	var_dump($course);
 		// 	echo '</pre>';
 		// }
+		$this->courseCount=count($this->coursedata);
 		$this->lastUpdated=time();
-		var_dump($this->lastUpdated);
 	}
 }
 /* Username | Password (hashed) | coursedata | Marks (array ku/ti/comm/app/other) 
