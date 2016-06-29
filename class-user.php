@@ -1,15 +1,15 @@
 <?php
 class User{
+	public $weighting=array();
+	public $coursedata=array();//course codes, names, links
+	public $achievement=array(); //marks in a decimal
 	public $credentials=array();
 	private $connection; //for pgsql resource
 	private $data; //raw data dump, not yet used
 	private $id; //student id, not used anymore
 	private $url="https://ta.yrdsb.ca/yrdsb/index.php";
-	private $coursedata=array();//course codes, names, links
 	private $handle; //cURL handle
 	private $courses=array(); //not used yet
-	private $achievement=array(); //marks in a decimal
-	private $weighting=array();
 	private $lastUpdated;
 
 	public function __construct($username=null, $password=null){
@@ -34,6 +34,18 @@ class User{
 		}
 		$this->update();
 	}
+	public function getAverage($course){
+		if(!isset($this->achievement[$course][1]))
+			return false;
+		$total=0;
+		for($i=1; $i<=count($this->achievement[$course]); $i++){
+			$total+=$this->achievement[$course][$i]*$this->weighting[$course][$i];
+		}
+		return $total;
+	}
+	public function getLastMark($course){
+		return 0;
+	}
 
 	public function login(){
 		$response=$this->curl('post', $this->url, array('subject_id'=>0, 'username'=>$this->credentials['username'], 'password'=>$this->credentials['password'], 'submit'=>'Login'));
@@ -47,13 +59,14 @@ class User{
 	}
 
 	public function update($force=false){
-		if($force || time()-$this->lastUpdated>1800){ //10 minute cache
-			header("X-Load-From-Cache: False");
+		var_dump($this->lastUpdated);
+		if($force || time()-$this->lastUpdated>41400){ //30 minute cache
+			header("X-Load-From-Cache: False, ".time()." - ".$this->lastUpdated);
+			//but somehow time is appearing 12 hours in the past?
 			$this->fetch();
 		}else{
 			header("X-Load-From-Cache: True");
 		}
-
 	}
 
 	private function error($message){
@@ -115,6 +128,7 @@ class User{
 		// 	echo '</pre>';
 		// }
 		$this->lastUpdated=time();
+		var_dump($this->lastUpdated);
 	}
 }
 /* Username | Password (hashed) | coursedata | Marks (array ku/ti/comm/app/other) 

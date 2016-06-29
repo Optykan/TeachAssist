@@ -7,20 +7,21 @@
 	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
 	<script type="text/javascript" src="/js/vendor/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 	<!-- <script type="text/javascript" src="/js/vendor/foundation.min.js"></script> -->
 </head>
 <body>
 
-	<div class="row">
+	<div class="row wrapper">
 		<div class="nav-side">
 			<ul class="nav-container">
 				<li class="nav-header">TeachAssist</li>
 				<li class="nav-element">
-					<p class="course-mark">98.0%</p>
+					<p class="course-mark">3.0%</p>
 					<p class="course-name">Computer Engineering Technology</p>
 				</li>				
 				<li class="nav-element">
-					<p class="course-mark">93.5%</p>
+					<p class="course-mark">7.5%</p>
 					<p class="course-name">English</p>
 				</li>
 				<li class="nav-element"></li>
@@ -40,7 +41,37 @@
 				</li>
 			</ul>
 			<hr/>
+			<div class="overview">
+				<div class="block term">
+					<div class="circle">
+						98%
+					</div>
+					<p class="achivement">Term Mark</p>
+				</div>
+				<div class="block course">	
+					<!-- includes exams -->
+					<div class="circle">98%</div>
+					<p class="achivement">Course Mark</p>
+				</div>
+				<div class="block status">
+					<div class="circle">
+						<i class="icon ion-ios-checkmark-empty"></i>
+					</div>
+					<p class="achivement">Up to date</p>
+					<!-- up-to-date or hidden	 -->
+				</div>
+			</div>
+			<div class="chart-container">
+				<div class="chart">
+					<div class="chart-header">Achievement</div>
+					<canvas id="achievementLine"></canvas>
+				</div>
+				<div class="chart">
+					<div class="chart-header">Weighting</div>
+					<canvas id="weightDonut"></canvas>
+				</div>
+			</div>
 		</div>
-	</div>
-</body>
-</html>
+		<script type="text/javascript" src="/js/app.js"></script>
+	</body>
+	</html>
