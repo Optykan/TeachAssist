@@ -29,13 +29,15 @@ p {
         font-size: 1.25rem;
         color: white; }
       .wrapper .nav-side .nav-container .nav-element {
-        text-align: center;
-        height: 150px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         border-bottom: 1px solid #ccc; }
+        .wrapper .nav-side .nav-container .nav-element a {
+          text-align: center;
+          height: 150px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none; }
         .wrapper .nav-side .nav-container .nav-element:last-child {
           border-bottom: none; }
         .wrapper .nav-side .nav-container .nav-element .course-mark {
@@ -102,6 +104,8 @@ p {
         background-color: #87D04D; }
         .content .overview .block.status .circle .icon {
           font-size: 5rem; }
+          .content .overview .block.status .circle .icon:before {
+            line-height: 100px; }
 
 .chart-container {
   display: flex;

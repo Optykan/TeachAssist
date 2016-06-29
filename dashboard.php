@@ -11,7 +11,7 @@ $user=unserialize($_SESSION['data']);
 if(isset($_GET['course'])){
 	$course=$_GET['course'];
 }else{
-	$course = reset($user->coursedata);
+	$course = $user->getCourse(0, 'id');
 	if(!isset($course)){
 		//no courses oops
 	}
@@ -38,12 +38,14 @@ echo '</pre>';
 		<div class="nav-side">
 			<ul class="nav-container">
 				<li class="nav-header">TeachAssist</li>
-				<?php for($i=0; $i<count($user->coursedata); $i++): ?>
+				<?php for($i=0; $i<$user->courseCount; $i++): ?>
 					<li class="nav-element">
-						<?php $mark=$user->getAverage($user->coursedata[0][$i])?>
-						<?php $mark = $mark ? $mark : $user->getLastMark($user->coursedata[0][$i])?>
-						<p class="course-mark"><?=round($mark*100, 2)?>%</p>
-						<p class="course-name"><?=$user->coursedata[1][$i]?></p>
+						<a href="dashboard.php?course=<?=$user->getCourse($i,'id')?>">
+							<?php $mark=$user->getAverage($user->getCourse($i, 'id'))?>
+							<?php $mark = $mark ? $mark : $user->getLastMark($user->getCourse($i, 'id'))?>
+							<p class="course-mark"><?=round($mark*100, 1)?>%</p>
+							<p class="course-name"><?=$user->getCourse($i, 'name')?></p>
+						</a>
 					</li>
 				<?php endfor;?>
 				<!-- <li class="nav-element">
@@ -57,7 +59,7 @@ echo '</pre>';
 		<div class="content">
 			<ul class="top-bar">
 				<li class="top-element">
-					<p class="now-viewing">Now Viewing: Computer Engineering Technology</p>
+					<p class="now-viewing">Now Viewing: <?=$user->toName($course)?></p>
 				</li>
 				<li class="top-element">
 					<i class="icon ion-ios-bell-outline"></i>
@@ -69,14 +71,12 @@ echo '</pre>';
 			<hr/>
 			<div class="overview">
 				<div class="block term">
-					<div class="circle">
-						98%
-					</div>
+					<div class="circle"><?=round($user->getTermAverage($course)*100,2)?>%</div>
 					<p class="achivement">Term Mark</p>
 				</div>
 				<div class="block course">	
 					<!-- includes exams -->
-					<div class="circle">98%</div>
+					<div class="circle"><?=round($user->getCourseAverage($course)*100,2)?>%</div>
 					<p class="achivement">Course Mark</p>
 				</div>
 				<div class="block status">
@@ -101,3 +101,4 @@ echo '</pre>';
 		<script type="text/javascript" src="/js/app.js"></script>
 	</body>
 	</html>
+	<?php $_SESSION['data']=serialize($user);?>

@@ -37,13 +37,16 @@ canvas{
 				@extend .os;
 			}
 			.nav-element{
-				text-align:center;
-				height:150px;
-				display:flex;
-				flex-direction:column;
-				align-items:center;
-				justify-content:center;
 				border-bottom: 1px solid #ccc;
+				a{
+					text-align:center;
+					height:150px;
+					display:flex;
+					flex-direction:column;
+					align-items:center;
+					justify-content:center;
+					text-decoration: none;
+				}
 				&:last-child{
 					border-bottom:none;
 				}
@@ -130,6 +133,9 @@ canvas{
 				background-color: #87D04D;
 				.icon{
 					font-size:5rem;
+					&:before{
+						line-height:100px;
+					}
 				}
 			}
 		}
