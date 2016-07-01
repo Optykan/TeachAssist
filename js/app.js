@@ -1,28 +1,6 @@
 var achievementLine = document.getElementById("achievementLine");
 var weightDonut = document.getElementById("weightDonut");
-var weightData={
-	labels: ["K/U",
-	"T/I",
-	"Comm",
-	"App"
-	],
-	datasets: [
-	{
-		data: [0.1, 0.2, 0.3, 0.4],
-		backgroundColor: [
-		"#f1c40f",
-		"#2ecc71",
-		"#9b59b6",
-		"#e67e22"
-		],
-		hoverBackgroundColor: [
-		"#f1c40f",
-		"#2ecc71",
-		"#9b59b6",
-		"#e67e22"
-		]
-	}]
-};
+
 var achievementData = {
 	labels: ["January", "February", "March", "April", "May", "June", "July"],
 	datasets: [

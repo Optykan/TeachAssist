@@ -108,8 +108,7 @@ p {
             line-height: 100px; }
 
 .chart-container {
-  display: flex;
-  flex-wrap: wrap; }
+  display: flex; }
   .chart-container .chart {
     flex: 0 0 calc(50% - 1rem);
     background-color: white;

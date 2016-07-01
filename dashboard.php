@@ -1,4 +1,12 @@
 <?php
+function jsMap($array){
+	$examweight=$array[6];
+	for ($i=1; $i < 6; $i++) { 
+		$array[$i]=round((1.0-$examweight)*$array[$i], 2)*100;
+	}
+	$array[6]=$examweight*100;
+	return array_values($array);
+}
 session_start();
 if(!isset($_SESSION['data'])){ 
 	//direct access without login denied
@@ -30,6 +38,34 @@ echo '</pre>';
 	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
 	<script type="text/javascript" src="/js/vendor/jquery.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+	<script type="text/javascript">
+		var weightData={
+			labels: ["K/U",
+			"T/I",
+			"Comm",
+			"App",
+			"Final"
+			],
+			datasets: [
+			{
+				data: <?=json_encode(jsMap($user->weighting[$course]))?>,
+				backgroundColor: [
+				"#f1c40f",
+				"#2ecc71",
+				"#9b59b6",
+				"#e67e22",
+				"#95a5a6",
+				],
+				hoverBackgroundColor: [
+				"#f1c40f",
+				"#2ecc71",
+				"#9b59b6",
+				"#e67e22",
+				"#95a5a6"
+				]
+			}]
+		};
+	</script>
 	<!-- <script type="text/javascript" src="/js/vendor/foundation.min.js"></script> -->
 </head>
 <body>

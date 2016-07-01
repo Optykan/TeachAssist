@@ -143,7 +143,7 @@ canvas{
 }
 .chart-container{
 	display:flex;
-	flex-wrap:wrap;
+	// flex-wrap:wrap;
 	.chart{
 		flex: 0 0 calc(50% - 1rem);
 		background-color:white;
