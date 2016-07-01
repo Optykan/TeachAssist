@@ -19,5 +19,11 @@ if($_POST['action']=='login'){
 	else{
 		header("Location: index.php?error=1");
 	}
+}else if($_POST['action']=='dump'){
+	if(isset($_SESSION['data'])){
+		var_dump($_SESSION['data']);
+	}else{
+		echo 'nothing to dump';
+	}
 }
 ?>
