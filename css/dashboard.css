@@ -1,9 +1,28 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300";
+.os, .tooltip .tooltiptext, p, .wrapper .nav-side .nav-container .nav-header, .content .overview .block .circle, .content .overview .block .achivement, .chart-container .chart .chart-header {
+  font-family: 'Open Sans', sans-serif; }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1; }
+  .tooltip:hover .tooltiptext {
+    visibility: visible; }
+
 html, body {
   height: 100%; }
-
-.os, p, .wrapper .nav-side .nav-container .nav-header, .content .overview .block .circle, .content .overview .block .achivement, .chart-container .chart .chart-header {
-  font-family: 'Open Sans', sans-serif; }
 
 ul {
   margin: 0;
