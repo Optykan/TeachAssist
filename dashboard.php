@@ -108,7 +108,11 @@ echo '</pre>';
 			<div class="overview">
 				<div class="block term">
 					<div class="circle"><?=round($user->getTermAverage($course)*100,2)?>%</div>
-					<p class="achivement">Term Mark</p>
+					<p class="achivement">Term Mark
+						<div class="tooltip"><i class="icon ion-ios-help-outline"></i>
+							<span class="tooltiptext">There may be a discrepancy between this and TeachAssist, ultimately TeachAssist is correct</span>
+						</div>
+					</p>
 				</div>
 				<div class="block course">	
 					<!-- includes exams -->

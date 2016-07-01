@@ -1,11 +1,10 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans:300';
+@import 'util';
 $grey: #53585B;
 html, body{
 	height:100%;
 }
-.os{
-	font-family: 'Open Sans', sans-serif;
-}
+
 ul{
 	margin:0;
 	padding:0;
