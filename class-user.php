@@ -176,7 +176,7 @@ class User{
 			$assignments=$tables->item(1)->getElementsByTagName('tr'); //the second table is the one with all the assignments
 			
 			for ($k=1; $k < $assignments->length; $k++) { 
-				array_push($this->assignments[$this->getCourse($i, 'id')], $this->niceify($assignments->item($i)));
+				array_push($this->assignments[$this->getCourse($i, 'id')], $this->niceify($assignments->item($k)));
 			}
 		}
 
@@ -190,21 +190,20 @@ class User{
 	}
 	private function niceify($row){
 		$array=array();
-		for ($i=0; $i < 6; $i++) { 
-			if($i==0){
+		for ($l=0; $l < 6; $l++) { 
+			if($l==0){
 				array_push($array, $row->getElementsByTagName('td')->item(0)->textContent);
 			}
 			else{
 				// $element=$row->getElementsByTagName('td')->item($i)->getElementsByTagName('table');
-				$element=$row->getElementsByTagName('td')->item($i);
 				echo "<pre>";
-				var_dump($row);
+				var_dump($row->getElementsByTagName('td')->item($l)->getElementsByTagName('table'));
 				echo "</pre>";
-				// ->getElementsByTagName('table');
+				$element=$row->getElementsByTagName('td')->item($l)->getElementsByTagName('table');
 				if($element->length==0){
 					array_push($array, null);
 				}else{
-					array_push($element->item(0)->getElementsByTagName('td')->textContent);
+					array_push($array, $element->item(0)->getElementsByTagName('td')->item(0)->textContent);
 				}
 			}
 		}
