@@ -5,6 +5,7 @@ class User{
 	public $achievement=array(); //marks in a decimal
 	public $credentials=array();
 	public $courseCount;
+	public $assignments=array();
 	private $temp=array(); //for mark comparison
 	private $connection; //for pgsql resource
 	private $data; //raw data dump, not yet used
@@ -145,23 +146,37 @@ class User{
 			$dom=new DOMDocument();
 			@$dom->loadHTML($this->curl('get', 'https://ta.yrdsb.ca/gamma-live/students/'.$this->coursedata[2][$i], array())); //suppress the mass of commas
 			$tables=$dom->getElementsByTagName('table');
-			$marks=$tables->item($tables->length-2);
 
-			if(strpos($marks->textContent, "Student Achievement") === false)
-				continue; //marks have been hidden 
+			$marks=$tables->item($tables->length-2); //second last table is the one with the overall marks
 
-			$marks=$marks->getElementsByTagName("tr"); //overwrite because the original is not important
+			if(strpos($marks->textContent, "Student Achievement") !== false){
 
-			$this->achievement[$this->coursedata[0][$i]]=array(); //we're using the course name as the index
-			$this->weighting[$this->coursedata[0][$i]]=array();
-			for ($j=1; $j < $marks->length; $j++) { //the first iteration is simply the table titles so skip that
+				$marks=$marks->getElementsByTagName("tr"); 
+
+				$this->achievement[$this->coursedata[0][$i]]=array();
+			 	//we're using the course name as the index
+				$this->weighting[$this->coursedata[0][$i]]=array();
+				for ($j=1; $j < $marks->length; $j++) { 
+				//the first iteration is simply the table titles so skip that
 				//ku/ti/comm/app/other/final, each one of these iterations cycles to the next category
-				if($j==5)
-					continue; //skip the 'other' category
-				$container=$marks->item($j)->getElementsByTagName("td");
-				$this->achievement[$this->coursedata[0][$i]][$j]=floatval($container->item($container->length-1)->textContent)/100; //mark is always the last one
-				
-				$this->weighting[$this->coursedata[0][$i]][$j]=floatval($container->item(1)->textContent)/100; //weighting is always the second one
+					if($j==5)
+						continue; 
+						//skip the 'other' category
+
+					$container=$marks->item($j)->getElementsByTagName("td");
+					$this->achievement[$this->coursedata[0][$i]][$j]=floatval($container->item($container->length-1)->textContent)/100; 
+					//mark is always the last one
+
+					$this->weighting[$this->coursedata[0][$i]][$j]=floatval($container->item(1)->textContent)/100; 
+					//weighting is always the second one
+				}
+			}
+
+			$this->assignments[$this->getCourse($i, 'id')]=array();
+			$assignments=$tables->item(1)->getElementsByTagName('tr'); //the second table is the one with all the assignments
+			
+			for ($k=1; $k < $assignments->length; $k++) { 
+				array_push($this->assignments[$this->getCourse($i, 'id')], $this->niceify($assignments->item($i)));
 			}
 		}
 
@@ -173,6 +188,35 @@ class User{
 		$this->courseCount=count($this->coursedata);
 		$this->lastUpdated=time();
 	}
+	private function niceify($row){
+		$array=array();
+		for ($i=0; $i < 6; $i++) { 
+			if($i==0){
+				array_push($array, $row->getElementsByTagName('td')->item(0)->textContent);
+			}
+			else{
+				// $element=$row->getElementsByTagName('td')->item($i)->getElementsByTagName('table');
+				$element=$row->getElementsByTagName('td')->item($i);
+				echo "<pre>";
+				var_dump($row);
+				echo "</pre>";
+				// ->getElementsByTagName('table');
+				if($element->length==0){
+					array_push($array, null);
+				}else{
+					array_push($element->item(0)->getElementsByTagName('td')->textContent);
+				}
+			}
+		}
+		// $array['name']=$row->getElementsByTagName('td')->item(0)->textContent;
+		// $array['ku']=$row->getElementsByTagName('td')->item(1)->textContent;
+		// $array['ti']=$row->getElementsByTagName('td')->item(2)->textContent;
+		// $array['comm']=$row->getElementsByTagName('td')->item(3)->textContent;
+		// $array['app']=$row->getElementsByTagName('td')->item(4)->textContent;
+		// $array['final']=$row->getElementsByTagName('td')->item(5)->textContent;
+		return $array;
+	}
+
 }
 /* Username | Password (hashed) | coursedata | Marks (array ku/ti/comm/app/other) 
 *  reconsider this data structure
