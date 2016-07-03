@@ -100,7 +100,6 @@ class User{
 	}
 
 	public function update($force=false){
-		var_dump($this->lastUpdated);
 		if($force || time()-$this->lastUpdated>600){ //10 minute cache (41400)
 			header("X-Load-From-Cache: False");
 			//but somehow time is appearing 12 hours in the past?
@@ -185,51 +184,20 @@ class User{
 				if($res!==false){
 					array_push($this->assignments[$this->getCourse($i, 'id')], $res);
 				}				
-			}
-			
-			// for ($k=1; $k < $assignments->length; $k++) { 
-			// 	$assignment=$assignments->item($k);
-			// 	echo "<pre>";
-			// 	var_dump($assignment);
-			// 	echo "</pre>";
-
-			// }
+			}	
 		}
-
-		// foreach($this->courses as $course){
-		// 	echo '<pre>';
-		// 	var_dump($course);
-		// 	echo '</pre>';
-		// }
 		$this->courseCount=count($this->coursedata);
 		$this->lastUpdated=time();
 	}
 	private function niceify($row){
 		$array=array();
-		// for ($l=0; $l < 6; $l++) { 
-		// 	if($l==0){
-		// 		array_push($array, $row->getElementsByTagName('td')->item(0)->textContent);
-		// 	}
-		// 	else{
-		// 		// $element=$row->getElementsByTagName('td')->item($i)->getElementsByTagName('table');
-		// 		echo "<pre>";
-		// 		var_dump($row->getElementsByTagName('td')->item($l)->getElementsByTagName('table'));
-		// 		echo "</pre>";
-		// 		$element=$row->getElementsByTagName('td')->item($l)->getElementsByTagName('table');
-		// 		if($element->length==0){
-		// 			array_push($array, null);
-		// 		}else{
-		// 			array_push($array, $element->item(0)->getElementsByTagName('td')->item(0)->textContent);
-		// 		}
-		// 	}
-		// }
+
 		$continue=false;
 		foreach($row as $key=>$item){
 			if($continue){
 				$continue=false;
 				continue;
 			}
-
 			if($key==0){
 				if(strlen($item->textContent)==13 && preg_match("/^\s+/", $item->textContent) == 1){
 					return false;
