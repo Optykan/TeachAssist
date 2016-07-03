@@ -21,7 +21,6 @@ canvas{
 	// width: 100px !important;
 }
 .wrapper{
-	height:100%;
 	display:flex;
 	.nav-side{
 		flex: 1 1 200px;
@@ -70,6 +69,7 @@ canvas{
 		display: flex;
 		list-style:none;
 		align-items:center;
+		padding: 0.7rem 0;
 		.top-element{
 			padding: 0 1rem;
 			.now-viewing{
@@ -78,11 +78,20 @@ canvas{
 			&:nth-child(2){
 				margin-left:auto;
 			}
-			.ion-ios-bell-outline{
-				font-size:2rem;
-			}
-			.ion-ios-person-outline{
-				font-size:3rem;
+			a{
+				display:flex;
+				align-items:center;
+				text-decoration: none;
+				color:$grey;
+				transition:0.3s color ease;
+				.ion-log-out{
+					font-size:2rem;
+					padding-right:0.5rem;
+				}
+				&:hover{
+					color:#e74c3c;
+					transition:0.3s color ease;
+				}
 			}
 		}	
 	}

@@ -35,7 +35,6 @@ p {
   margin: 0; }
 
 .wrapper {
-  height: 100%;
   display: flex; }
   .wrapper .nav-side {
     flex: 1 1 200px; }
@@ -73,17 +72,26 @@ p {
   .content .top-bar {
     display: flex;
     list-style: none;
-    align-items: center; }
+    align-items: center;
+    padding: 0.7rem 0; }
     .content .top-bar .top-element {
       padding: 0 1rem; }
       .content .top-bar .top-element .now-viewing {
         font-size: 1.5rem; }
       .content .top-bar .top-element:nth-child(2) {
         margin-left: auto; }
-      .content .top-bar .top-element .ion-ios-bell-outline {
-        font-size: 2rem; }
-      .content .top-bar .top-element .ion-ios-person-outline {
-        font-size: 3rem; }
+      .content .top-bar .top-element a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #53585B;
+        transition: 0.3s color ease; }
+        .content .top-bar .top-element a .ion-log-out {
+          font-size: 2rem;
+          padding-right: 0.5rem; }
+        .content .top-bar .top-element a:hover {
+          color: #e74c3c;
+          transition: 0.3s color ease; }
   .content .overview {
     margin-top: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

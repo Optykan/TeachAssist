@@ -25,7 +25,7 @@ if(isset($_GET['course'])){
 	}
 }
 echo '<pre>';
-var_dump($user); 
+// var_dump($user); 
 echo '</pre>';
 ?>
 <!DOCTYPE html>
@@ -98,10 +98,12 @@ echo '</pre>';
 					<p class="now-viewing">Now Viewing: <?=$user->toName($course)?></p>
 				</li>
 				<li class="top-element">
-					<i class="icon ion-ios-bell-outline"></i>
-				</li>
-				<li class="top-element">
-					<i class="icon ion-ios-person-outline"></i>
+					<!-- <a href="action.php?action=logout"> -->
+					<a href="action.php?action=logout">
+						<i class="icon ion-log-out"></i>
+						Logout as <?=$user->credentials['username']?>
+					</a>
+					<!-- </a> -->
 				</li>
 			</ul>
 			<hr/>
@@ -110,7 +112,7 @@ echo '</pre>';
 					<div class="circle"><?=round($user->getTermAverage($course)*100,2)?>%</div>
 					<p class="achivement">Term Mark
 						<div class="tooltip"><i class="icon ion-ios-help-outline"></i>
-							<span class="tooltiptext">There may be a discrepancy between this and TeachAssist, ultimately TeachAssist is correct</span>
+							<span class="tooltiptext">Ultimately the number shown on TeachAssist is the correct one.</span>
 						</div>
 					</p>
 				</div>
