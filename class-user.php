@@ -173,11 +173,27 @@ class User{
 			}
 
 			$this->assignments[$this->getCourse($i, 'id')]=array();
-			$assignments=$tables->item(1)->getElementsByTagName('tr'); //the second table is the one with all the assignments
-			
-			for ($k=1; $k < $assignments->length; $k++) { 
-				array_push($this->assignments[$this->getCourse($i, 'id')], $this->niceify($assignments->item($k)));
+			// $assignments=$tables->item(1)->getElementsByTagName('tr'); 
+			//the second table is the one with all the assignments
+			$assignments=$tables->item(1)->childNodes;
+			// var_dump($assignments);
+
+			foreach ($assignments as $key=>$assignment) {
+				if($key==0)
+					continue;
+				$res=$this->niceify($assignment->getElementsByTagName('td'));
+				if($res!==false){
+					array_push($this->assignments[$this->getCourse($i, 'id')], $res);
+				}				
 			}
+			
+			// for ($k=1; $k < $assignments->length; $k++) { 
+			// 	$assignment=$assignments->item($k);
+			// 	echo "<pre>";
+			// 	var_dump($assignment);
+			// 	echo "</pre>";
+
+			// }
 		}
 
 		// foreach($this->courses as $course){
@@ -190,29 +206,47 @@ class User{
 	}
 	private function niceify($row){
 		$array=array();
-		for ($l=0; $l < 6; $l++) { 
-			if($l==0){
-				array_push($array, $row->getElementsByTagName('td')->item(0)->textContent);
+		// for ($l=0; $l < 6; $l++) { 
+		// 	if($l==0){
+		// 		array_push($array, $row->getElementsByTagName('td')->item(0)->textContent);
+		// 	}
+		// 	else{
+		// 		// $element=$row->getElementsByTagName('td')->item($i)->getElementsByTagName('table');
+		// 		echo "<pre>";
+		// 		var_dump($row->getElementsByTagName('td')->item($l)->getElementsByTagName('table'));
+		// 		echo "</pre>";
+		// 		$element=$row->getElementsByTagName('td')->item($l)->getElementsByTagName('table');
+		// 		if($element->length==0){
+		// 			array_push($array, null);
+		// 		}else{
+		// 			array_push($array, $element->item(0)->getElementsByTagName('td')->item(0)->textContent);
+		// 		}
+		// 	}
+		// }
+		$continue=false;
+		foreach($row as $key=>$item){
+			if($continue){
+				$continue=false;
+				continue;
 			}
-			else{
-				// $element=$row->getElementsByTagName('td')->item($i)->getElementsByTagName('table');
-				echo "<pre>";
-				var_dump($row->getElementsByTagName('td')->item($l)->getElementsByTagName('table'));
-				echo "</pre>";
-				$element=$row->getElementsByTagName('td')->item($l)->getElementsByTagName('table');
-				if($element->length==0){
-					array_push($array, null);
+
+			if($key==0){
+				if(strlen($item->textContent)==13 && preg_match("/^\s+/", $item->textContent) == 1){
+					return false;
+					//its blank... why? I'm not quite sure
 				}else{
-					array_push($array, $element->item(0)->getElementsByTagName('td')->item(0)->textContent);
+					array_push($array, preg_replace('/\s+/', ' ', $item->textContent));
 				}
 			}
+			else if($item->getElementsByTagName('table')->length!==0){
+				array_push($array, preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent));
+				$continue=true;
+				//if we extracted data, skip the next iteration, which for some reason is always null
+			}else{
+				array_push($array, null);
+				// echo "</br>";
+			}
 		}
-		// $array['name']=$row->getElementsByTagName('td')->item(0)->textContent;
-		// $array['ku']=$row->getElementsByTagName('td')->item(1)->textContent;
-		// $array['ti']=$row->getElementsByTagName('td')->item(2)->textContent;
-		// $array['comm']=$row->getElementsByTagName('td')->item(3)->textContent;
-		// $array['app']=$row->getElementsByTagName('td')->item(4)->textContent;
-		// $array['final']=$row->getElementsByTagName('td')->item(5)->textContent;
 		return $array;
 	}
 
