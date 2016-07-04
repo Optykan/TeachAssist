@@ -28,14 +28,11 @@ canvas{
 			list-style-type:none;
 			.nav-header{
 				text-align:center;
-				background-color:#1D9E75;
 				padding:1.5rem;
 				font-size: 1.25rem;
-				color:white;
 				@extend .os;
 			}
 			.nav-element{
-				border-bottom: 1px solid #ccc;
 				a{
 					text-align:center;
 					height:150px;
@@ -50,25 +47,20 @@ canvas{
 				}
 				.course-mark{
 					font-size:2.5rem;
-					color: $grey;
 				}
 				p{
-					color: $grey;
 				}
 			}
 		}
 	}
 }
 .module{
-	box-shadow: 0 0 10px rgba(0,0,0,.1);
-	background-color:white;
 	margin-top:2rem;
 }
 .content{
 	flex: 1 1 calc(100% - 200px);
 	padding:0.6rem 2rem;
 	box-sizing:padding-box;
-	background-color: #E4EBF3;
 	.top-bar{
 		display: flex;
 		list-style:none;
@@ -86,14 +78,12 @@ canvas{
 				display:flex;
 				align-items:center;
 				text-decoration: none;
-				color:$grey;
 				transition:0.3s color ease;
 				.ion-log-out{
 					font-size:2rem;
 					padding-right:0.5rem;
 				}
 				&:hover{
-					color:#e74c3c;
 					transition:0.3s color ease;
 				}
 			}
@@ -104,11 +94,9 @@ canvas{
 		position:relative;
 		flex-wrap:wrap; 
 		.block{
-			background-color:white;
 			padding: 2rem;
 			display:flex;
 			align-items:center;
-			outline: 1px solid #ccc;
 			justify-content:center;
 			flex: 1 0 0;
 			&:last-child{
@@ -122,7 +110,6 @@ canvas{
 				text-align: center;
 				line-height:100px;
 				font-size:1.5rem;
-				color:white;
 				@extend .os;
 			}
 			>p{
@@ -134,17 +121,17 @@ canvas{
 				@extend .os;
 			}
 			&.term .circle{
-				background-color: #40ACC6;
+				
 			}
 			&.course .circle{
-				background-color: #FFB901;
+				
 			}
 			&.status .circle{
 				&.updated{
-					background-color: #87D04D;
+					
 				}
 				&.hidden{
-					background-color:#e74c3c;
+					
 				}
 				.icon{
 					&.ion-ios-checkmark-empty{
@@ -172,7 +159,6 @@ canvas{
 			td{
 				flex: 1 1 calc(100% / 6);
 				padding: 1rem;
-				outline: 1px solid #ccc;
 			}
 		}
 	}
@@ -183,7 +169,6 @@ canvas{
 	.chart{
 		// flex: 0 0 calc(50% - 1rem);
 		flex: 1 1 100%;
-		background-color:white;
 		margin-top: 2rem;
 		&:first-child{
 			margin-right: 1rem;
@@ -192,10 +177,8 @@ canvas{
 			margin-left: 1rem;
 		}
 		.chart-header{
-			background-color:#F8F9FE;
 			font-size:1.5rem;
 			padding: 1rem 2rem;
-			border-bottom: 1px solid #ccc;
 			@extend .os;
 		}
 	}

@@ -1,3 +1,7 @@
+
+var userList = new List('assignments',  {
+	valueNames: [ 'name', 'ku', 'ti', 'comm', 'app', 'final' ]
+});
 var achievementLine = document.getElementById("achievementLine");
 var weightDonut = document.getElementById("weightDonut");
 
@@ -114,9 +118,4 @@ var weightChart = new Chart(weightDonut,{
 	options:{
 		responsive:true
 	}
-});
-
-
-var userList = new List('assignments',  {
-	valueNames: [ 'name', 'ku', 'ti', 'comm', 'app', 'final' ]
 });
