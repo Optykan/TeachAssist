@@ -42,38 +42,28 @@ p {
       list-style-type: none; }
       .wrapper .nav-side .nav-container .nav-header {
         text-align: center;
-        background-color: #1D9E75;
         padding: 1.5rem;
-        font-size: 1.25rem;
-        color: white; }
-      .wrapper .nav-side .nav-container .nav-element {
-        border-bottom: 1px solid #ccc; }
-        .wrapper .nav-side .nav-container .nav-element a {
-          text-align: center;
-          height: 150px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none; }
-        .wrapper .nav-side .nav-container .nav-element:last-child {
-          border-bottom: none; }
-        .wrapper .nav-side .nav-container .nav-element .course-mark {
-          font-size: 2.5rem;
-          color: #53585B; }
-        .wrapper .nav-side .nav-container .nav-element p {
-          color: #53585B; }
+        font-size: 1.25rem; }
+      .wrapper .nav-side .nav-container .nav-element a {
+        text-align: center;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; }
+      .wrapper .nav-side .nav-container .nav-element:last-child {
+        border-bottom: none; }
+      .wrapper .nav-side .nav-container .nav-element .course-mark {
+        font-size: 2.5rem; }
 
 .module {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
   margin-top: 2rem; }
 
 .content {
   flex: 1 1 calc(100% - 200px);
   padding: 0.6rem 2rem;
-  box-sizing: padding-box;
-  background-color: #E4EBF3; }
+  box-sizing: padding-box; }
   .content .top-bar {
     display: flex;
     list-style: none;
@@ -89,24 +79,20 @@ p {
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: #53585B;
         transition: 0.3s color ease; }
         .content .top-bar .top-element a .ion-log-out {
           font-size: 2rem;
           padding-right: 0.5rem; }
         .content .top-bar .top-element a:hover {
-          color: #e74c3c;
           transition: 0.3s color ease; }
   .content .overview {
     display: flex;
     position: relative;
     flex-wrap: wrap; }
     .content .overview .block {
-      background-color: white;
       padding: 2rem;
       display: flex;
       align-items: center;
-      outline: 1px solid #ccc;
       justify-content: center;
       flex: 1 0 0; }
       .content .overview .block:last-child {
@@ -118,22 +104,13 @@ p {
         border-radius: 50%;
         text-align: center;
         line-height: 100px;
-        font-size: 1.5rem;
-        color: white; }
+        font-size: 1.5rem; }
       .content .overview .block > p {
         padding: 1rem;
         margin-left: 10%;
         text-transform: uppercase;
         font-size: 1.5rem;
         text-align: center; }
-      .content .overview .block.term .circle {
-        background-color: #40ACC6; }
-      .content .overview .block.course .circle {
-        background-color: #FFB901; }
-      .content .overview .block.status .circle.updated {
-        background-color: #87D04D; }
-      .content .overview .block.status .circle.hidden {
-        background-color: #e74c3c; }
       .content .overview .block.status .circle .icon.ion-ios-checkmark-empty {
         font-size: 5rem; }
       .content .overview .block.status .circle .icon.ion-ios-bolt {
@@ -149,24 +126,20 @@ p {
     display: flex; }
     .assignments .list tr td {
       flex: 1 1 calc(100% / 6);
-      padding: 1rem;
-      outline: 1px solid #ccc; }
+      padding: 1rem; }
 
 .chart-container {
   display: flex;
   flex-wrap: wrap; }
   .chart-container .chart {
     flex: 1 1 100%;
-    background-color: white;
     margin-top: 2rem; }
     .chart-container .chart:first-child {
       margin-right: 1rem; }
     .chart-container .chart:last-child {
       margin-left: 1rem; }
     .chart-container .chart .chart-header {
-      background-color: #F8F9FE;
       font-size: 1.5rem;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #ccc; }
+      padding: 1rem 2rem; }
 
 /*# sourceMappingURL=dashboard.css.map */

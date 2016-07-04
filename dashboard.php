@@ -35,6 +35,7 @@ echo '</pre>';
 	<title>TA Scraper</title>
 	<!-- <link rel="stylesheet" type="text/css" href="/css/foundation.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="/css/themes/light.css">
 	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
 	<script type="text/javascript" src="/js/vendor/jquery.js"></script>
@@ -138,7 +139,6 @@ echo '</pre>';
 					<tbody class='list'>
 						<?php foreach($user->assignments[$course] as $assignment):?>
 							<tr>
-								<?php var_dump($assignment)?>
 								<td class="name"><?=$assignment[0]?></td>
 								<td class="ku"><?=$assignment[1]['nice']?></td>
 								<td class="ti"><?=$assignment[2]['nice']?></td>
