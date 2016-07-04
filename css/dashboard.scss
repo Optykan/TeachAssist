@@ -59,7 +59,11 @@ canvas{
 		}
 	}
 }
-
+.module{
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	background-color:white;
+	margin-top:2rem;
+}
 .content{
 	flex: 1 1 calc(100% - 200px);
 	padding:0.6rem 2rem;
@@ -96,8 +100,6 @@ canvas{
 		}	
 	}
 	.overview{
-		margin-top: 2rem;
-		box-shadow: 0 0 10px rgba(0,0,0,.1);
 		display:flex;
 		position:relative;
 		flex-wrap:wrap; 
@@ -123,7 +125,7 @@ canvas{
 				color:white;
 				@extend .os;
 			}
-			.achivement{
+			>p{
 				padding: 1rem;
 				margin-left:10%;
 				text-transform:uppercase;
@@ -138,9 +140,19 @@ canvas{
 				background-color: #FFB901;
 			}
 			&.status .circle{
-				background-color: #87D04D;
+				&.updated{
+					background-color: #87D04D;
+				}
+				&.hidden{
+					background-color:#e74c3c;
+				}
 				.icon{
-					font-size:5rem;
+					&.ion-ios-checkmark-empty{
+						font-size:5rem;
+					}
+					&.ion-ios-bolt{
+						font-size:3rem;
+					}
 					&:before{
 						line-height:100px;
 					}
@@ -149,11 +161,28 @@ canvas{
 		}
 	}
 }
+.assignments{
+	padding: 1rem;
+	table{
+		width:100%;
+	}
+	.list{
+		tr{
+			display:flex;
+			td{
+				flex: 1 1 calc(100% / 6);
+				padding: 1rem;
+				outline: 1px solid #ccc;
+			}
+		}
+	}
+}
 .chart-container{
 	display:flex;
-	// flex-wrap:wrap;
+	flex-wrap:wrap;
 	.chart{
-		flex: 0 0 calc(50% - 1rem);
+		// flex: 0 0 calc(50% - 1rem);
+		flex: 1 1 100%;
 		background-color:white;
 		margin-top: 2rem;
 		&:first-child{

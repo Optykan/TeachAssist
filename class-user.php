@@ -6,13 +6,14 @@ class User{
 	public $credentials=array();
 	public $courseCount;
 	public $assignments=array();
+	public $status=array();
 	private $temp=array(); //for mark comparison
 	private $connection; //for pgsql resource
 	private $data; //raw data dump, not yet used
 	private $handle; //cURL handle
 	private $courses=array(); //not used yet
 	private $lastUpdated;
-
+	
 	public function __construct($username=null, $password=null){
 		// $this->connect();
 		$this->credentials['username']=$username;
@@ -139,8 +140,12 @@ class User{
 
 		//parse links
 		for ($i=0; $i < count($this->coursedata[2]); $i++) { 
-			if(strpos($this->coursedata[2][$i], "Please") !== false)
+			if(strpos($this->coursedata[2][$i], "Please") !== false){
+				$this->status[$this->getCourse($i, 'id')]="hidden";
 				continue; // Marks have been hidden, ie: "Please see your teacher for..."
+			}
+			$this->status[$this->getCourse($i, 'id')]="updated";
+
 
 			$dom=new DOMDocument();
 			@$dom->loadHTML($this->curl('get', 'https://ta.yrdsb.ca/gamma-live/students/'.$this->coursedata[2][$i], array())); //suppress the mass of commas
@@ -204,10 +209,24 @@ class User{
 					//its blank... why? I'm not quite sure
 				}else{
 					array_push($array, preg_replace('/\s+/', ' ', $item->textContent));
+					//push the assignment name
 				}
 			}
 			else if($item->getElementsByTagName('table')->length!==0){
-				array_push($array, preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent));
+				$mark=array();
+				$m=array();
+				$compare=preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent);
+				preg_match('/(([0-9]+) \/ ([0-9]+) = [0-9]+%) (weight=([0-9]+))?/', $compare, $m);
+				$mark['numerator']=floatval($m[2]);
+				$mark['denominator']=floatval($m[3]);
+				if(!isset($m[5])){
+					$mark['weight']=0;
+				}else{
+					$mark['weight']=floatval($m[5]);
+				}
+				$mark['total']=round(floatval($m[2])/floatval($m[3]),2);
+				$mark['nice']=$m[1];
+				array_push($array, $mark);
 				$continue=true;
 				//if we extracted data, skip the next iteration, which for some reason is always null
 			}else{
