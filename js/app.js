@@ -115,3 +115,8 @@ var weightChart = new Chart(weightDonut,{
 		responsive:true
 	}
 });
+
+
+var userList = new List('assignments',  {
+	valueNames: [ 'name', 'ku', 'ti', 'comm', 'app', 'final' ]
+});

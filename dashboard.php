@@ -24,6 +24,7 @@ if(isset($_GET['course'])){
 		//no courses oops
 	}
 }
+$user->fetch();
 echo '<pre>';
 // var_dump($user); 
 echo '</pre>';
@@ -37,6 +38,7 @@ echo '</pre>';
 	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
 	<script type="text/javascript" src="/js/vendor/jquery.js"></script>
+	<script src="http://listjs.com/no-cdn/list.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 	<script type="text/javascript">
 		var weightData={
@@ -107,7 +109,7 @@ echo '</pre>';
 				</li>
 			</ul>
 			<hr/>
-			<div class="overview">
+			<div class="module overview">
 				<div class="block term">
 					<div class="circle"><?=round($user->getTermAverage($course)*100,2)?>%</div>
 					<p class="achivement">Term Mark
@@ -122,23 +124,43 @@ echo '</pre>';
 					<p class="achivement">Course Mark</p>
 				</div>
 				<div class="block status">
-					<div class="circle">
-						<i class="icon ion-ios-checkmark-empty"></i>
+					<div class="circle <?=$user->status[$course]?>">
+						<i class="icon <?=$user->status[$course]=='updated' ? 'ion-ios-checkmark-empty' : 'ion-ios-bolt'?>"></i>
 					</div>
-					<p class="achivement">Up to date</p>
+					<p><?=$user->status[$course]=='updated' ? 'Up to date' : 'Marks hidden'?></p>
 					<!-- up-to-date or hidden	 -->
 				</div>
 			</div>
-			<div class="chart-container">
+
+			<div class="module assignments" id="assignments">
+				<input class="search" placeholder="Search" />
+				<table>
+					<tbody class='list'>
+						<?php foreach($user->assignments[$course] as $assignment):?>
+							<tr>
+								<?php var_dump($assignment)?>
+								<td class="name"><?=$assignment[0]?></td>
+								<td class="ku"><?=$assignment[1]['nice']?></td>
+								<td class="ti"><?=$assignment[2]['nice']?></td>
+								<td class="comm"><?=$assignment[3]['nice']?></td>
+								<td class="app"><?=$assignment[4]['nice']?></td>
+								<td class="final"><?=$assignment[5]['nice']?></td>
+							</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
+			</div>
+
+<!-- 			<div class="chart-container">
 				<div class="chart">
 					<div class="chart-header">Achievement</div>
-					<canvas id="achievementLine"></canvas>
+					<canvas height="50" width="200" id="achievementLine"></canvas>
 				</div>
 				<div class="chart">
 					<div class="chart-header">Weighting</div>
-					<canvas id="weightDonut"></canvas>
+					<canvas height="50" width="200" id="weightDonut"></canvas>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<script type="text/javascript" src="/js/app.js"></script>
 	</body>

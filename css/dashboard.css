@@ -1,5 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300";
-.os, .tooltip .tooltiptext, p, .wrapper .nav-side .nav-container .nav-header, .content .overview .block .circle, .content .overview .block .achivement, .chart-container .chart .chart-header {
+.os, .tooltip .tooltiptext, p, .wrapper .nav-side .nav-container .nav-header, .content .overview .block .circle, .content .overview .block > p, .chart-container .chart .chart-header {
   font-family: 'Open Sans', sans-serif; }
 
 .tooltip {
@@ -64,6 +64,11 @@ p {
         .wrapper .nav-side .nav-container .nav-element p {
           color: #53585B; }
 
+.module {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin-top: 2rem; }
+
 .content {
   flex: 1 1 calc(100% - 200px);
   padding: 0.6rem 2rem;
@@ -93,8 +98,6 @@ p {
           color: #e74c3c;
           transition: 0.3s color ease; }
   .content .overview {
-    margin-top: 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     position: relative;
     flex-wrap: wrap; }
@@ -117,7 +120,7 @@ p {
         line-height: 100px;
         font-size: 1.5rem;
         color: white; }
-      .content .overview .block .achivement {
+      .content .overview .block > p {
         padding: 1rem;
         margin-left: 10%;
         text-transform: uppercase;
@@ -127,17 +130,33 @@ p {
         background-color: #40ACC6; }
       .content .overview .block.course .circle {
         background-color: #FFB901; }
-      .content .overview .block.status .circle {
+      .content .overview .block.status .circle.updated {
         background-color: #87D04D; }
-        .content .overview .block.status .circle .icon {
-          font-size: 5rem; }
-          .content .overview .block.status .circle .icon:before {
-            line-height: 100px; }
+      .content .overview .block.status .circle.hidden {
+        background-color: #e74c3c; }
+      .content .overview .block.status .circle .icon.ion-ios-checkmark-empty {
+        font-size: 5rem; }
+      .content .overview .block.status .circle .icon.ion-ios-bolt {
+        font-size: 3rem; }
+      .content .overview .block.status .circle .icon:before {
+        line-height: 100px; }
+
+.assignments {
+  padding: 1rem; }
+  .assignments table {
+    width: 100%; }
+  .assignments .list tr {
+    display: flex; }
+    .assignments .list tr td {
+      flex: 1 1 calc(100% / 6);
+      padding: 1rem;
+      outline: 1px solid #ccc; }
 
 .chart-container {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
   .chart-container .chart {
-    flex: 0 0 calc(50% - 1rem);
+    flex: 1 1 100%;
     background-color: white;
     margin-top: 2rem; }
     .chart-container .chart:first-child {
