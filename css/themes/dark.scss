@@ -1,25 +1,40 @@
 $grey: #53585B;
+$headers:  #16232C;
+$black:  #05121B;
 
+hr{
+	border: 1px solid #2F414F;
+}
 .wrapper{
 	.nav-side{
+		background-color:#1B2831;
 		.nav-container{
-			
 			.nav-header{
 				color:white;
+				background-color:#3B82EA;
 			}
 			.nav-element{
-				border-bottom: 1px solid #ccc;
+				border-bottom: 1px solid #000;
 				a{
 					
 				}
 				&:last-child{
 					
 				}
-				.course-mark{
-					color: $grey;
-				}
 				p{
-					color: $grey;
+					color: rgba(255,255,255,0.5);
+					transition: 0.3s color ease;
+				}
+				&.active{
+					p{
+						color:white;
+					}
+				}
+				&:hover{
+					p{
+						color:white;
+						transition: 0.3s color ease;
+					}
 				}
 			}
 		}
@@ -28,18 +43,38 @@ $grey: #53585B;
 .module{
 	box-shadow: 0 0 10px rgba(0,0,0,.1);
 	background-color:white;
+	.module-header{
+		background-color: $headers;
+		color:white;
+	}
+	.search{
+		background-color:inherit;
+		border-top:0;
+		border-left:0;
+		border-right:0;
+		border-bottom: 1px solid rgba(255,255,255,0.5);
+		color:white;
+		box-shadow: 0 0 0 #3B82EA;
+		transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+		&:active, &:focus{
+			transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+			box-shadow: 0 3px 3px -3px #3B82EA;
+			border-bottom: 1px solid #3B82EA;
+		}
+	}
 }
 .content{
-	background-color: #E4EBF3;
+	background-color: #05121B;
 	.top-bar{
 
 		.top-element{
 			.now-viewing{
+				color:rgba(255,255,255,0.5);
 			}
 			&:nth-child(2){
 			}
 			a{
-				color:$grey;
+				color:rgba(255,255,255,0.5);
 				transition:0.3s color ease;
 				.ion-log-out{
 				}
@@ -52,26 +87,26 @@ $grey: #53585B;
 	}
 	.overview{
 		.block{
-			background-color:white;
-			outline: 1px solid #ccc;
+			background-color:#0F1C25;
+			border-right: 1px solid #2F414F;
 			.circle{
 				color:white;
-				@extend .os;
 			}
 			>p{
+				color:white;
 			}
 			&.term .circle{
-				background-color: #40ACC6;
+				background-color: #2980b9;
 			}
 			&.course .circle{
-				background-color: #FFB901;
+				background-color: #e67e22;
 			}
 			&.status .circle{
 				&.updated{
-					background-color: #87D04D;
+					background-color: #27ae60;
 				}
 				&.hidden{
-					background-color:#e74c3c;
+					background-color:#c0392b;
 				}
 				.icon{
 					&.ion-ios-checkmark-empty{
@@ -89,12 +124,14 @@ $grey: #53585B;
 	}
 }
 .assignments{
+	background-color:$black;
 	table{
 	}
 	.list{
 		tr{
 			td{
-				outline: 1px solid #ccc;
+				color:rgba(255,255,255,0.5);
+				outline: 1px solid #2F414F;
 			}
 		}
 	}
@@ -105,10 +142,6 @@ $grey: #53585B;
 		&:first-child{
 		}
 		&:last-child{
-		}
-		.chart-header{
-			background-color:#F8F9FE;
-			@extend .os;
 		}
 	}
 }

@@ -21,7 +21,7 @@ if($_POST['action']=='login'){
 	}
 }else if($_POST['action']=='dump'){
 	if(isset($_SESSION['data'])){
-		var_dump($_SESSION['data']);
+		var_dump(gzencode($_SESSION['data'], 9));
 	}else{
 		echo 'nothing to dump';
 	}

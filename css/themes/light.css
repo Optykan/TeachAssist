@@ -13,6 +13,19 @@
   background-color: white; }
   .module .module-header {
     background-color: #F8F9FE; }
+  .module .search {
+    background-color: inherit;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    color: black;
+    box-shadow: 0 0 0 #3B82EA;
+    transition: 0.3s box-shadow ease, 0.3s border-bottom ease; }
+    .module .search:active, .module .search:focus {
+      transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+      box-shadow: 0 3px 3px -3px #3B82EA;
+      border-bottom: 1px solid #3B82EA; }
 
 .content {
   background-color: #E4EBF3; }

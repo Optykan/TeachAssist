@@ -77,7 +77,7 @@ echo '</pre>';
 			<ul class="nav-container">
 				<li class="nav-header">TeachAssist</li>
 				<?php for($i=0; $i<$user->courseCount; $i++): ?>
-					<li class="nav-element">
+					<li class="nav-element<?=$user->getCourse($i, 'id')==$course? ' active':''?>">
 						<a href="dashboard.php?course=<?=$user->getCourse($i,'id')?>">
 							<?php $mark=$user->getAverage($user->getCourse($i, 'id'))?>
 							<?php $mark = $mark ? $mark : $user->getLastMark($user->getCourse($i, 'id'))?>
