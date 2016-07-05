@@ -24,7 +24,6 @@ if(isset($_GET['course'])){
 		//no courses oops
 	}
 }
-$user->fetch();
 echo '<pre>';
 // var_dump($user); 
 echo '</pre>';
@@ -134,7 +133,9 @@ echo '</pre>';
 			</div>
 
 			<div class="module assignments" id="assignments">
-				<input class="search" placeholder="Search" />
+				<div class="module-header">Assignments
+					<input class="search" placeholder="Search" />
+				</div>
 				<table>
 					<tbody class='list'>
 						<?php foreach($user->assignments[$course] as $assignment):?>

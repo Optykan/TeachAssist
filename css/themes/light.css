@@ -1,0 +1,47 @@
+.wrapper .nav-side .nav-container .nav-header {
+  color: white;
+  background-color: #27ae60; }
+.wrapper .nav-side .nav-container .nav-element {
+  border-bottom: 1px solid #ccc; }
+  .wrapper .nav-side .nav-container .nav-element .course-mark {
+    color: #53585B; }
+  .wrapper .nav-side .nav-container .nav-element p {
+    color: #53585B; }
+
+.module {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white; }
+  .module .module-header {
+    background-color: #F8F9FE; }
+
+.content {
+  background-color: #E4EBF3; }
+  .content .top-bar .top-element a {
+    color: #53585B;
+    transition: 0.3s color ease; }
+    .content .top-bar .top-element a:hover {
+      color: #e74c3c;
+      transition: 0.3s color ease; }
+  .content .overview .block {
+    background-color: white;
+    border-right: 1px solid #ccc; }
+    .content .overview .block .circle {
+      color: white; }
+    .content .overview .block.term .circle {
+      background-color: #40ACC6; }
+    .content .overview .block.course .circle {
+      background-color: #FFB901; }
+    .content .overview .block.status .circle.updated {
+      background-color: #87D04D; }
+    .content .overview .block.status .circle.hidden {
+      background-color: #e74c3c; }
+
+.assignments .list tr td {
+  outline: 1px solid #ccc; }
+
+.chart-container .chart {
+  background-color: white; }
+  .chart-container .chart .chart-header {
+    background-color: #F8F9FE; }
+
+/*# sourceMappingURL=light.css.map */

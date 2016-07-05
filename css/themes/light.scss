@@ -1,0 +1,116 @@
+$grey: #53585B;
+$headers:  #F8F9FE;
+
+.wrapper{
+	.nav-side{
+		.nav-container{
+			.nav-header{
+				color:white;
+				background-color:#27ae60;
+			}
+			.nav-element{
+				border-bottom: 1px solid #ccc;
+				a{
+					
+				}
+				&:last-child{
+					
+				}
+				.course-mark{
+					color: $grey;
+				}
+				p{
+					color: $grey;
+				}
+			}
+		}
+	}
+}
+.module{
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	background-color:white;
+	.module-header{
+		background-color: $headers;
+	}
+}
+.content{
+	background-color: #E4EBF3;
+	.top-bar{
+
+		.top-element{
+			.now-viewing{
+			}
+			&:nth-child(2){
+			}
+			a{
+				color:$grey;
+				transition:0.3s color ease;
+				.ion-log-out{
+				}
+				&:hover{
+					color:#e74c3c;
+					transition:0.3s color ease;
+				}
+			}
+		}	
+	}
+	.overview{
+		.block{
+			background-color:white;
+			border-right: 1px solid #ccc;
+			.circle{
+				color:white;
+			}
+			>p{
+			}
+			&.term .circle{
+				background-color: #40ACC6;
+			}
+			&.course .circle{
+				background-color: #FFB901;
+			}
+			&.status .circle{
+				&.updated{
+					background-color: #87D04D;
+				}
+				&.hidden{
+					background-color:#e74c3c;
+				}
+				.icon{
+					&.ion-ios-checkmark-empty{
+						
+					}
+					&.ion-ios-bolt{
+						
+					}
+					&:before{
+						
+					}
+				}
+			}
+		}
+	}
+}
+.assignments{
+	table{
+	}
+	.list{
+		tr{
+			td{
+				outline: 1px solid #ccc;
+			}
+		}
+	}
+}
+.chart-container{
+	.chart{
+		background-color:white;
+		&:first-child{
+		}
+		&:last-child{
+		}
+		.chart-header{
+			background-color: $headers;
+		}
+	}
+}
