@@ -195,6 +195,7 @@ class User{
 		$this->lastUpdated=time();
 	}
 	private function niceify($row){
+		//this function fills up data really quickly
 		$array=array();
 
 		$continue=false;
@@ -217,15 +218,14 @@ class User{
 				$m=array();
 				$compare=preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent);
 				preg_match('/(([0-9]+) \/ ([0-9]+) = [0-9]+%) (weight=([0-9]+))?/', $compare, $m);
-				$mark['numerator']=floatval($m[2]);
-				$mark['denominator']=floatval($m[3]);
+				$mark['n']=floatval($m[2]);
+				$mark['d']=floatval($m[3]);
 				if(!isset($m[5])){
-					$mark['weight']=0;
+					$mark['w']=0;
 				}else{
-					$mark['weight']=floatval($m[5]);
+					$mark['w']=floatval($m[5]);
 				}
-				$mark['total']=round(floatval($m[2])/floatval($m[3]),2);
-				$mark['nice']=$m[1];
+				$mark['t']=round(floatval($m[2])/floatval($m[3]),2);
 				array_push($array, $mark);
 				$continue=true;
 				//if we extracted data, skip the next iteration, which for some reason is always null
