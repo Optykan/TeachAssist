@@ -56,6 +56,14 @@ canvas{
 }
 .module{
 	margin-top:2rem;
+	border-radius: 5px;
+	.module-header{
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+		font-size:1.5rem;
+		padding: 1rem 2rem;
+		@extend .os;
+	}
 }
 .content{
 	flex: 1 1 calc(100% - 200px);
@@ -149,7 +157,6 @@ canvas{
 	}
 }
 .assignments{
-	padding: 1rem;
 	table{
 		width:100%;
 	}
@@ -161,6 +168,15 @@ canvas{
 				padding: 1rem;
 			}
 		}
+	}
+	.module-header{
+		position:relative;
+	}
+	.search{
+		position:absolute;
+		bottom:1rem;
+		right:2rem;
+		font-size:1rem;
 	}
 }
 .chart-container{
@@ -176,10 +192,6 @@ canvas{
 		&:last-child{
 			margin-left: 1rem;
 		}
-		.chart-header{
-			font-size:1.5rem;
-			padding: 1rem 2rem;
-			@extend .os;
-		}
+		
 	}
 }
