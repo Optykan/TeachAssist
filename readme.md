@@ -1,4 +1,12 @@
-#Version 0.4.0
+#Version 0.4.2
+Another small patch to change the way marks are calculated. This version now:
+- Calculates marks based on the fraction value and not the percent.
+
+##Version 0.4.1
+A small patch to fix decimals. This version fixes:
+- An inability to process any decimals
+
+##Version 0.4.0
 An update to add some more calculation. This version contains:
 - Proper display of weights
 - Client-side mark calculation

@@ -3,12 +3,14 @@ var Dashboard={
 	achievement: [0,0,0,0,0],
 	getWeight: function(a){
 		if(a)
-			return parseFloat(a.match(/W: ([0-9]+)/)[1]);
+			return parseFloat(a.match(/W: ([0-9.]+)/)[1]);
 		return 0;
 	},
 	getMark: function(a){
-		if(a)
-			return parseFloat(a.match(/[0-9]+ \/ [0-9]+ = ([0-9.]+)%/)[1])/100;
+		if(a){
+			var matches=a.match(/([0-9.]+) \/ ([0-9.]+) = [0-9.]+%/);
+			return parseFloat(matches[1])/parseFloat(matches[2]);
+		}
 		return 0;
 	},
 	calculate: function(){
