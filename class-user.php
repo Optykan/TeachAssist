@@ -101,7 +101,7 @@ class User{
 	}
 
 	public function update($force=false){
-		if($force || time()-$this->lastUpdated>600){ //10 minute cache (41400)
+		if($force || time()-$this->lastUpdated>600){ //10 minute cache
 			header("X-Load-From-Cache: False");
 			//but somehow time is appearing 12 hours in the past?
 			$this->fetch();
@@ -153,6 +153,7 @@ class User{
 			$marks=$tables->item($tables->length-2); //second last table is the one with the overall marks
 
 			if(strpos($marks->textContent, "Student Achievement") !== false){
+				//if the weighting table is available
 
 				$marks=$marks->getElementsByTagName("tr"); 
 
@@ -179,7 +180,6 @@ class User{
 			// $assignments=$tables->item(1)->getElementsByTagName('tr'); 
 			//the second table is the one with all the assignments
 			$assignments=$tables->item(1)->childNodes;
-			// var_dump($assignments);
 
 			foreach ($assignments as $key=>$assignment) {
 				if($key==0)

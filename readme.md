@@ -1,4 +1,8 @@
-#Version 0.4.2
+#Version 0.4.3
+A small patch to tweak some visuals. This version implements:
+- Assignment colours!
+
+##Version 0.4.2
 Another small patch to change the way marks are calculated. This version now:
 - Calculates marks based on the fraction value and not the percent.
 

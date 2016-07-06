@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400';
 @import 'util';
 $grey: #53585B;
 html, body{
@@ -163,9 +163,11 @@ canvas{
 	.list{
 		tr{
 			display:flex;
-			td{
-				flex: 1 1 calc(100% / 6);
+			td,th{
+				flex: 0 1 calc(100% / 6);
 				padding: 1rem;
+				@extend .os;
+				font-weight:400;
 			}
 		}
 	}
@@ -177,6 +179,21 @@ canvas{
 		bottom:1rem;
 		right:2rem;
 		font-size:1rem;
+	}
+	.table-header{
+		display:flex;
+		.column{
+			flex: 0 1 calc(100% / 6);
+			@extend .os;
+		}
+	}
+	.assignment{
+		.mark{
+
+		}
+		.weight{
+			float:right;
+		}
 	}
 }
 .chart-container{

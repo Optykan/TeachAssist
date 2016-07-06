@@ -1,6 +1,7 @@
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300";
-.os, .tooltip .tooltiptext, p, .wrapper .nav-side .nav-container .nav-header, .module .module-header, .content .overview .block .circle, .content .overview .block > p {
-  font-family: 'Open Sans', sans-serif; }
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400";
+.os, .tooltip .tooltiptext, p, .wrapper .nav-side .nav-container .nav-header, .module .module-header, .content .overview .block .circle, .content .overview .block > p, .assignments .list tr td, .assignments .list tr th, .assignments .table-header .column {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300; }
 
 .tooltip {
   position: relative;
@@ -128,9 +129,10 @@ p {
   width: 100%; }
 .assignments .list tr {
   display: flex; }
-  .assignments .list tr td {
-    flex: 1 1 calc(100% / 6);
-    padding: 1rem; }
+  .assignments .list tr td, .assignments .list tr th {
+    flex: 0 1 calc(100% / 6);
+    padding: 1rem;
+    font-weight: 400; }
 .assignments .module-header {
   position: relative; }
 .assignments .search {
@@ -138,6 +140,12 @@ p {
   bottom: 1rem;
   right: 2rem;
   font-size: 1rem; }
+.assignments .table-header {
+  display: flex; }
+  .assignments .table-header .column {
+    flex: 0 1 calc(100% / 6); }
+.assignments .assignment .weight {
+  float: right; }
 
 .chart-container {
   display: flex;
