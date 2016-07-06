@@ -7,6 +7,11 @@ function jsMap($array){
 	$array[6]=$examweight*100;
 	return array_values($array);
 }
+function formatMark($sub){
+	if(!isset($sub['n']))
+		return '';
+	return $sub['n'] . ' / ' . $sub['d'] . ' = ' . $sub['t']*100 . '%';
+}
 session_start();
 if(!isset($_SESSION['data'])){ 
 	//direct access without login denied
@@ -133,7 +138,8 @@ echo '</pre>';
 			</div>
 
 			<div class="module assignments" id="assignments">
-				<div class="module-header">Assignments
+				<div class="module-header">
+					Assignments
 					<input class="search" placeholder="Search" />
 				</div>
 				<table>
@@ -141,11 +147,11 @@ echo '</pre>';
 						<?php foreach($user->assignments[$course] as $assignment):?>
 							<tr>
 								<td class="name"><?=$assignment[0]?></td>
-								<td class="ku"><?=$assignment[1]['nice']?></td>
-								<td class="ti"><?=$assignment[2]['nice']?></td>
-								<td class="comm"><?=$assignment[3]['nice']?></td>
-								<td class="app"><?=$assignment[4]['nice']?></td>
-								<td class="final"><?=$assignment[5]['nice']?></td>
+								<td class="ku"><?=formatMark($assignment[1])?></td>
+								<td class="ti"><?=formatMark($assignment[2])?></td>
+								<td class="comm"><?=formatMark($assignment[3])?></td>
+								<td class="app"><?=formatMark($assignment[4])?></td>
+								<td class="final"><?=formatMark($assignment[5])?></td>
 							</tr>
 						<?php endforeach;?>
 					</tbody>
