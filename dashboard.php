@@ -8,9 +8,10 @@ function jsMap($array){
 	return array_values($array);
 }
 function formatMark($sub){
+	$total=round(floatval($sub['n'])/floatval($sub['d'])*100,2);
 	if(!isset($sub['n']))
 		return '';
-	return $sub['n'] . ' / ' . $sub['d'] . ' = ' . $sub['t']*100 . '%';
+	return '<span class="mark">' . $sub['n'] . ' / ' . $sub['d'] . ' = ' . $total . '%' . '</span><span class="weight">W: ' . $sub['w'] . '</span>';
 }
 session_start();
 if(!isset($_SESSION['data'])){ 
@@ -46,6 +47,7 @@ echo '</pre>';
 	<script src="http://listjs.com/no-cdn/list.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 	<script type="text/javascript">
+		var courseWeighting=<?=json_encode(jsMap($user->weighting[$course]))?>;
 		var weightData={
 			labels: ["K/U",
 			"T/I",
@@ -55,7 +57,7 @@ echo '</pre>';
 			],
 			datasets: [
 			{
-				data: <?=json_encode(jsMap($user->weighting[$course]))?>,
+				data: courseWeighting,
 				backgroundColor: [
 				"#f1c40f",
 				"#2ecc71",
@@ -145,7 +147,7 @@ echo '</pre>';
 				<table>
 					<tbody class='list'>
 						<?php foreach($user->assignments[$course] as $assignment):?>
-							<tr>
+							<tr class="assignment">
 								<td class="name"><?=$assignment[0]?></td>
 								<td class="ku"><?=formatMark($assignment[1])?></td>
 								<td class="ti"><?=formatMark($assignment[2])?></td>
@@ -169,7 +171,8 @@ echo '</pre>';
 				</div>
 			</div> -->
 		</div>
-		<script type="text/javascript" src="/js/app.js"></script>
+		<script type="text/javascript" src="/js/dashboard-charts.js"></script>
+		<script type="text/javascript" src="/js/dashboard.js"></script>
 	</body>
 	</html>
 	<?php $_SESSION['data']=serialize($user);?>
