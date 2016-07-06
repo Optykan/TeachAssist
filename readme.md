@@ -1,4 +1,11 @@
-#Version 0.1.2
+#Version 0.1.3
+A small patch to fix a usability bug. This version fixes:
+- Assignment displaying
+
+Also if you didn't know, this project is hosted at
+[http://yrdsbteachassist.herokuapp.com](http://yrdsbteachassist.herokuapp.com)
+
+##Version 0.1.2
 More visual update~~s~~, and plans for the future. This version contains:
 - A dark theme
 
@@ -7,7 +14,6 @@ Plan to implement:
 - More permanent session storage (text file...?)
 - Theme switching
 
-Things 
 ##Version 0.1.1
 A small visual update. This version contains:
 - A light theme
