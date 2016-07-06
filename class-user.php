@@ -216,7 +216,7 @@ class User{
 				$mark=array();
 				$m=array();
 				$compare=preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent);
-				preg_match('/(([0-9]+) \/ ([0-9]+) = [0-9]+%) (weight=([0-9.]+))?/', $compare, $m);
+				preg_match('/(([0-9.]+) \/ ([0-9.]+) = [0-9.]+%) (weight=([0-9.]+))?/', $compare, $m);
 				$mark['n']=floatval($m[2]);
 				$mark['d']=floatval($m[3]);
 				if(!isset($m[5])){
