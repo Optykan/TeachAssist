@@ -21,7 +21,9 @@ if($_POST['action']=='login'){
 	}
 }else if($_POST['action']=='dump'){
 	if(isset($_SESSION['data'])){
-		var_dump(gzencode($_SESSION['data'], 9));
+		// var_dump(gzencode($_SESSION['data'], 9));
+		var_dump($_SESSION['data']);
+
 	}else{
 		echo 'nothing to dump';
 	}
@@ -37,5 +39,8 @@ if($_POST['action']=='login'){
 		session_destroy();
 	}
 	header("Location: index.php");
+}else{
+	http_response_code(418);
+	echo "No parameters passed.";
 }
 ?>

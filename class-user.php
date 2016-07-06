@@ -5,8 +5,8 @@ class User{
 	public $achievement=array(); //marks in a decimal
 	public $credentials=array();
 	public $courseCount;
-	public $assignments=array();
-	public $status=array();
+	public $assignments=array(); //all your assignments
+	public $status=array(); //cached?
 	private $temp=array(); //for mark comparison
 	private $connection; //for pgsql resource
 	private $data; //raw data dump, not yet used
@@ -146,7 +146,6 @@ class User{
 			}
 			$this->status[$this->getCourse($i, 'id')]="updated";
 
-
 			$dom=new DOMDocument();
 			@$dom->loadHTML($this->curl('get', 'https://ta.yrdsb.ca/gamma-live/students/'.$this->coursedata[2][$i], array())); //suppress the mass of commas
 			$tables=$dom->getElementsByTagName('table');
@@ -217,7 +216,7 @@ class User{
 				$mark=array();
 				$m=array();
 				$compare=preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent);
-				preg_match('/(([0-9]+) \/ ([0-9]+) = [0-9]+%) (weight=([0-9]+))?/', $compare, $m);
+				preg_match('/(([0-9]+) \/ ([0-9]+) = [0-9]+%) (weight=([0-9.]+))?/', $compare, $m);
 				$mark['n']=floatval($m[2]);
 				$mark['d']=floatval($m[3]);
 				if(!isset($m[5])){
@@ -225,7 +224,6 @@ class User{
 				}else{
 					$mark['w']=floatval($m[5]);
 				}
-				$mark['t']=round(floatval($m[2])/floatval($m[3]),2);
 				array_push($array, $mark);
 				$continue=true;
 				//if we extracted data, skip the next iteration, which for some reason is always null
