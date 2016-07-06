@@ -49,8 +49,28 @@
     .content .overview .block.status .circle.hidden {
       background-color: #e74c3c; }
 
-.assignments .list tr td {
-  outline: 1px solid #ccc; }
+.assignments .list tr {
+  border-bottom: 1px solid  #ccc; }
+  .assignments .list tr td {
+    border-right: 1px solid  #ccc; }
+    .assignments .list tr td:last-child {
+      border-right: none; }
+  .assignments .list tr .ku {
+    background-color: #FFFFAA; }
+  .assignments .list tr .ti {
+    background-color: #C0FEA4; }
+  .assignments .list tr .comm {
+    background-color: #AFAFFF; }
+  .assignments .list tr .app {
+    background-color: #FFD490; }
+  .assignments .list tr .final {
+    background-color: #DEDEDE; }
+.assignments .table-header {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  .assignments .table-header .column {
+    padding: 0.5rem 1rem;
+    background-color: #F4F8F9; }
 
 .chart-container .chart {
   background-color: white; }

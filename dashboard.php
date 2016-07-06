@@ -144,6 +144,14 @@ echo '</pre>';
 					Assignments
 					<input class="search" placeholder="Search" />
 				</div>
+				<div class="table-header">
+					<div class="column">Name</div>
+					<div class="column">K/U</div>
+					<div class="column">T/I</div>
+					<div class="column">Comm</div>
+					<div class="column">App</div>
+					<div class="column">Final</div>
+				</div>
 				<table>
 					<tbody class='list'>
 						<?php foreach($user->assignments[$course] as $assignment):?>

@@ -111,9 +111,37 @@ $headers:  #F8F9FE;
 	}
 	.list{
 		tr{
+			border-bottom: 1px solid  #ccc;
 			td{
-				outline: 1px solid #ccc;
+				border-right: 1px solid  #ccc;
+				&:last-child{
+					border-right:none;
+				}
 			}
+			.ku{
+				background-color: #FFFFAA;
+			}
+			.ti{
+				background-color: #C0FEA4;
+			}
+			.comm{
+				background-color: #AFAFFF;
+			}
+			.app{
+				background-color: #FFD490;
+			}
+			.final{
+				background-color: #DEDEDE;
+			}
+		}
+	}
+	.table-header{
+		border-top: 1px solid rgba(0,0,0,0.2);
+		border-bottom: 1px solid rgba(0,0,0,0.2);
+
+		.column{
+			padding: 0.5rem 1rem;
+			background-color: #F4F8F9;
 		}
 	}
 }
