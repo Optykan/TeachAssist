@@ -131,7 +131,7 @@ echo '</pre>';
 					<p class="achivement">Course Mark</p>
 				</div>
 				<div class="block status">
-					<div class="circle <?=$user->status[$course]?>">
+					<div class="circle <?=$user->status[$course]=='updated' ? 'updated' : 'hidden'?>">
 						<i class="icon <?=$user->status[$course]=='updated' ? 'ion-ios-checkmark-empty' : 'ion-ios-bolt'?>"></i>
 					</div>
 					<p><?=$user->status[$course]=='updated' ? 'Up to date' : 'Marks hidden'?></p>

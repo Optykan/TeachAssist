@@ -1,4 +1,9 @@
-#Version 0.4.3
+#Version 0.5.0
+This latest update brings some much needed visuals. This version contains:
+- Login styles
+- Fixes minor issue when marks are hidden
+
+##Version 0.4.3
 A small patch to tweak some visuals. This version implements:
 - Assignment colours!
 

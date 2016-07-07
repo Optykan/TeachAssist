@@ -1,0 +1,70 @@
+@import 'util';
+html,body{
+	height:100%;
+}
+.wrapper{
+	background-color:white;
+	display:flex;
+	align-items: center;
+	justify-content:center;
+	height:100%;
+}
+.logo{
+	height:150px;
+	width:150px;
+	border-radius:50%;
+	border: 3px solid #27ae60;
+	line-height:140px;
+	color: #27ae60;
+	font-size:5rem;
+	text-align:center;
+	margin-bottom:3rem;
+	@extend .po;
+}
+.form {
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+	width:300px;
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	input{
+		font-family: "Roboto", sans-serif;
+		outline: 0;
+		background-color: #f2f2f2;
+		width: 100%;
+		border: 0;
+		margin: 0 0 15px;
+		padding: 15px;
+		box-sizing: border-box;
+		font-size: 14px;
+	}
+	button{
+		@extend .ro;
+		text-transform: uppercase;
+		outline: 0;
+		background-color: #4CAF50;
+		width: 100%;
+		border: 0;
+		padding: 15px;
+		color: #FFFFFF;
+		font-size: 14px;
+		-webkit-transition: all 0.3 ease;
+		transition: all 0.3 ease;
+		cursor: pointer;
+		&:hover, &:active, &:focus{
+			background-color: #43A047;
+		}
+	}
+	.message{
+		margin: 15px 0 0;
+		color: rgba(0,0,0,0.5);
+		font-size: 0.75rem;
+		@extend .ro;
+	}
+}
