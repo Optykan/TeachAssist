@@ -1,14 +1,4 @@
 @import 'util';
-html,body{
-	height:100%;
-}
-.wrapper{
-	background-color:white;
-	display:flex;
-	align-items: center;
-	justify-content:center;
-	height:100%;
-}
 .logo{
 	height:150px;
 	width:150px;
@@ -22,19 +12,24 @@ html,body{
 	@extend .po;
 }
 .form {
+	.error{
+		margin-top:-1rem;
+		color:red;
+		@extend .os;
+	}
+	top:calc(50% - 326.5px);
+	left: calc(50% - 198px);
 	display:flex;
 	flex-direction: column;
 	align-items:center;
 	width:300px;
-	position: relative;
+	position: absolute;
 	z-index: 1;
 	background: #FFFFFF;
-	margin: 0 auto 100px;
-	padding: 45px;
+	padding: 3rem;
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 	input{
-		font-family: "Roboto", sans-serif;
 		outline: 0;
 		background-color: #f2f2f2;
 		width: 100%;
@@ -42,22 +37,25 @@ html,body{
 		margin: 0 0 15px;
 		padding: 15px;
 		box-sizing: border-box;
-		font-size: 14px;
+		font-size: 1rem;
+		@extend .os;
 	}
 	button{
 		@extend .ro;
 		text-transform: uppercase;
 		outline: 0;
-		background-color: #4CAF50;
+		background-color: #27ae60;
 		width: 100%;
 		border: 0;
-		padding: 15px;
-		color: #FFFFFF;
-		font-size: 14px;
+		padding: 1rem;
+		color: white;
+		font-size: 1rem;
 		-webkit-transition: all 0.3 ease;
 		transition: all 0.3 ease;
 		cursor: pointer;
+		transition: background-color 0.3s ease;
 		&:hover, &:active, &:focus{
+			transition: background-color 0.3s ease;
 			background-color: #43A047;
 		}
 	}
@@ -66,5 +64,9 @@ html,body{
 		color: rgba(0,0,0,0.5);
 		font-size: 0.75rem;
 		@extend .ro;
+		a{
+			color: #4CAF50;
+			text-decoration: none;
+		}
 	}
 }
