@@ -1,4 +1,9 @@
-#Version 0.5.0
+#Version 0.5.1
+A small patch for various fixes. This version now:
+- Displays error messages
+- Has a login icon
+
+##Version 0.5.0
 This latest update brings some much needed visuals. This version contains:
 - Login styles
 - Fixes minor issue when marks are hidden
