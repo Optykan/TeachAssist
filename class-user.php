@@ -8,12 +8,12 @@ class User{
 	public $assignments=array(); //all your assignments
 	public $status=array(); //cached?
 	private $temp=array(); //for mark comparison
-	private $connection; //for pgsql resource
+	private $db; //for pgsql resource
 	private $data; //raw data dump, not yet used
 	private $handle; //cURL handle
 	private $courses=array(); //not used yet
 	private $lastUpdated;
-	
+
 	public function __construct($username=null, $password=null){
 		// $this->connect();
 		$this->credentials['username']=$username;
@@ -110,8 +110,12 @@ class User{
 		}
 	}
 
-	private function error($message){
-		echo $message;
+	private function connect(){
+		$this->db=pg_connect(getenv("DB_URL"));
+		if($this->db !== false){
+			return true;
+		}
+		return false;
 	}
 
 	private function curl($method, $url, $prop){
