@@ -1,0 +1,80 @@
+.wrapper .nav-side .nav-container .nav-header {
+  color: white;
+  background-color: #27ae60; }
+.wrapper .nav-side .nav-container .nav-element {
+  border-bottom: 1px solid #ccc; }
+  .wrapper .nav-side .nav-container .nav-element .course-mark {
+    color: #53585B; }
+  .wrapper .nav-side .nav-container .nav-element p {
+    color: #53585B; }
+
+.module {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white; }
+  .module .module-header {
+    background-color: #F8F9FE; }
+  .module .search {
+    background-color: inherit;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    color: black;
+    box-shadow: 0 0 0 #3B82EA;
+    transition: 0.3s box-shadow ease, 0.3s border-bottom ease; }
+    .module .search:active, .module .search:focus {
+      transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+      box-shadow: 0 3px 3px -3px #3B82EA;
+      border-bottom: 1px solid #3B82EA; }
+
+.content {
+  background-color: #E4EBF3; }
+  .content .top-bar .top-element a {
+    color: #53585B;
+    transition: 0.3s color ease; }
+    .content .top-bar .top-element a:hover {
+      color: #e74c3c;
+      transition: 0.3s color ease; }
+  .content .overview .block {
+    background-color: white;
+    border-right: 1px solid #ccc; }
+    .content .overview .block .circle {
+      color: white; }
+    .content .overview .block.term .circle {
+      background-color: #40ACC6; }
+    .content .overview .block.course .circle {
+      background-color: #FFB901; }
+    .content .overview .block.status .circle.updated {
+      background-color: #87D04D; }
+    .content .overview .block.status .circle.hidden {
+      background-color: #e74c3c; }
+
+.assignments .list tr {
+  border-bottom: 1px solid  #ccc; }
+  .assignments .list tr td {
+    border-right: 1px solid  #ccc; }
+    .assignments .list tr td:last-child {
+      border-right: none; }
+  .assignments .list tr .ku {
+    background-color: #FFFFAA; }
+  .assignments .list tr .ti {
+    background-color: #C0FEA4; }
+  .assignments .list tr .comm {
+    background-color: #AFAFFF; }
+  .assignments .list tr .app {
+    background-color: #FFD490; }
+  .assignments .list tr .final {
+    background-color: #DEDEDE; }
+.assignments .table-header {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  .assignments .table-header .column {
+    padding: 0.5rem 1rem;
+    background-color: #F4F8F9; }
+
+.chart-container .chart {
+  background-color: white; }
+  .chart-container .chart .chart-header {
+    background-color: #F8F9FE; }
+
+/*# sourceMappingURL=light.css.map */

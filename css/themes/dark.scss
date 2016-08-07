@@ -1,0 +1,147 @@
+$grey: #53585B;
+$headers:  #16232C;
+$black:  #05121B;
+
+hr{
+	border: 1px solid #2F414F;
+}
+.wrapper{
+	.nav-side{
+		background-color:#1B2831;
+		.nav-container{
+			.nav-header{
+				color:white;
+				background-color:#3B82EA;
+			}
+			.nav-element{
+				border-bottom: 1px solid #000;
+				a{
+					
+				}
+				&:last-child{
+					
+				}
+				p{
+					color: rgba(255,255,255,0.5);
+					transition: 0.3s color ease;
+				}
+				&.active{
+					p{
+						color:white;
+					}
+				}
+				&:hover{
+					p{
+						color:white;
+						transition: 0.3s color ease;
+					}
+				}
+			}
+		}
+	}
+}
+.module{
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	background-color:white;
+	.module-header{
+		background-color: $headers;
+		color:white;
+	}
+	.search{
+		background-color:inherit;
+		border-top:0;
+		border-left:0;
+		border-right:0;
+		border-bottom: 1px solid rgba(255,255,255,0.5);
+		color:white;
+		box-shadow: 0 0 0 #3B82EA;
+		transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+		&:active, &:focus{
+			transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+			box-shadow: 0 3px 3px -3px #3B82EA;
+			border-bottom: 1px solid #3B82EA;
+		}
+	}
+}
+.content{
+	background-color: #05121B;
+	.top-bar{
+
+		.top-element{
+			.now-viewing{
+				color:rgba(255,255,255,0.5);
+			}
+			&:nth-child(2){
+			}
+			a{
+				color:rgba(255,255,255,0.5);
+				transition:0.3s color ease;
+				.ion-log-out{
+				}
+				&:hover{
+					color:#e74c3c;
+					transition:0.3s color ease;
+				}
+			}
+		}	
+	}
+	.overview{
+		.block{
+			background-color:#0F1C25;
+			border-right: 1px solid #2F414F;
+			.circle{
+				color:white;
+			}
+			>p{
+				color:white;
+			}
+			&.term .circle{
+				background-color: #2980b9;
+			}
+			&.course .circle{
+				background-color: #e67e22;
+			}
+			&.status .circle{
+				&.updated{
+					background-color: #27ae60;
+				}
+				&.hidden{
+					background-color:#c0392b;
+				}
+				.icon{
+					&.ion-ios-checkmark-empty{
+						
+					}
+					&.ion-ios-bolt{
+						
+					}
+					&:before{
+						
+					}
+				}
+			}
+		}
+	}
+}
+.assignments{
+	background-color:$black;
+	table{
+	}
+	.list{
+		tr{
+			td{
+				color:rgba(255,255,255,0.5);
+				outline: 1px solid #2F414F;
+			}
+		}
+	}
+}
+.chart-container{
+	.chart{
+		background-color:white;
+		&:first-child{
+		}
+		&:last-child{
+		}
+	}
+}

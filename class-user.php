@@ -5,8 +5,10 @@ class User{
 	public $achievement=array(); //marks in a decimal
 	public $credentials=array();
 	public $courseCount;
+	public $assignments=array(); //all your assignments
+	public $status=array(); //cached?
 	private $temp=array(); //for mark comparison
-	private $connection; //for pgsql resource
+	private $db; //for pgsql resource
 	private $data; //raw data dump, not yet used
 	private $handle; //cURL handle
 	private $courses=array(); //not used yet
@@ -99,8 +101,7 @@ class User{
 	}
 
 	public function update($force=false){
-		var_dump($this->lastUpdated);
-		if($force || time()-$this->lastUpdated>600){ //10 minute cache (41400)
+		if($force || time()-$this->lastUpdated>600){ //10 minute cache
 			header("X-Load-From-Cache: False");
 			//but somehow time is appearing 12 hours in the past?
 			$this->fetch();
@@ -109,8 +110,12 @@ class User{
 		}
 	}
 
-	private function error($message){
-		echo $message;
+	private function connect(){
+		$this->db=pg_connect(getenv("DB_URL"));
+		if($this->db !== false){
+			return true;
+		}
+		return false;
 	}
 
 	private function curl($method, $url, $prop){
@@ -139,40 +144,101 @@ class User{
 
 		//parse links
 		for ($i=0; $i < count($this->coursedata[2]); $i++) { 
-			if(strpos($this->coursedata[2][$i], "Please") !== false)
+			if(strpos($this->coursedata[2][$i], "Please") !== false){
+				$this->status[$this->getCourse($i, 'id')]="hidden";
 				continue; // Marks have been hidden, ie: "Please see your teacher for..."
+			}
+			$this->status[$this->getCourse($i, 'id')]="updated";
 
 			$dom=new DOMDocument();
 			@$dom->loadHTML($this->curl('get', 'https://ta.yrdsb.ca/gamma-live/students/'.$this->coursedata[2][$i], array())); //suppress the mass of commas
 			$tables=$dom->getElementsByTagName('table');
-			$marks=$tables->item($tables->length-2);
 
-			if(strpos($marks->textContent, "Student Achievement") === false)
-				continue; //marks have been hidden 
+			$marks=$tables->item($tables->length-2); //second last table is the one with the overall marks
 
-			$marks=$marks->getElementsByTagName("tr"); //overwrite because the original is not important
+			if(strpos($marks->textContent, "Student Achievement") !== false){
+				//if the weighting table is available
 
-			$this->achievement[$this->coursedata[0][$i]]=array(); //we're using the course name as the index
-			$this->weighting[$this->coursedata[0][$i]]=array();
-			for ($j=1; $j < $marks->length; $j++) { //the first iteration is simply the table titles so skip that
+				$marks=$marks->getElementsByTagName("tr"); 
+
+				$this->achievement[$this->coursedata[0][$i]]=array();
+			 	//we're using the course name as the index
+				$this->weighting[$this->coursedata[0][$i]]=array();
+				for ($j=1; $j < $marks->length; $j++) { 
+				//the first iteration is simply the table titles so skip that
 				//ku/ti/comm/app/other/final, each one of these iterations cycles to the next category
-				if($j==5)
-					continue; //skip the 'other' category
-				$container=$marks->item($j)->getElementsByTagName("td");
-				$this->achievement[$this->coursedata[0][$i]][$j]=floatval($container->item($container->length-1)->textContent)/100; //mark is always the last one
-				
-				$this->weighting[$this->coursedata[0][$i]][$j]=floatval($container->item(1)->textContent)/100; //weighting is always the second one
-			}
-		}
+					if($j==5)
+						continue; 
+						//skip the 'other' category
 
-		// foreach($this->courses as $course){
-		// 	echo '<pre>';
-		// 	var_dump($course);
-		// 	echo '</pre>';
-		// }
+					$container=$marks->item($j)->getElementsByTagName("td");
+					$this->achievement[$this->coursedata[0][$i]][$j]=floatval($container->item($container->length-1)->textContent)/100; 
+					//mark is always the last one
+
+					$this->weighting[$this->coursedata[0][$i]][$j]=floatval($container->item(1)->textContent)/100; 
+					//weighting is always the second one
+				}
+			}
+
+			$this->assignments[$this->getCourse($i, 'id')]=array();
+			// $assignments=$tables->item(1)->getElementsByTagName('tr'); 
+			//the second table is the one with all the assignments
+			$assignments=$tables->item(1)->childNodes;
+
+			foreach ($assignments as $key=>$assignment) {
+				if($key==0)
+					continue;
+				$res=$this->niceify($assignment->getElementsByTagName('td'));
+				if($res!==false){
+					array_push($this->assignments[$this->getCourse($i, 'id')], $res);
+				}				
+			}	
+		}
 		$this->courseCount=count($this->coursedata);
 		$this->lastUpdated=time();
 	}
+	private function niceify($row){
+		//this function fills up data really quickly
+		$array=array();
+
+		$continue=false;
+		foreach($row as $key=>$item){
+			if($continue){
+				$continue=false;
+				continue;
+			}
+			if($key==0){
+				if(strlen($item->textContent)==13 && preg_match("/^\s+/", $item->textContent) == 1){
+					return false;
+					//its blank... why? I'm not quite sure
+				}else{
+					array_push($array, preg_replace('/\s+/', ' ', $item->textContent));
+					//push the assignment name
+				}
+			}
+			else if($item->getElementsByTagName('table')->length!==0){
+				$mark=array();
+				$m=array();
+				$compare=preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent);
+				preg_match('/(([0-9.]+) \/ ([0-9.]+) = [0-9.]+%) (weight=([0-9.]+))?/', $compare, $m);
+				$mark['n']=floatval($m[2]);
+				$mark['d']=floatval($m[3]);
+				if(!isset($m[5])){
+					$mark['w']=0;
+				}else{
+					$mark['w']=floatval($m[5]);
+				}
+				array_push($array, $mark);
+				$continue=true;
+				//if we extracted data, skip the next iteration, which for some reason is always null
+			}else{
+				array_push($array, null);
+				// echo "</br>";
+			}
+		}
+		return $array;
+	}
+
 }
 /* Username | Password (hashed) | coursedata | Marks (array ku/ti/comm/app/other) 
 *  reconsider this data structure

@@ -1,0 +1,159 @@
+$grey: #53585B;
+$headers:  #F8F9FE;
+
+.wrapper{
+	.nav-side{
+		.nav-container{
+			.nav-header{
+				color:white;
+				background-color:#27ae60;
+			}
+			.nav-element{
+				border-bottom: 1px solid #ccc;
+				a{
+					
+				}
+				&:last-child{
+					
+				}
+				.course-mark{
+					color: $grey;
+				}
+				p{
+					color: $grey;
+				}
+			}
+		}
+	}
+}
+.module{
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	background-color:white;
+	.module-header{
+		background-color: $headers;
+	}
+	.search{
+		background-color:inherit;
+		border-top:0;
+		border-left:0;
+		border-right:0;
+		border-bottom: 1px solid rgba(0,0,0,0.5);
+		color:black;
+		box-shadow: 0 0 0 #3B82EA;
+		transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+		&:active, &:focus{
+			transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+			box-shadow: 0 3px 3px -3px #3B82EA;
+			border-bottom: 1px solid #3B82EA;
+		}
+	}
+}
+.content{
+	background-color: #E4EBF3;
+	.top-bar{
+
+		.top-element{
+			.now-viewing{
+			}
+			&:nth-child(2){
+			}
+			a{
+				color:$grey;
+				transition:0.3s color ease;
+				.ion-log-out{
+				}
+				&:hover{
+					color:#e74c3c;
+					transition:0.3s color ease;
+				}
+			}
+		}	
+	}
+	.overview{
+		.block{
+			background-color:white;
+			border-right: 1px solid #ccc;
+			.circle{
+				color:white;
+			}
+			>p{
+			}
+			&.term .circle{
+				background-color: #40ACC6;
+			}
+			&.course .circle{
+				background-color: #FFB901;
+			}
+			&.status .circle{
+				&.updated{
+					background-color: #87D04D;
+				}
+				&.hidden{
+					background-color:#e74c3c;
+				}
+				.icon{
+					&.ion-ios-checkmark-empty{
+
+					}
+					&.ion-ios-bolt{
+
+					}
+					&:before{
+
+					}
+				}
+			}
+		}
+	}
+}
+.assignments{
+	table{
+	}
+	.list{
+		tr{
+			border-bottom: 1px solid  #ccc;
+			td{
+				border-right: 1px solid  #ccc;
+				&:last-child{
+					border-right:none;
+				}
+			}
+			.ku{
+				background-color: #FFFFAA;
+			}
+			.ti{
+				background-color: #C0FEA4;
+			}
+			.comm{
+				background-color: #AFAFFF;
+			}
+			.app{
+				background-color: #FFD490;
+			}
+			.final{
+				background-color: #DEDEDE;
+			}
+		}
+	}
+	.table-header{
+		border-top: 1px solid rgba(0,0,0,0.2);
+		border-bottom: 1px solid rgba(0,0,0,0.2);
+
+		.column{
+			padding: 0.5rem 1rem;
+			background-color: #F4F8F9;
+		}
+	}
+}
+.chart-container{
+	.chart{
+		background-color:white;
+		&:first-child{
+		}
+		&:last-child{
+		}
+		.chart-header{
+			background-color: $headers;
+		}
+	}
+}
