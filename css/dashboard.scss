@@ -1,11 +1,9 @@
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300';
+@import 'util';
 $grey: #53585B;
 html, body{
 	height:100%;
 }
-.os{
-	font-family: 'Open Sans', sans-serif;
-}
+
 ul{
 	margin:0;
 	padding:0;
@@ -22,7 +20,6 @@ canvas{
 	// width: 100px !important;
 }
 .wrapper{
-	height:100%;
 	display:flex;
 	.nav-side{
 		flex: 1 1 200px;
@@ -30,14 +27,11 @@ canvas{
 			list-style-type:none;
 			.nav-header{
 				text-align:center;
-				background-color:#1D9E75;
 				padding:1.5rem;
 				font-size: 1.25rem;
-				color:white;
 				@extend .os;
 			}
 			.nav-element{
-				border-bottom: 1px solid #ccc;
 				a{
 					text-align:center;
 					height:150px;
@@ -52,25 +46,33 @@ canvas{
 				}
 				.course-mark{
 					font-size:2.5rem;
-					color: $grey;
 				}
 				p{
-					color: $grey;
 				}
 			}
 		}
 	}
 }
-
+.module{
+	margin-top:2rem;
+	border-radius: 5px;
+	.module-header{
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+		font-size:1.5rem;
+		padding: 1rem 2rem;
+		@extend .os;
+	}
+}
 .content{
 	flex: 1 1 calc(100% - 200px);
 	padding:0.6rem 2rem;
 	box-sizing:padding-box;
-	background-color: #E4EBF3;
 	.top-bar{
 		display: flex;
 		list-style:none;
 		align-items:center;
+		padding: 0.7rem 0;
 		.top-element{
 			padding: 0 1rem;
 			.now-viewing{
@@ -79,26 +81,29 @@ canvas{
 			&:nth-child(2){
 				margin-left:auto;
 			}
-			.ion-ios-bell-outline{
-				font-size:2rem;
-			}
-			.ion-ios-person-outline{
-				font-size:3rem;
+			a{
+				display:flex;
+				align-items:center;
+				text-decoration: none;
+				transition:0.3s color ease;
+				.ion-log-out{
+					font-size:2rem;
+					padding-right:0.5rem;
+				}
+				&:hover{
+					transition:0.3s color ease;
+				}
 			}
 		}	
 	}
 	.overview{
-		margin-top: 2rem;
-		box-shadow: 0 0 10px rgba(0,0,0,.1);
 		display:flex;
 		position:relative;
 		flex-wrap:wrap; 
 		.block{
-			background-color:white;
 			padding: 2rem;
 			display:flex;
 			align-items:center;
-			outline: 1px solid #ccc;
 			justify-content:center;
 			flex: 1 0 0;
 			&:last-child{
@@ -112,10 +117,9 @@ canvas{
 				text-align: center;
 				line-height:100px;
 				font-size:1.5rem;
-				color:white;
 				@extend .os;
 			}
-			.achivement{
+			>p{
 				padding: 1rem;
 				margin-left:10%;
 				text-transform:uppercase;
@@ -124,15 +128,25 @@ canvas{
 				@extend .os;
 			}
 			&.term .circle{
-				background-color: #40ACC6;
+				
 			}
 			&.course .circle{
-				background-color: #FFB901;
+				
 			}
 			&.status .circle{
-				background-color: #87D04D;
+				&.updated{
+					
+				}
+				&.hidden{
+					
+				}
 				.icon{
-					font-size:5rem;
+					&.ion-ios-checkmark-empty{
+						font-size:5rem;
+					}
+					&.ion-ios-bolt{
+						font-size:3rem;
+					}
 					&:before{
 						line-height:100px;
 					}
@@ -141,12 +155,52 @@ canvas{
 		}
 	}
 }
+.assignments{
+	table{
+		width:100%;
+	}
+	.list{
+		tr{
+			display:flex;
+			td,th{
+				flex: 0 1 calc(100% / 6);
+				padding: 1rem;
+				@extend .os;
+				font-weight:400;
+			}
+		}
+	}
+	.module-header{
+		position:relative;
+	}
+	.search{
+		position:absolute;
+		bottom:1rem;
+		right:2rem;
+		font-size:1rem;
+	}
+	.table-header{
+		display:flex;
+		.column{
+			flex: 0 1 calc(100% / 6);
+			@extend .os;
+		}
+	}
+	.assignment{
+		.mark{
+
+		}
+		.weight{
+			float:right;
+		}
+	}
+}
 .chart-container{
 	display:flex;
 	flex-wrap:wrap;
 	.chart{
-		flex: 0 0 calc(50% - 1rem);
-		background-color:white;
+		// flex: 0 0 calc(50% - 1rem);
+		flex: 1 1 100%;
 		margin-top: 2rem;
 		&:first-child{
 			margin-right: 1rem;
@@ -154,12 +208,6 @@ canvas{
 		&:last-child{
 			margin-left: 1rem;
 		}
-		.chart-header{
-			background-color:#F8F9FE;
-			font-size:1.5rem;
-			padding: 1rem 2rem;
-			border-bottom: 1px solid #ccc;
-			@extend .os;
-		}
+		
 	}
 }

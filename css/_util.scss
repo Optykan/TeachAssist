@@ -1,0 +1,35 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400|Poiret+One|Roboto';
+.os{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+.po{
+    font-family: 'Poiret One', cursive;
+}
+.ro{
+    font-family: 'Roboto', sans-serif;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        font-size:0.75rem;
+        padding: 5px 0;
+        border-radius: 6px;
+
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+        @extend .os;
+    }
+    &:hover .tooltiptext{
+        visibility: visible;
+    }
+}
+

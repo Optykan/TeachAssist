@@ -1,0 +1,75 @@
+hr {
+  border: 1px solid #2F414F; }
+
+.wrapper .nav-side {
+  background-color: #1B2831; }
+  .wrapper .nav-side .nav-container .nav-header {
+    color: white;
+    background-color: #3B82EA; }
+  .wrapper .nav-side .nav-container .nav-element {
+    border-bottom: 1px solid #000; }
+    .wrapper .nav-side .nav-container .nav-element p {
+      color: rgba(255, 255, 255, 0.5);
+      transition: 0.3s color ease; }
+    .wrapper .nav-side .nav-container .nav-element.active p {
+      color: white; }
+    .wrapper .nav-side .nav-container .nav-element:hover p {
+      color: white;
+      transition: 0.3s color ease; }
+
+.module {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white; }
+  .module .module-header {
+    background-color: #16232C;
+    color: white; }
+  .module .search {
+    background-color: inherit;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    box-shadow: 0 0 0 #3B82EA;
+    transition: 0.3s box-shadow ease, 0.3s border-bottom ease; }
+    .module .search:active, .module .search:focus {
+      transition: 0.3s box-shadow ease, 0.3s border-bottom ease;
+      box-shadow: 0 3px 3px -3px #3B82EA;
+      border-bottom: 1px solid #3B82EA; }
+
+.content {
+  background-color: #05121B; }
+  .content .top-bar .top-element .now-viewing {
+    color: rgba(255, 255, 255, 0.5); }
+  .content .top-bar .top-element a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.3s color ease; }
+    .content .top-bar .top-element a:hover {
+      color: #e74c3c;
+      transition: 0.3s color ease; }
+  .content .overview .block {
+    background-color: #0F1C25;
+    border-right: 1px solid #2F414F; }
+    .content .overview .block .circle {
+      color: white; }
+    .content .overview .block > p {
+      color: white; }
+    .content .overview .block.term .circle {
+      background-color: #2980b9; }
+    .content .overview .block.course .circle {
+      background-color: #e67e22; }
+    .content .overview .block.status .circle.updated {
+      background-color: #27ae60; }
+    .content .overview .block.status .circle.hidden {
+      background-color: #c0392b; }
+
+.assignments {
+  background-color: #05121B; }
+  .assignments .list tr td {
+    color: rgba(255, 255, 255, 0.5);
+    outline: 1px solid #2F414F; }
+
+.chart-container .chart {
+  background-color: white; }
+
+/*# sourceMappingURL=dark.css.map */
