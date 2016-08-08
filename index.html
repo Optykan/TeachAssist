@@ -1,0 +1,20 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.3/js.cookie.min.js"></script>
+</head>
+
+<body>
+    <a href="#" onclick="openwindow()">Pop-up Window</a>
+
+    <script>
+        function openwindow() {
+            var win = window.open("http://ta.yrdsb.ca/gamma-live/index.php", 'wolololo', 'width=420,height=680,left=100,top=10');
+            setTimeout(function () {
+                console.log(win.window.location.href)
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
