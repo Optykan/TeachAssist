@@ -3,14 +3,14 @@
 class Network{
 	private $handle;
 
-	public __construct(){
+	public function __construct($cookiejar){
 		$this->handle=curl_init();
 		curl_setopt($this->handle, CURLOPT_VERBOSE, TRUE);
 		// curl_setopt($this->handle, CURLOPT_HEADER, 1);
 		curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt'); //there's probably a security hole in here somewhere
-		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt'); //but teachassist seems to cover it, just reauth every time
+		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $cookiejar.'.txt'); //there's probably a security hole in here somewhere
+		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $cookiejar.'.txt'); //but teachassist seems to cover it, just reauth every time
 	}  
 	private function curl($method, $url, $params=array()){
 		$params=http_build_query($params);
