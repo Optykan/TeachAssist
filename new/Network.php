@@ -12,7 +12,7 @@ class Network{
 		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $this->credentials['username'].'.txt'); //there's probably a security hole in here somewhere
 		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $this->credentials['username'].'.txt'); //but teachassist seems to cover it, just reauth every time
 	}  
-	private function curl($method, $url, $params){
+	private function curl($method, $url, $params=array()){
 		$params=http_build_query($params);
 		if($method=='post'){
 			curl_setopt($this->handle, CURLOPT_URL, $url);
@@ -25,10 +25,10 @@ class Network{
 		}
 		return curl_exec($this->handle);
 	}
-	public function get($url, $params){
+	public function get($url, $params=array()){
 		return $this->curl('get', $url, $params);
 	}
-	public function post($url, $params){
+	public function post($url, $params=array()){
 		return $this->curl('post', $url, $params);
 	}
 
