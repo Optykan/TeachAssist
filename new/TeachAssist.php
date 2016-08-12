@@ -5,43 +5,20 @@ require_once 'Assignment.php';
 
 class TeachAssist extends Network{
 	private $baseUrl;
-	private $username;
-	private $password;
-	// private $courseUrls=array();
-	// private $courseNames=array();
-	// private $courseIds=array();
-	private $courses;
 
-	public function __construct($base){
+	public function __construct($base, $cookiejar){
 		$this->baseUrl=$base;
-		parent::__construct();
+		parent::__construct($cookiejar);
 	}
-	public function auth(){
-		$response=$this->post($this->baseUrl, array('subject_id'=>0, 'username'=>$this->username, 'password'=>$this->password, 'submit'=>'Login'));
-		if(preg_match("/ta\.yrdsb\.ca\/(gamma-live)?(yrdsb)?\/index\.php/", $this->getLastCurlUrl()){
-			//TODO: update the regex for TDSB
-			return false;
+	public function auth($username, $password){
+		$response=$this->post($this->baseUrl.'index.php', array('subject_id'=>0, 'username'=>$username, 'password'=>$password, 'submit'=>'Login'));
+		// if(preg_match("/ta\.yrdsb\.ca\/(gamma-live)?(yrdsb)?\/index\.php/", $this->getLastCurlUrl()){
+		if(preg_match("/listReports\.php/", $this->getLastCurlUrl())){
+			//this regex should work for everything
+			return $response;
 		}
-		return $response;
+		return false;
 	}
-
-	// public function getCourseId($index){
-	// 	return $courseIds[$index];
-	// }
-
-	// public function getCourseIndex($id){
-	// 	foreach($this->courseIds as $index=>$cid){
-	// 		if($id==$cid){
-	// 			return $index;
-	// 		}
-	// 	}
-	// 	return NULL;
-	// }
-	// public function getCourseUrl($i){
-	// 	if(is_int($i))
-	// 		return $this->courseUrls[$i];
-	// 	return $this->courseurls[$this->getCourseIndex($i)];
-	// }
 
 	public function getUrls($data){
 		$matches=array();
@@ -64,7 +41,7 @@ class TeachAssist extends Network{
 		$course=new Course($id, $name);
 
 		$dom=new DOMDocument();
-		@$dom->loadHTML($this->get('https://ta.yrdsb.ca/gamma-live/students/'.$url));
+		@$dom->loadHTML($this->get($this->baseUrl.'students/'.$url));
 
 		$tables=$dom->getElementsByTagName('table');
 		$marks=$tables->item($tables->length-2); //second last table is the one with the overall marks
