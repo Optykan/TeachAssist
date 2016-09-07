@@ -19,7 +19,8 @@ class Storage{
 
 	public function getCourses(){
 		if(crc32($this->storage)==$this->hash){
-			return unserialize(gzuncompress($this->courses));
+			$serialized=gzuncompress($this->storage);
+			return unserialize($serialized);
 		}
 		return false;
 	}
