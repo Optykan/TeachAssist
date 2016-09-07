@@ -22,8 +22,8 @@ class TeachAssist extends Network{
 
 	public function getUrls($data){
 		$matches=array();
-
-		preg_match_all('/(viewReport\.php\?subject_id=[0-9]+&student_id=[0-9]+)|(Please see teacher.*)/', $data, $matches);
+		//cases for available, hidden, or empty (???)
+		preg_match_all('/(viewReport\.php\?subject_id=[0-9]+&student_id=[0-9]+)|(Please see teacher.*)|(?:<td align="right">\s+<\/td>)/', $data, $matches);
 		return $matches[0];
 	}
 	public function getIds($data){
@@ -37,7 +37,7 @@ class TeachAssist extends Network{
 		return $matches[2];
 	}
 
-	private function fetchCourseData($url, $id, $name){
+	public function fetchCourseData($url, $id, $name){
 		$course=new Course($id, $name);
 
 		$dom=new DOMDocument();
@@ -46,7 +46,7 @@ class TeachAssist extends Network{
 		$tables=$dom->getElementsByTagName('table');
 		$marks=$tables->item($tables->length-2); //second last table is the one with the overall marks
 
-		if(strpos($marks->textContent, "Student Achievement") !== false){
+		if((bool)$marks &&  strpos($marks->textContent, "Student Achievement") !== false){
 			//if the weighting table is available
 
 			$marks=$marks->getElementsByTagName("tr"); 
@@ -70,19 +70,22 @@ class TeachAssist extends Network{
 
 		$assignments=$tables->item(1)->childNodes;
 
-		foreach ($assignments as $key=>$assignment) {
-			if($key==0)
-				continue;
-			$res=$this->niceify($assignment->getElementsByTagName('td'));
+		if(!is_null($assignments)){
+			foreach ($assignments as $key=>$assignment) {
+				if($key==0)
+					continue;
+				$res=$this->niceify($assignment->getElementsByTagName('td'));
 
-			if($res!==false){
-				$course->addAssignment($this->niceify($res));
-			}				
-		}	
+				if($res!==false){
+					$course->addAssignment($res);
+				}				
+			}	
+		}
 		return $course;
 
 	}
 
+	//turn a nasty DOMNode thingy into a nice array
 	private function niceify($row){
 		//this function fills up data really quickly
 		$assignment=new Assignment();
@@ -107,7 +110,7 @@ class TeachAssist extends Network{
 				$mark=array();
 				$m=array();
 				$compare=preg_replace('/\s+/', ' ', $item->getElementsByTagName('table')->item(0)->getElementsByTagName('td')->item(0)->textContent);
-				preg_match('/(([0-9.]+) \/ ([0-9.]+) = [0-9.]+%) (weight=([0-9.]+))?/', $compare, $m);
+				preg_match('/(([0-9.]+) \/ ([0-9.]+) = [0-9.]+%)\s+(weight=([0-9.]+))?/', $compare, $m);
 
 				$assignment->addMark(floatval($m[2]), floatval($m[3]), floatval($m[5] ?: 0));
 

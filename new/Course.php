@@ -14,15 +14,15 @@ class Course{
 	public function __construct($courseId, $courseName){
 		$this->map=array('ku', 'ti', 'comm', 'app', 'final');
 		$this->id=$courseId;
-		$this->$name=$courseName;
+		$this->name=$courseName;
 	}
 
 	private function resolveMap($input){
-		if(is_int($input) && $input<count($this->map-1)){
-			return $this->nap[$index];
+		if(is_int($input) && $input<count($this->map)){
+			return $this->map[$index];
 		}else{
 			foreach ($this->map as $key => $value) {
-				if($value==$which){
+				if($value==$input){
 					return $key;
 				}
 			}
@@ -33,13 +33,13 @@ class Course{
 		if($array=='assignments'){
 			return $this->assignments[$index];
 		}
-		if($key = $this->resolveMap($which)){
+		if($key = $this->resolveMap($index)){
 			switch ($array) {
 				case 'weighting':
-				return $this->weighting[$this->resolveMap($which)];
+				return $this->weighting[$this->resolveMap($index)];
 				break;
 				case 'achievement':
-				return $this->achievement[$this->resolveMap($which)];
+				return $this->achievement[$this->resolveMap($index)];
 				break;
 				default:
 				return false;
@@ -54,7 +54,7 @@ class Course{
 	public function addWeighting($weight){
 		array_push($this->weighting, $weight);
 	}
-	public function addAssignment($data){
+	public function addAssignment(Assignment $data){
 		array_push($this->assignments, $data);
 	}
 

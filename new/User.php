@@ -16,23 +16,33 @@ class User extends TeachAssist{
 
 	public function __construct($username, $password){
 		$this->username=$username;
-		parent::__construct('https://ta.yrdsb.ca/yrdsb/', $username);
+		parent::__construct('https://ta.yrdsb.ca/live/', $username);
 		$this->coursesFromStorage=$this->retrieve();
 		$this->init($username, $password);
 	}
 
 	private function init($username, $password){
+		$storage=$this->retrieve();
+
 		$response=$this->auth($username, $password);
 		if($response){
 			$this->courseUrls=$this->getUrls($response);
 			$this->courseIds=$this->getIds($response);
 			$this->courseNames=$this->getNames($response);
 			$this->numberOfCourses=count($this->courseIds);
-			for ($i=0; $i < $this->numberOfCourses; $i++) { 
-				//push each course into our courses array
-				array_push($this->courses, $this->fetchCourseData($this->courseUrl[$i], $this->courseIds[$i], $this->courseNames[$i]));
+
+			for($i=0; $i<$this->numberOfCourses; $i++){
+				if((bool)$this->courseUrls[$i] && strpos($this->courseUrls[$i], 'Please') === false){
+					array_push($this->courses, $this->fetchCourseData($this->courseUrls[$i], $this->courseIds[$i], $this->courseNames[$i]));
+				}else{
+					//marks are hidden, attempt to load from storage
+					if($storage && is_array($storage)){
+						array_push($this->courses, $storage[$i]);
+					}else{
+						array_push($this->courses, NULL);
+					}
+				}
 			}
-			print_r($this);
 		}else{
 			die('Login Failed');
 		}
@@ -43,12 +53,13 @@ class User extends TeachAssist{
 		setcookie('storage', serialize($this->storage), time()+31557600);
 	}
 	public function retrieve(){
-		if($this->storage instanceof Storage){
-			$data=$this->storage->getCourses();
+		if($_COOKIE['storage']){
+			$storage=unserialize($_COOKIE['storage']);
+			$data=$storage->getCourses();
 			return $data;
 		}
 		return false;
 	}
-	
+
 }
 ?>
