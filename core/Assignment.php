@@ -2,7 +2,7 @@
 
 class Assignment{
 	private $marks=array();
-	//ku ti comm app, a +ve real number
+	//ku ti comm app, a +ve real number representing how many marks achieved
 	private $total=array();
 	//ku ti comm app, a +real number representing the maximum number of marks
 	private $weight=array();
@@ -22,6 +22,14 @@ class Assignment{
 		array_push($this->total, NULL);
 		array_push($this->weight, NULL);
 		//to keep everything in line
+	}
+	public function getWeight($index){
+		return isset($this->weight[$index]) ? $this->weight[$index]: NULL;
+	}
+	public function getMark($index){
+		if($this->total[$index]==0)
+			return NULL;
+		return $this->marks[$index]/$this->total[$index];
 	}
 }
 ?>
