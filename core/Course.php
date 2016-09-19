@@ -5,11 +5,16 @@ class Course{
 	private $name;
 	private $map=array();
 	private $weighting=array();
-	private $achievement=array();
-	//teachassist reporting percent
-
 	private $assignments=array();
+
+	//teachassist reporting numbers
 	private $average;
+	private $achievement=array();
+
+	//our numbers based on raw data
+	private $scraperAverage;
+	private $scraperAchievement=array(0,0,0,0,0);
+
 
 	public function __construct($courseId, $courseName){
 		$this->map=array('ku', 'ti', 'comm', 'app', 'final');
@@ -46,6 +51,17 @@ class Course{
 			}
 		}
 		return false;
+	}
+	private function hasFinal(){
+		foreach($this->assignments as $assignment){
+			if($assignment->getMark(4))
+				return true;
+		}
+		return false;
+	}
+
+	public function setAverage($average){
+		$this->average=$average;
 	}
 
 	public function addAchievement($mark){
@@ -88,12 +104,59 @@ class Course{
 	}
 
 	public function computeAverage(){
-		$sum;
+		$sum=0;
 		for ($i=0; $i < 5; $i++) { 
 			//assuming that we ALWAYS have 5 categories: ku ti comm app final
-			$sum+=$this->weighting[$i]*$this->achievement[$i];
+			if(!is_null($this->achievement[$i])){
+				$sum+=$this->weighting[$i]*$this->achievement[$i];
+			}
 		}
 		$this->average=$sum;
+	}
+
+	public function computeScraperAverage(){
+		//this is the average based off of our calculations
+
+		//percents
+		$marks=array([], [], [], [], []);
+		//numbers
+		$weight=array([], [], [], [], []);
+		//more numbers
+		$totalWeight=array(0, 0, 0, 0, 0);
+
+		//this has a runtime of o(scary)
+		//if teachers havent inputted at least one mark in each category then we're screwed
+		foreach($this->assignments as $assignment){
+			for($i=0; $i<5; $i++){
+				array_push($marks[$i], $assignment->getMark($i));
+				array_push($weight[$i], $assignment->getWeight($i));
+				$totalWeight[$i]+=$assignment->getWeight($i);
+			}
+		}
+
+		//now we have a populated marks array, as well as total weightings for each category
+		$max=count($marks[0]);
+		foreach($marks as $category=>$mark){
+			for($i=0; $i<$max; $i++){
+				if(isset($totalWeight[$i]) && !is_null($totalWeight[$i]) && $totalWeight[$i] !== 0 && (bool)$weight[$category][$i]){
+					$this->scraperAchievement[$category]+=($weight[$category][$i]/$totalWeight[$category])*$marks[$category][$i];
+				}
+			}	
+		}
+
+		$sum=0;
+		$hasFinal=$this->hasFinal();
+		if($hasFinal){
+			for($i=0; $i<5; $i++){
+				$sum+=$this->weighting[$i]*0.7*$this->scraperAchievement[$i];
+			}	
+		}
+		else{
+			for($i=0; $i<4; $i++){
+				$sum+=$this->weighting[$i]*$this->scraperAchievement[$i];
+			}	
+		}
+		$this->scraperAverage=$sum;
 	}
 
 	public function getAverage(){

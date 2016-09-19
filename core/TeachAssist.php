@@ -20,11 +20,17 @@ class TeachAssist extends Network{
 		return false;
 	}
 
+	public function getTeachAssistMark($data){
+		$matches=array();
+		preg_match_all('/(current\s+?mark\s+?=\s+?[0-9.]+%)|(Please see teacher.*)|(?:<td align="right">\s+<\/td>)|(Click to.*)|(level.*)/i', $data, $matches);
+		return $matches[1];
+	}
+
 	public function getUrls($data){
 		$matches=array();
 		//cases for available, hidden, or empty (???)
 		preg_match_all('/(viewReport\.php\?subject_id=[0-9]+&student_id=[0-9]+)|(Please see teacher.*)|(?:<td align="right">\s+<\/td>)/', $data, $matches);
-		return $matches[0];
+		return preg_replace('/\s+/', '  ', $matches[0]);
 	}
 	public function getIds($data){
 		$matches=array();
@@ -81,6 +87,9 @@ class TeachAssist extends Network{
 				}				
 			}	
 		}
+
+		// $course->computeAverage();
+		$course->computeScraperAverage();
 		return $course;
 
 	}
