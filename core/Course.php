@@ -91,9 +91,9 @@ class Course{
 
 	public function getAssignment($which=NULL){
 		if(!isset($which)){
-			return $this->assignment;
+			return $this->assignments;
 		}
-		return $this->getInternal($which, 'assignment');
+		return $this->assignments[$which] ?: false;
 	}
 
 	public function getAchievement($which=NULL){
