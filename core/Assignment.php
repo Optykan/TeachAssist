@@ -26,10 +26,26 @@ class Assignment{
 	public function getWeight($index){
 		return isset($this->weight[$index]) ? $this->weight[$index]: NULL;
 	}
+	public function getNumerator($category){
+		//where category is a good ol' 01234
+		return $this->marks[$category];
+	}
+	public function getTotal($category){
+		return $this->total[$category];
+	}
 	public function getMark($index){
 		if($this->total[$index]==0)
 			return NULL;
 		return $this->marks[$index]/$this->total[$index];
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getFormattedScore($category){
+		if(isset($this->marks[$category]) && $this->total[$category] != 0){
+			return $this->marks[$category].' / '.$this->total[$category].' = '.round($this->getMark[$category], 2).'%';
+		}
+		return '';
 	}
 }
 ?>

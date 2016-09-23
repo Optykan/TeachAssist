@@ -5,7 +5,9 @@ if(isset($_GET['e'])){
 		case 1:
 		$e='Login Failed';
 		break;
-		
+		case 2:
+		$e='Invalid Course';
+		break;
 		default:
 		$e='Something happened';
 		break;

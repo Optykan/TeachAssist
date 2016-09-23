@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAIC,kBAAK;EACJ,UAAU,EAAC,IAAI;EAEd,uBAAC;IACA,OAAO,EAAC,YAAY",
+"sources": ["../../assets/sass/dashboard.scss"],
+"names": [],
+"file": "dashboard.css"
+}

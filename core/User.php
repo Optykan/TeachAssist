@@ -76,10 +76,16 @@ class User extends TeachAssist{
 	}
 	public function getCourse($course){
 		if(is_int($course)){
-			return $this->courses[$i];
+			return $this->courses[$course];
 		}
 		$courseIds=array_flip($this->courseIds);
 		return $this->courses[$courseIds[$course]] ?: false;
+	}
+	public function getCourseCount(){
+		return $this->numberOfCourses;
+	}
+	public function getFlags($course){
+		return $this->flags[$course];
 	}
 
 }
