@@ -159,6 +159,10 @@ class Course{
 		$this->scraperAverage=$sum;
 	}
 
+	public function getScraperAverage(){
+		return $this->scraperAverage;
+	}
+
 	public function getAverage(){
 		return $this->average;
 	}

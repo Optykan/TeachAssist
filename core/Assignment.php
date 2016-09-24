@@ -43,7 +43,7 @@ class Assignment{
 	}
 	public function getFormattedScore($category){
 		if(isset($this->marks[$category]) && $this->total[$category] != 0){
-			return $this->marks[$category].' / '.$this->total[$category].' = '.round($this->getMark[$category], 2).'%';
+			return $this->marks[$category].' / '.$this->total[$category].' = '.round($this->getMark($category)*100, 2).'%';
 		}
 		return '';
 	}

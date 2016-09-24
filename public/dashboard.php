@@ -22,15 +22,7 @@ else{
 	Extras::redirect('/index.php?e=1');
 }
 if($_GET['action']=='logout'){
-	$_SESSION = array();
-	$params = session_get_cookie_params();
-	setcookie(session_name(), '', time() - 42000,
-		$params["path"], $params["domain"],
-		$params["secure"], $params["httponly"]
-		);
-	session_destroy();
-    //thanks php manual 
-
+	Extras::logout();
 	Extras::redirect('/index.php?m=1');
 }
 
@@ -46,28 +38,42 @@ $user->store();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/theme-dark.css">
 	<title>TeachAssist</title>
 </head>
 <body>
 	<div class="top-bar">
-		<p class="logo">TeachAssist</p>
-		<p class="center">Dashboard</p>
+		<div class="logo">TeachAssist</div>
+		<div class="header-center">Dashboard</div>
 		<div class="account">
 			<a href="dashboard.php?action=logout">Logout</a>
 		</div>
 	</div>
 	<nav class="course-navigation">
 		<ul>
-			<li><a href="dashboard.php?course="></a></li>
+			<?php $courseCount=$user->getCourseCount();?>
+			<?php for($i=0; $i<$courseCount; $i++):?>
+				<?php $currentCourse=$user->getCourse($i);?>
+				<?php if(is_null($currentCourse)) continue;?>
+				<li><a href="dashboard.php?course=<?=$i?>"><?=$user->getCourse($i)->getName()?></a></li>
+			<?php endfor;?>
 		</ul>
 	</nav>
 	<div class="main">
 		<div class="status">
-			<h3 class="scraper"></h3>
-			<h1 class="teachassist"></h1>
-			<h3 class="status"></h3>
+			<div class="scraper"><?=round($course->getScraperAverage()*100,2)?>%</div>
+			<div class="teachassist"><?=$course->getAverage()?>%</div>
+			<?php $flags=$user->getFlags($courseId);?>
+			<?php $status=Extras::formatStatus($flags);?>
+			<div class="status-circle">
+				<div class="circle <?=$status['status']?>">
+					<i class="icon <?=$status['icon']?>"></i>
+				</div>
+				<h3 class="status-message"><?=$status['message']?></h3>
+			</div>
 		</div>
 		<hr />
 		<div class="charts">
@@ -91,12 +97,12 @@ $user->store();
 					<?php $assignments=$course->getAssignment();?>
 					<?php foreach($assignments as $assignment):?>
 						<tr class="assignment">
-							<td class="name"><?=$assignment->getName()?></td>
-							<td class="ku"><?=$assignment->getFormattedScore(0)?></td>
-							<td class="ti"><?=$assignment->getFormattedScore(1)?></td>
-							<td class="comm"><?=$assignment->getFormattedScore(2)?></td>
-							<td class="app"><?=$assignment->getFormattedScore(3)?></td>
-							<td class="final"><?=$assignment->getFormattedScore(4)?></td>
+							<td class="category name"><?=$assignment->getName()?></td>
+							<td class="category ku"><?=$assignment->getFormattedScore(0)?></td>
+							<td class="category ti"><?=$assignment->getFormattedScore(1)?></td>
+							<td class="category comm"><?=$assignment->getFormattedScore(2)?></td>
+							<td class="category app"><?=$assignment->getFormattedScore(3)?></td>
+							<td class="category final"><?=$assignment->getFormattedScore(4)?></td>
 						</tr>
 					<?php endforeach;?>
 				</tbody>
