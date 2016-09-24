@@ -1,3 +1,42 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400";
+.os, body, html {
+  font-family: 'Open Sans', sans-serif; }
+
+body, html {
+  margin: 0;
+  min-height: 100vh; }
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .top-bar .logo {
+    padding: 1rem 2rem; }
+
+.main {
+  color: white; }
+  .main .status {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
+    .main .status .status-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; }
+      .main .status .status-circle .circle {
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%; }
+        .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
+          font-size: 3rem; }
+  .main .teachassist {
+    font-size: 5rem;
+    font-weight: 300; }
+
 #assignments .list {
   list-style: none; }
   #assignments .list li p {

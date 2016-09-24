@@ -1,0 +1,17 @@
+body {
+  background-color: #333; }
+
+.top-bar {
+  background-color: #1f1f1f; }
+  .top-bar .logo {
+    color: white;
+    background-color: #3498db; }
+
+.main .status .status-circle .circle {
+  color: white; }
+  .main .status .status-circle .circle.ok {
+    background-color: #2ecc71; }
+  .main .status .status-circle .circle.nok {
+    background-color: #e74c3c; }
+
+/*# sourceMappingURL=theme-dark.css.map */

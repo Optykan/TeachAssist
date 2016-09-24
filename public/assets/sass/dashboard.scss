@@ -1,3 +1,56 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400';
+.os{
+	font-family: 'Open Sans', sans-serif;
+}
+
+body,html{
+	margin:0;
+	min-height:100vh;
+	@extend .os;
+}
+.top-bar{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	.logo{
+		padding:1rem 2rem;
+		// @extend .os;
+	}
+}
+.main{
+	color:white;
+	.status{
+		display:flex;
+		align-items: center;
+		justify-content: space-around;
+		.status-circle{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			.circle{
+				width:5rem;
+				height:5rem;
+				display:flex;
+				justify-content: center;
+				align-items:center;
+				border-radius:50%;
+				.icon{
+					&.ion-ios-bolt{
+
+					}
+					&.ion-ios-checkmark-empty{
+						font-size: 3rem;
+					}
+				}
+			}
+		}
+	}
+	.teachassist{
+		font-size:5rem;
+		font-weight:300;
+	}
+}
 #assignments{
 	.table-header{
 		
