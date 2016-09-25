@@ -34,8 +34,8 @@ class Assignment{
 		return $this->total[$category];
 	}
 	public function getMark($index){
-		if($this->total[$index]==0)
-			return NULL;
+		if(!isset($this->total[$index])) return NULL;
+		if($this->total[$index]==0)	return NULL;
 		return $this->marks[$index]/$this->total[$index];
 	}
 	public function getName(){

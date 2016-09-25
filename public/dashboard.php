@@ -49,19 +49,22 @@ $user->store();
 		<div class="logo">TeachAssist</div>
 		<div class="header-center">Dashboard</div>
 		<div class="account">
-			<a href="dashboard.php?action=logout">Logout</a>
+			<a href="dashboard.php?action=logout"><i class="icon ion-log-out"></i></a>
 		</div>
 	</div>
-	<nav class="course-navigation">
-		<ul>
-			<?php $courseCount=$user->getCourseCount();?>
-			<?php for($i=0; $i<$courseCount; $i++):?>
-				<?php $currentCourse=$user->getCourse($i);?>
-				<?php if(is_null($currentCourse)) continue;?>
-				<li><a href="dashboard.php?course=<?=$i?>"><?=$user->getCourse($i)->getName()?></a></li>
-			<?php endfor;?>
-		</ul>
-	</nav>
+	<div class="course-navigation">
+		<?php $courseCount=$user->getCourseCount();?>
+		<?php for($i=0; $i<$courseCount; $i++):?>
+			<?php $currentCourse=$user->getCourse($i);?>
+			<?php if(is_null($currentCourse)) continue;?>
+			<div class="course-link<?=$i==$courseId ? ' active' : ''?>">
+				<a href="dashboard.php?course=<?=$i?>">
+					<span class="course-average"><?=$user->getCourse($i)->getAverage()?>%</span>
+					<span class="course-id"><?=$user->getCourse($i)->getId()?></span>
+				</a>
+			</div>
+		<?php endfor;?>
+	</div>
 	<div class="main">
 		<div class="status">
 			<div class="scraper"><?=round($course->getScraperAverage()*100,2)?>%</div>
@@ -75,10 +78,10 @@ $user->store();
 				<h3 class="status-message"><?=$status['message']?></h3>
 			</div>
 		</div>
-		<hr />
+
 		<div class="charts">
 		</div>
-		<hr />
+
 		<div id="assignments">
 			<div class="module-header">
 				Assignments
