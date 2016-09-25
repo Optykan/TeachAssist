@@ -8,22 +8,50 @@ body, html {
 
 .top-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center; }
   .top-bar .logo {
     padding: 1rem 2rem; }
+  .top-bar .header-center {
+    padding-left: 2rem;
+    text-transform: uppercase;
+    font-weight: 300; }
+  .top-bar .account {
+    margin-left: auto; }
+    .top-bar .account a {
+      display: block;
+      padding: 1rem 1.5rem; }
+
+.course-navigation {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1rem; }
+  .course-navigation .course-link {
+    border-radius: .5rem;
+    padding: 0 .5rem;
+    transition: background-color 0.3s ease-in-out; }
+    .course-navigation .course-link a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      text-decoration: none; }
 
 .main {
   color: white; }
   .main .status {
     display: flex;
     align-items: center;
-    justify-content: space-around; }
+    justify-content: space-around;
+    padding: 1rem 0; }
     .main .status .status-circle {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column; }
+      .main .status .status-circle .status-message {
+        margin-bottom: 0;
+        font-weight: 300; }
       .main .status .status-circle .circle {
         width: 5rem;
         height: 5rem;
