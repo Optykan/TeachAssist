@@ -1,6 +1,9 @@
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400";
-.os, body, html {
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600";
+.os, .top-bar .logo {
   font-family: 'Open Sans', sans-serif; }
+
+.ss, body, html {
+  font-family: 'Source Sans Pro', sans-serif; }
 
 body, html {
   margin: 0;
@@ -10,7 +13,14 @@ body, html {
   display: flex;
   align-items: center; }
   .top-bar .logo {
-    padding: 1rem 2rem; }
+    padding: 1rem .5rem;
+    max-width: 200px;
+    width: 200px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-sizing: border-box; }
+    .top-bar .logo .teach {
+      padding-left: 1.5rem; }
   .top-bar .header-center {
     padding-left: 2rem;
     text-transform: uppercase;
@@ -21,53 +31,54 @@ body, html {
       display: block;
       padding: 1rem 1.5rem; }
 
-.course-navigation {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 1rem; }
-  .course-navigation .course-link {
-    border-radius: .5rem;
-    padding: 0 .5rem;
-    transition: background-color 0.3s ease-in-out; }
-    .course-navigation .course-link a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      text-decoration: none; }
-
-.main {
-  color: white; }
-  .main .status {
+.site-wrapper {
+  display: flex; }
+  .site-wrapper .course-navigation {
+    min-width: 200px;
+    width: 200px;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 1rem 0; }
-    .main .status .status-circle {
+    flex-direction: column;
+    padding: 2rem 1.5rem 0;
+    box-sizing: border-box; }
+    .site-wrapper .course-navigation .nav-header {
+      text-transform: uppercase; }
+    .site-wrapper .course-navigation .course-link {
+      transition: background-color 0.3s ease-in-out; }
+      .site-wrapper .course-navigation .course-link a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none; }
+  .site-wrapper .main {
+    width: 100%; }
+    .site-wrapper .main .status {
       display: flex;
-      justify-content: center;
       align-items: center;
-      flex-direction: column; }
-      .main .status .status-circle .status-message {
-        margin-bottom: 0;
-        font-weight: 300; }
-      .main .status .status-circle .circle {
-        width: 5rem;
-        height: 5rem;
+      justify-content: space-around;
+      padding: 1rem 0; }
+      .site-wrapper .main .status .status-circle {
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 50%; }
-        .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
-          font-size: 3rem; }
-  .main .teachassist {
-    font-size: 5rem;
-    font-weight: 300; }
-
-#assignments .list {
-  list-style: none; }
-  #assignments .list li p {
-    display: inline-block; }
+        flex-direction: column; }
+        .site-wrapper .main .status .status-circle .status-message {
+          margin-bottom: 0;
+          font-weight: 300; }
+        .site-wrapper .main .status .status-circle .circle {
+          width: 5rem;
+          height: 5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%; }
+          .site-wrapper .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
+            font-size: 3rem; }
+    .site-wrapper .main .teachassist {
+      font-size: 5rem;
+      font-weight: 300; }
+  .site-wrapper #assignments .list {
+    list-style: none; }
+    .site-wrapper #assignments .list li p {
+      display: inline-block; }
 
 /*# sourceMappingURL=dashboard.css.map */

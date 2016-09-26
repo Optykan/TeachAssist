@@ -41,75 +41,78 @@ $user->store();
 	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/dashboard.css">
-	<link rel="stylesheet" type="text/css" href="dist/css/theme-dark.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/theme-default.css">
 	<title>TeachAssist</title>
 </head>
 <body>
 	<div class="top-bar">
-		<div class="logo">TeachAssist</div>
+		<div class="logo"><span class="teach">Teach</span><span class="assist">Assist</span></div>
 		<div class="header-center">Dashboard</div>
 		<div class="account">
 			<a href="dashboard.php?action=logout"><i class="icon ion-log-out"></i></a>
 		</div>
 	</div>
-	<div class="course-navigation">
-		<?php $courseCount=$user->getCourseCount();?>
-		<?php for($i=0; $i<$courseCount; $i++):?>
-			<?php $currentCourse=$user->getCourse($i);?>
-			<?php if(is_null($currentCourse)) continue;?>
-			<div class="course-link<?=$i==$courseId ? ' active' : ''?>">
-				<a href="dashboard.php?course=<?=$i?>">
-					<span class="course-average"><?=$user->getCourse($i)->getAverage()?>%</span>
-					<span class="course-id"><?=$user->getCourse($i)->getId()?></span>
-				</a>
-			</div>
-		<?php endfor;?>
-	</div>
-	<div class="main">
-		<div class="status">
-			<div class="scraper"><?=round($course->getScraperAverage()*100,2)?>%</div>
-			<div class="teachassist"><?=$course->getAverage()?>%</div>
-			<?php $flags=$user->getFlags($courseId);?>
-			<?php $status=Extras::formatStatus($flags);?>
-			<div class="status-circle">
-				<div class="circle <?=$status['status']?>">
-					<i class="icon <?=$status['icon']?>"></i>
+	<div class="site-wrapper">
+		<div class="course-navigation">
+			<p class="nav-header">Courses</p>
+			<?php $courseCount=$user->getCourseCount();?>
+			<?php for($i=0; $i<$courseCount; $i++):?>
+				<?php $currentCourse=$user->getCourse($i);?>
+				<?php if(is_null($currentCourse)) continue;?>
+				<div class="course-link<?=$i==$courseId ? ' active' : ''?>">
+					<a href="dashboard.php?course=<?=$i?>">
+						<span class="course-average"><?=$user->getCourse($i)->getAverage()?>%</span>
+						<span class="course-id"><?=$user->getCourse($i)->getId()?></span>
+					</a>
 				</div>
-				<h3 class="status-message"><?=$status['message']?></h3>
-			</div>
+			<?php endfor;?>
 		</div>
-
-		<div class="charts">
-		</div>
-
-		<div id="assignments">
-			<div class="module-header">
-				Assignments
-				<input class="search" placeholder="Search" />
+		<div class="main">
+			<div class="status">
+				<div class="scraper"><?=round($course->getScraperAverage()*100,2)?>%</div>
+				<div class="teachassist"><?=$course->getAverage()?>%</div>
+				<?php $flags=$user->getFlags($courseId);?>
+				<?php $status=Extras::formatStatus($flags);?>
+				<div class="status-circle">
+					<div class="circle <?=$status['status']?>">
+						<i class="icon <?=$status['icon']?>"></i>
+					</div>
+					<h3 class="status-message"><?=$status['message']?></h3>
+				</div>
 			</div>
-			<div class="table-header">
-				<div class="column">Name</div>
-				<div class="column">K/U</div>
-				<div class="column">T/I</div>
-				<div class="column">Comm</div>
-				<div class="column">App</div>
-				<div class="column">Final</div>
+
+			<div class="charts">
 			</div>
-			<table>
-				<tbody class='list'>
-					<?php $assignments=$course->getAssignment();?>
-					<?php foreach($assignments as $assignment):?>
-						<tr class="assignment">
-							<td class="category name"><?=$assignment->getName()?></td>
-							<td class="category ku"><?=$assignment->getFormattedScore(0)?></td>
-							<td class="category ti"><?=$assignment->getFormattedScore(1)?></td>
-							<td class="category comm"><?=$assignment->getFormattedScore(2)?></td>
-							<td class="category app"><?=$assignment->getFormattedScore(3)?></td>
-							<td class="category final"><?=$assignment->getFormattedScore(4)?></td>
-						</tr>
-					<?php endforeach;?>
-				</tbody>
-			</table>
+
+			<div id="assignments">
+				<div class="module-header">
+					Assignments
+					<input class="search" placeholder="Search" />
+				</div>
+				<div class="table-header">
+					<div class="column">Name</div>
+					<div class="column">K/U</div>
+					<div class="column">T/I</div>
+					<div class="column">Comm</div>
+					<div class="column">App</div>
+					<div class="column">Final</div>
+				</div>
+				<table>
+					<tbody class='list'>
+						<?php $assignments=$course->getAssignment();?>
+						<?php foreach($assignments as $assignment):?>
+							<tr class="assignment">
+								<td class="category name"><?=$assignment->getName()?></td>
+								<td class="category ku"><?=$assignment->getFormattedScore(0)?></td>
+								<td class="category ti"><?=$assignment->getFormattedScore(1)?></td>
+								<td class="category comm"><?=$assignment->getFormattedScore(2)?></td>
+								<td class="category app"><?=$assignment->getFormattedScore(3)?></td>
+								<td class="category final"><?=$assignment->getFormattedScore(4)?></td>
+							</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="dist/vendor/jquery/jquery.min.js"></script>
