@@ -1,0 +1,43 @@
+body {
+  background-color: #F3F3F3; }
+
+.top-bar {
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1); }
+  .top-bar .logo {
+    background-color: #1B2227; }
+    .top-bar .logo .teach {
+      color: #475661; }
+    .top-bar .logo .assist {
+      color: #5CACE0; }
+  .top-bar .header-center {
+    color: #475661; }
+  .top-bar .account {
+    background-color: #e67e22; }
+    .top-bar .account .icon {
+      color: #475661; }
+
+.course-navigation {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #21292F; }
+  .course-navigation .nav-header {
+    color: #475661; }
+  .course-navigation .course-link.active {
+    background-color: #5CACE0; }
+  .course-navigation .course-link:not(.active):hover {
+    background-color: rgba(92, 172, 224, 0.1); }
+  .course-navigation .course-link a {
+    color: white; }
+
+.main {
+  color: white; }
+  .main .status {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    .main .status .status-circle .circle {
+      color: white; }
+      .main .status .status-circle .circle.ok {
+        background-color: #2ecc71; }
+      .main .status .status-circle .circle.nok {
+        background-color: #e74c3c; }
+
+/*# sourceMappingURL=theme-default.css.map */
