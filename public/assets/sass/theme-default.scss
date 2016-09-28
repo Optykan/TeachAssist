@@ -1,0 +1,67 @@
+$black: #1B2227;
+$grey: #21292F;
+$text: #475661;
+$blue: #5CACE0;
+$orange: #e67e22;
+$lwhite: #F3F3F3;
+$hr: 1px solid rgba(0,0,0,.1);
+body{
+	background-color: $lwhite;
+}
+.top-bar{
+	background-color: white;
+	box-shadow: 0 0 2px rgba(black, 0.1);
+	.logo{
+		background-color: $black; 
+		.teach{
+			color: $text;
+		}
+		.assist{
+			color: $blue;
+		}
+	}
+	.header-center{
+		color: $text;
+	}
+	.account{
+	 	background-color:$orange;
+		.icon{
+			color: $text;
+		}
+	}
+}
+.course-navigation{
+	border-bottom: $hr;
+	background-color: $grey;
+	.nav-header{
+		color: $text;
+	}
+	.course-link{
+		&.active{
+			background-color:$blue;
+		}
+		&:not(.active):hover{
+			background-color:rgba($blue, .1);
+		}
+		a{
+			color:white;
+		}
+	}
+}
+.main{
+	color:white;
+	.status{
+		border-bottom: $hr;
+		.status-circle{
+			.circle{
+				color:white;
+				&.ok{
+					background-color: #2ecc71;
+				}
+				&.nok{
+					background-color: #e74c3c;
+				}
+			}
+		}
+	}
+}
