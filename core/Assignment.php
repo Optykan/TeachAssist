@@ -42,10 +42,30 @@ class Assignment{
 		return $this->name;
 	}
 	public function getFormattedScore($category){
-		if(isset($this->marks[$category]) && $this->total[$category] != 0){
-			return $this->marks[$category].' / '.$this->total[$category].' = '.round($this->getMark($category)*100, 2).'%';
+		switch ($category) {
+			case 0:
+			$class='ku';
+			break;
+			case 1:
+			$class='ti';
+			break;
+			case 2:
+			$class="comm";
+			break;
+			case 3:	
+			$class="app";
+			break;
+			case 4:
+			$class="final";
+			break;
+			default:
+			$class="ku";
+			break;
 		}
-		return '';
+		if(isset($this->marks[$category]) && $this->total[$category] != 0){
+			return '<div class="mark">'.$this->marks[$category].' / '.$this->total[$category]." = <span class='$class'>".round($this->getMark($category)*100, 2)."</span>%</div><div class='weight weight-$class'>{$this->getWeight($category)}</div>";
+		}
+		return '&nbsp;';
 	}
 }
 ?>
