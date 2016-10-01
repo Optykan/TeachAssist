@@ -1,10 +1,16 @@
 $nav-width:200px;
+$global-radius: 5px;
 @import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600';
 .os{
 	font-family: 'Open Sans', sans-serif;
 }
 .ss{
 	font-family: 'Source Sans Pro', sans-serif;
+}
+@mixin t($type...){
+	transition-property: $type;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-in-out;
 }
 
 body,html{
@@ -42,40 +48,57 @@ body,html{
 }
 .site-wrapper{
 	display:flex;
+	position:absolute;
+	height:calc(100% - 55px);
+	width:100%;
 	.course-navigation{
 		min-width: $nav-width;
 		width: $nav-width;
 		display:flex;
 		flex-direction: column;
-		padding: 2rem 1.5rem 0;
+		padding: 2rem 1rem 0;
 		box-sizing:border-box;
 		.nav-header{
 			text-transform: uppercase;
+			margin-left: 1rem;
 		}
 		.course-link{
-			transition: background-color 0.3s ease-in-out;
+			border-radius: $global-radius;
+			@include t(background-color);
 			a{
-				display:flex;
-				flex-direction:column;
-				align-items:center;
+				@include t(color);
+				display:block;
+				padding: 0.5rem 1rem;
 				text-decoration: none;
+				.course-id{
+					float:right;
+				}
 			}
 		}
 	}
 	.main{
 		width:100%;
+		padding:2rem 2rem;
+		.module{
+			border-radius: $global-radius;
+			padding:1rem;
+			.module-header{
+				padding: 0 1rem 1rem;
+				font-weight: 700;
+				font-size:1.25rem;
+			}
+		}
 		.status{
 			display:flex;
 			align-items: center;
 			justify-content: space-around;
-			padding: 1rem 0;
 			.status-circle{
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				flex-direction: column;
 				.status-message{
-					margin-bottom:0;
+					margin:0;
 					font-weight:300;
 				}
 				.circle{
@@ -90,7 +113,7 @@ body,html{
 
 						}
 						&.ion-ios-checkmark-empty{
-							font-size: 3rem;
+							font-size: 3.5rem;
 						}
 					}
 				}
@@ -102,14 +125,67 @@ body,html{
 		}
 	}
 	#assignments{
+		padding-left:0;
+		padding-right:0;
+		table{
+			border-spacing:0;
+			width:100%;
+		}
+		.module-header{
+			display:flex;
+			align-items:center;
+			padding-left:2rem;
+			padding-right:2rem;
+			.search{
+				margin-left:auto;
+				@include t(box-shadow, color);
+			}
+		}
 		.table-header{
-			
+			.sort{
+				padding: 0.5rem 0 0.5rem 1rem;
+				text-align:left;
+				font-weight:700;
+				text-transform: uppercase;
+				font-size:0.75rem;
+				cursor:pointer;
+				float:left;
+				-moz-user-select: none;
+				-khtml-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+				@extend .os;
+				&.sort-name{
+					padding-left:2rem;
+				}
+				&.sort-final{
+					padding-right:1rem;
+				}
+				&.sort-weight{
+					float:right;
+				}
+			}
 		}
 		.list{
 			list-style:none;
-			li{
-				p{
-					display:inline-block;
+			.category{
+				padding:0;
+				.mark{
+					padding: 0.5rem 0 0.5rem 1rem;
+				}
+				.container{
+					display:flex;
+				}
+				&.name{
+					padding-left:2rem;
+				}
+				.weight{
+					width: 2ch;
+					padding: 0 0.5rem;
+					margin-left: auto;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 				}
 			}
 		}	

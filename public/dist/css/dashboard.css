@@ -1,5 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600";
-.os, .top-bar .logo {
+.os, .top-bar .logo, .site-wrapper #assignments .table-header .sort {
   font-family: 'Open Sans', sans-serif; }
 
 .ss, body, html {
@@ -32,37 +32,55 @@ body, html {
       padding: 1rem 1.5rem; }
 
 .site-wrapper {
-  display: flex; }
+  display: flex;
+  position: absolute;
+  height: calc(100% - 55px);
+  width: 100%; }
   .site-wrapper .course-navigation {
     min-width: 200px;
     width: 200px;
     display: flex;
     flex-direction: column;
-    padding: 2rem 1.5rem 0;
+    padding: 2rem 1rem 0;
     box-sizing: border-box; }
     .site-wrapper .course-navigation .nav-header {
-      text-transform: uppercase; }
+      text-transform: uppercase;
+      margin-left: 1rem; }
     .site-wrapper .course-navigation .course-link {
-      transition: background-color 0.3s ease-in-out; }
+      border-radius: 5px;
+      transition-property: background-color;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-in-out; }
       .site-wrapper .course-navigation .course-link a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        transition-property: color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+        display: block;
+        padding: 0.5rem 1rem;
         text-decoration: none; }
+        .site-wrapper .course-navigation .course-link a .course-id {
+          float: right; }
   .site-wrapper .main {
-    width: 100%; }
+    width: 100%;
+    padding: 2rem 2rem; }
+    .site-wrapper .main .module {
+      border-radius: 5px;
+      padding: 1rem; }
+      .site-wrapper .main .module .module-header {
+        padding: 0 1rem 1rem;
+        font-weight: 700;
+        font-size: 1.25rem; }
     .site-wrapper .main .status {
       display: flex;
       align-items: center;
-      justify-content: space-around;
-      padding: 1rem 0; }
+      justify-content: space-around; }
       .site-wrapper .main .status .status-circle {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column; }
         .site-wrapper .main .status .status-circle .status-message {
-          margin-bottom: 0;
+          margin: 0;
           font-weight: 300; }
         .site-wrapper .main .status .status-circle .circle {
           width: 5rem;
@@ -72,13 +90,60 @@ body, html {
           align-items: center;
           border-radius: 50%; }
           .site-wrapper .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
-            font-size: 3rem; }
+            font-size: 3.5rem; }
     .site-wrapper .main .teachassist {
       font-size: 5rem;
       font-weight: 300; }
-  .site-wrapper #assignments .list {
-    list-style: none; }
-    .site-wrapper #assignments .list li p {
-      display: inline-block; }
+  .site-wrapper #assignments {
+    padding-left: 0;
+    padding-right: 0; }
+    .site-wrapper #assignments table {
+      border-spacing: 0;
+      width: 100%; }
+    .site-wrapper #assignments .module-header {
+      display: flex;
+      align-items: center;
+      padding-left: 2rem;
+      padding-right: 2rem; }
+      .site-wrapper #assignments .module-header .search {
+        margin-left: auto;
+        transition-property: box-shadow, color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out; }
+    .site-wrapper #assignments .table-header .sort {
+      padding: 0.5rem 0 0.5rem 1rem;
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      cursor: pointer;
+      float: left;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none; }
+      .site-wrapper #assignments .table-header .sort.sort-name {
+        padding-left: 2rem; }
+      .site-wrapper #assignments .table-header .sort.sort-final {
+        padding-right: 1rem; }
+      .site-wrapper #assignments .table-header .sort.sort-weight {
+        float: right; }
+    .site-wrapper #assignments .list {
+      list-style: none; }
+      .site-wrapper #assignments .list .category {
+        padding: 0; }
+        .site-wrapper #assignments .list .category .mark {
+          padding: 0.5rem 0 0.5rem 1rem; }
+        .site-wrapper #assignments .list .category .container {
+          display: flex; }
+        .site-wrapper #assignments .list .category.name {
+          padding-left: 2rem; }
+        .site-wrapper #assignments .list .category .weight {
+          width: 2ch;
+          padding: 0 0.5rem;
+          margin-left: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center; }
 
 /*# sourceMappingURL=dashboard.css.map */

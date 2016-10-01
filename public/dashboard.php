@@ -61,14 +61,14 @@ $user->store();
 				<?php if(is_null($currentCourse)) continue;?>
 				<div class="course-link<?=$i==$courseId ? ' active' : ''?>">
 					<a href="dashboard.php?course=<?=$i?>">
-						<span class="course-average"><?=$user->getCourse($i)->getAverage()?>%</span>
+						<span class="course-average"><?=number_format($user->getCourse($i)->getAverage(),1)?>%</span>
 						<span class="course-id"><?=$user->getCourse($i)->getId()?></span>
 					</a>
 				</div>
 			<?php endfor;?>
 		</div>
 		<div class="main">
-			<div class="status">
+			<div class="status module">
 				<div class="scraper"><?=round($course->getScraperAverage()*100,2)?>%</div>
 				<div class="teachassist"><?=$course->getAverage()?>%</div>
 				<?php $flags=$user->getFlags($courseId);?>
@@ -84,30 +84,49 @@ $user->store();
 			<div class="charts">
 			</div>
 
-			<div id="assignments">
+			<div id="assignments" class="module">
 				<div class="module-header">
 					Assignments
 					<input class="search" placeholder="Search" />
 				</div>
-				<div class="table-header">
-					<div class="column">Name</div>
-					<div class="column">K/U</div>
-					<div class="column">T/I</div>
-					<div class="column">Comm</div>
-					<div class="column">App</div>
-					<div class="column">Final</div>
-				</div>
 				<table>
+					<thead class="table-header">
+						<tr>
+							<th>
+								<span class="sort sort-name" data-sort="name">Name <i class="icon ion-ios-arrow-up"></i></span>
+							</th>
+							<th>
+								<span class="sort sort-ku" data-sort="ku">K/U <i class="icon ion-ios-minus-empty"></i></span>
+								<span class="sort sort-weight" data-sort="weight-ku">W <i class="icon ion-ios-minus-empty"></i></span>
+							</th>
+							<th>
+								<span class="sort sort-ti" data-sort="ti">T/I <i class="icon ion-ios-minus-empty"></i></span>
+								<span class="sort sort-weight" data-sort="weight-ti">W <i class="icon ion-ios-minus-empty"></i></span>
+							</th>
+							<th>
+								<span class="sort sort-comm" data-sort="comm">Comm <i class="icon ion-ios-minus-empty"></i></span>
+								<span class="sort sort-weight" data-sort="weight-comm">W <i class="icon ion-ios-minus-empty"></i></span>
+							</th>
+							<th>
+								<span class="sort sort-app" data-sort="app">App <i class="icon ion-ios-minus-empty"></i></span>
+								<span class="sort sort-weight" data-sort="weight-app">W <i class="icon ion-ios-minus-empty"></i></span>
+							</th>
+							<th>
+								<span class="sort sort-final" data-sort="final">Final <i class="icon ion-ios-minus-empty"></i></span>
+								<span class="sort sort-weight" data-sort="weight-final">W <i class="icon ion-ios-minus-empty"></i></span>
+							</th>
+						</tr>
+					</thead>
 					<tbody class='list'>
 						<?php $assignments=$course->getAssignment();?>
 						<?php foreach($assignments as $assignment):?>
 							<tr class="assignment">
 								<td class="category name"><?=$assignment->getName()?></td>
-								<td class="category ku"><?=$assignment->getFormattedScore(0)?></td>
-								<td class="category ti"><?=$assignment->getFormattedScore(1)?></td>
-								<td class="category comm"><?=$assignment->getFormattedScore(2)?></td>
-								<td class="category app"><?=$assignment->getFormattedScore(3)?></td>
-								<td class="category final"><?=$assignment->getFormattedScore(4)?></td>
+								<td class="category cat-ku"><div class="container"><?=$assignment->getFormattedScore(0)?></div></td>
+								<td class="category cat-ti"><div class="container"><?=$assignment->getFormattedScore(1)?></div></td>
+								<td class="category cat-comm"><div class="container"><?=$assignment->getFormattedScore(2)?></div></td>
+								<td class="category cat-app"><div class="container"><?=$assignment->getFormattedScore(3)?></div></td>
+								<td class="category cat-final"><div class="container"><?=$assignment->getFormattedScore(4)?></div></td>
 							</tr>
 						<?php endforeach;?>
 					</tbody>

@@ -13,9 +13,10 @@ body {
   .top-bar .header-center {
     color: #475661; }
   .top-bar .account {
-    background-color: #e67e22; }
+    border: 1px solid #5CACE0;
+    background-color: #5CACE0; }
     .top-bar .account .icon {
-      color: #475661; }
+      color: white; }
 
 .course-navigation {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -23,14 +24,20 @@ body {
   .course-navigation .nav-header {
     color: #475661; }
   .course-navigation .course-link.active {
-    background-color: #5CACE0; }
+    background-color: #273037; }
+    .course-navigation .course-link.active a {
+      color: white; }
   .course-navigation .course-link:not(.active):hover {
-    background-color: rgba(92, 172, 224, 0.1); }
+    background-color: rgba(39, 48, 55, 0.5); }
+    .course-navigation .course-link:not(.active):hover a {
+      color: #bfbfbf; }
   .course-navigation .course-link a {
-    color: white; }
+    color: #475661; }
 
 .main {
-  color: white; }
+  color: #475661; }
+  .main .module {
+    background-color: white; }
   .main .status {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
     .main .status .status-circle .circle {
@@ -39,5 +46,38 @@ body {
         background-color: #2ecc71; }
       .main .status .status-circle .circle.nok {
         background-color: #e74c3c; }
+
+#assignments .module-header .search {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #b3b3b3;
+  color: #b3b3b3; }
+  #assignments .module-header .search:hover {
+    color: #747474; }
+  #assignments .module-header .search:active, #assignments .module-header .search:focus {
+    color: #747474;
+    box-shadow: 0px 2px 2px -2px #5CACE0; }
+#assignments .table-header {
+  border-bottom: 1px solid #F3F3F3;
+  border-top: 1px solid #F3F3F3; }
+  #assignments .table-header .sort {
+    color: #8d8d8d;
+    border-bottom: 1px solid #F3F3F3;
+    border-top: 1px solid #F3F3F3; }
+#assignments .list .assignment:nth-child(even) {
+  background-color: #F3F3F3; }
+#assignments .list .category .weight {
+  color: white; }
+#assignments .list .cat-ku .weight {
+  background-color: #f39c12; }
+#assignments .list .cat-ti .weight {
+  background-color: #2ecc71; }
+#assignments .list .cat-comm .weight {
+  background-color: #9b59b6; }
+#assignments .list .cat-app .weight {
+  background-color: #e67e22; }
+#assignments .list .cat-final .weight {
+  background-color: #34495e; }
 
 /*# sourceMappingURL=theme-default.css.map */
