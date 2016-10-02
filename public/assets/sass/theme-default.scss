@@ -62,9 +62,13 @@ body{
 	color:$text;
 	.module{
 		background-color: white;
+		box-shadow: 2px 2px 4px  darken(white, 10%); 
+		.module-header{
+			border-bottom: $hr;
+		}
 	}
 	.status{
-		border-bottom: $hr;
+		// border-bottom: $hr;
 		.status-circle{
 			.circle{
 				color:white;
@@ -80,6 +84,7 @@ body{
 }
 #assignments{
 	.module-header{
+		border-bottom:none;
 		.search{
 			border-top:none;
 			border-right:none;
