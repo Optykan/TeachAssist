@@ -87,6 +87,13 @@ class User extends TeachAssist{
 	public function getFlags($course){
 		return array_flip(explode(',', $this->flags[$course]));
 	}
+	public function getFirstCourse(){
+		foreach($this->courses as $key=>$value){
+			if(!is_null($value))
+				return $key;
+		}
+		return 0;
+	}
 
 }
 ?>

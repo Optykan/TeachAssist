@@ -1,3 +1,42 @@
+.ct-series-a .ct-line, .ct-series-a .ct-point {
+  stroke: #f39c12; }
+.ct-series-a .ct-slice-pie {
+  fill: #f39c12;
+  stroke: white;
+  stroke-width: 4px; }
+
+.ct-series-b .ct-line, .ct-series-b .ct-point {
+  stroke: #2ecc71; }
+.ct-series-b .ct-slice-pie {
+  fill: #2ecc71;
+  stroke: white;
+  stroke-width: 4px; }
+
+.ct-series-c .ct-line, .ct-series-c .ct-point {
+  stroke: #9b59b6; }
+.ct-series-c .ct-slice-pie {
+  fill: #9b59b6;
+  stroke: white;
+  stroke-width: 4px; }
+
+.ct-series-d .ct-line, .ct-series-d .ct-point {
+  stroke: #e67e22; }
+.ct-series-d .ct-slice-pie {
+  fill: #e67e22;
+  stroke: white;
+  stroke-width: 4px; }
+
+.ct-series-e .ct-point, .ct-series-e .ct-line {
+  stroke: #34495e; }
+.ct-series-e .ct-slice-pie {
+  fill: #34495e;
+  stroke: white;
+  stroke-width: 4px; }
+
+#weighting .ct-label {
+  font-size: 1rem;
+  fill: white; }
+
 body {
   background-color: #F3F3F3; }
 
@@ -62,7 +101,8 @@ body {
   border-bottom: 1px solid #F3F3F3;
   border-top: 1px solid #F3F3F3; }
   #assignments .table-header .sort {
-    color: #8d8d8d;
+    color: #8d8d8d; }
+  #assignments .table-header .sort-header {
     border-bottom: 1px solid #F3F3F3;
     border-top: 1px solid #F3F3F3; }
 #assignments .list .assignment:nth-child(even) {

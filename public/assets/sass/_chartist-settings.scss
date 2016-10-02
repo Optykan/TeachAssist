@@ -1,0 +1,57 @@
+.ct-series-a{
+	.ct-line, .ct-point {
+ 		stroke: #f39c12;
+	}
+	.ct-slice-pie{		
+	  fill: #f39c12;
+	  stroke: white;
+	  stroke-width: 4px;
+	}
+}
+
+.ct-series-b{
+	.ct-line, .ct-point{
+	 	stroke: #2ecc71;
+	}
+	.ct-slice-pie{		
+	  fill: #2ecc71;
+	  stroke: white;
+	  stroke-width: 4px;
+	}
+}
+.ct-series-c{
+	.ct-line, .ct-point {
+		stroke: #9b59b6;
+	}
+	.ct-slice-pie{		
+	  fill: #9b59b6;
+	  stroke: white;
+	  stroke-width: 4px;
+	}
+}
+.ct-series-d{
+	.ct-line, .ct-point{
+		stroke: #e67e22;
+	}
+	.ct-slice-pie{		
+	  fill: #e67e22;
+	  stroke: white;
+	  stroke-width: 4px;
+	}
+}
+.ct-series-e{
+	.ct-point, .ct-line{
+		  stroke: #34495e;
+	}
+	.ct-slice-pie{		
+	  fill: #34495e;
+	  stroke: white;
+	  stroke-width: 4px;
+	}
+}
+#weighting{
+	.ct-label{
+		font-size:1rem;
+		fill: white;
+	}	
+}

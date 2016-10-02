@@ -11,7 +11,10 @@ body, html {
 
 .top-bar {
   display: flex;
-  align-items: center; }
+  width: 100%;
+  align-items: center;
+  position: fixed;
+  z-index: 99; }
   .top-bar .logo {
     padding: 1rem .5rem;
     max-width: 200px;
@@ -37,23 +40,26 @@ body, html {
   height: calc(100% - 55px);
   width: 100%; }
   .site-wrapper .course-navigation {
+    position: fixed;
+    margin-top: 55px;
     min-width: 200px;
     width: 200px;
     display: flex;
     flex-direction: column;
     padding: 2rem 1rem 0;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    height: 100%; }
     .site-wrapper .course-navigation .nav-header {
       text-transform: uppercase;
       margin-left: 1rem; }
     .site-wrapper .course-navigation .course-link {
       border-radius: 5px;
       transition-property: background-color;
-      transition-duration: 0.3s;
+      transition-duration: 0.25s;
       transition-timing-function: ease-in-out; }
       .site-wrapper .course-navigation .course-link a {
         transition-property: color;
-        transition-duration: 0.3s;
+        transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
         display: block;
         padding: 0.5rem 1rem;
@@ -62,10 +68,15 @@ body, html {
           float: right; }
   .site-wrapper .main {
     width: 100%;
+    margin-left: 200px;
+    margin-top: 55px;
     padding: 2rem 2rem; }
     .site-wrapper .main .module {
       border-radius: 5px;
-      padding: 1rem; }
+      padding: 1rem;
+      margin-top: 2rem; }
+      .site-wrapper .main .module:first-child {
+        margin-top: 0; }
       .site-wrapper .main .module .module-header {
         padding: 0 1rem 1rem;
         font-weight: 700;
@@ -91,9 +102,11 @@ body, html {
           border-radius: 50%; }
           .site-wrapper .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
             font-size: 3.5rem; }
-    .site-wrapper .main .teachassist {
-      font-size: 5rem;
-      font-weight: 300; }
+      .site-wrapper .main .status .teachassist {
+        font-weight: 700;
+        font-size: 5rem; }
+    .site-wrapper .main .charts {
+      display: flex; }
   .site-wrapper #assignments {
     padding-left: 0;
     padding-right: 0; }
@@ -108,8 +121,10 @@ body, html {
       .site-wrapper #assignments .module-header .search {
         margin-left: auto;
         transition-property: box-shadow, color;
-        transition-duration: 0.3s;
+        transition-duration: 0.25s;
         transition-timing-function: ease-in-out; }
+    .site-wrapper #assignments .table-header .sort-header {
+      display: flex; }
     .site-wrapper #assignments .table-header .sort {
       padding: 0.5rem 0 0.5rem 1rem;
       text-align: left;
@@ -124,18 +139,26 @@ body, html {
       user-select: none; }
       .site-wrapper #assignments .table-header .sort.sort-name {
         padding-left: 2rem; }
-      .site-wrapper #assignments .table-header .sort.sort-final {
+      .site-wrapper #assignments .table-header .sort.sort-final + .sort-weight {
         padding-right: 1rem; }
+      .site-wrapper #assignments .table-header .sort .icon {
+        display: inline-block;
+        text-align: center;
+        width: 1ch; }
       .site-wrapper #assignments .table-header .sort.sort-weight {
-        float: right; }
+        margin-left: auto;
+        padding-right: 2.5px;
+        padding-left: 0; }
     .site-wrapper #assignments .list {
       list-style: none; }
       .site-wrapper #assignments .list .category {
-        padding: 0; }
+        padding: 0;
+        position: relative; }
         .site-wrapper #assignments .list .category .mark {
           padding: 0.5rem 0 0.5rem 1rem; }
         .site-wrapper #assignments .list .category .container {
-          display: flex; }
+          display: flex;
+          flex-wrap: wrap; }
         .site-wrapper #assignments .list .category.name {
           padding-left: 2rem; }
         .site-wrapper #assignments .list .category .weight {
@@ -144,6 +167,17 @@ body, html {
           margin-left: auto;
           display: flex;
           justify-content: center;
-          align-items: center; }
+          align-items: center;
+          bottom: 0;
+          right: 0;
+          position: absolute;
+          opacity: 0.3;
+          border-top-left-radius: 5px;
+          cursor: default;
+          transition-property: opacity;
+          transition-duration: 0.25s;
+          transition-timing-function: ease-in-out; }
+          .site-wrapper #assignments .list .category .weight:hover {
+            opacity: 1; }
 
 /*# sourceMappingURL=dashboard.css.map */
