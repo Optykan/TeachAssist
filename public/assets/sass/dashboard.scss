@@ -131,12 +131,15 @@ body,html{
 				}
 			}
 			.teachassist{
-				font-weight:700;
+				font-weight:300;
 				font-size: 5rem;
 			}
 		}
 		.charts{
 			display:flex;
+			.chart{
+				flex: 1 1 50%;
+			}
 		}
 	}
 	#assignments{
