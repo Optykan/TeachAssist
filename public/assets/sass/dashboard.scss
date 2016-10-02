@@ -9,7 +9,7 @@ $global-radius: 5px;
 }
 @mixin t($type...){
 	transition-property: $type;
-	transition-duration: 0.3s;
+	transition-duration: 0.25s;
 	transition-timing-function: ease-in-out;
 }
 
@@ -20,7 +20,10 @@ body,html{
 }
 .top-bar{
 	display:flex;
+	width:100%;
 	align-items:center;
+	position:fixed;
+	z-index:99;
 	.logo{
 		.teach{
 			padding-left:1.5rem;
@@ -52,12 +55,15 @@ body,html{
 	height:calc(100% - 55px);
 	width:100%;
 	.course-navigation{
+		position:fixed;
+		margin-top:55px;
 		min-width: $nav-width;
 		width: $nav-width;
 		display:flex;
 		flex-direction: column;
 		padding: 2rem 1rem 0;
 		box-sizing:border-box;
+		height:100%;
 		.nav-header{
 			text-transform: uppercase;
 			margin-left: 1rem;
@@ -78,10 +84,16 @@ body,html{
 	}
 	.main{
 		width:100%;
+		margin-left: $nav-width;
+		margin-top: 55px;
 		padding:2rem 2rem;
 		.module{
 			border-radius: $global-radius;
 			padding:1rem;
+			margin-top:2rem;
+			&:first-child{
+				margin-top:0;
+			}
 			.module-header{
 				padding: 0 1rem 1rem;
 				font-weight: 700;
@@ -118,10 +130,13 @@ body,html{
 					}
 				}
 			}
+			.teachassist{
+				font-weight:700;
+				font-size: 5rem;
+			}
 		}
-		.teachassist{
-			font-size:5rem;
-			font-weight:300;
+		.charts{
+			display:flex;
 		}
 	}
 	#assignments{
@@ -142,6 +157,9 @@ body,html{
 			}
 		}
 		.table-header{
+			.sort-header{
+				display:flex;
+			}
 			.sort{
 				padding: 0.5rem 0 0.5rem 1rem;
 				text-align:left;
@@ -158,11 +176,18 @@ body,html{
 				&.sort-name{
 					padding-left:2rem;
 				}
-				&.sort-final{
+				&.sort-final + .sort-weight{
 					padding-right:1rem;
 				}
+				.icon{
+					display:inline-block;
+					text-align:center;
+					width:1ch;
+				}
 				&.sort-weight{
-					float:right;
+					margin-left:auto;
+					padding-right:2.5px;
+					padding-left:0;
 				}
 			}
 		}
@@ -170,11 +195,13 @@ body,html{
 			list-style:none;
 			.category{
 				padding:0;
+				position:relative;
 				.mark{
 					padding: 0.5rem 0 0.5rem 1rem;
 				}
 				.container{
 					display:flex;
+					flex-wrap:wrap;
 				}
 				&.name{
 					padding-left:2rem;
@@ -186,6 +213,16 @@ body,html{
 					display: flex;
 					justify-content: center;
 					align-items: center;
+					bottom:0;
+					right:0;
+					position:absolute;
+					opacity:0.3;
+					border-top-left-radius: $global-radius;
+					cursor:default;
+					@include t(opacity);
+					&:hover{
+						opacity:1;
+					}
 				}
 			}
 		}	

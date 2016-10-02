@@ -5,6 +5,7 @@ $blue: #5CACE0;
 $orange: #e67e22;
 $lwhite: #F3F3F3;
 $active: #273037;
+@import 'chartist-settings';
 
 $hr: 1px solid rgba(0,0,0,.1);
 body{
@@ -99,8 +100,10 @@ body{
 		border-top: 1px solid $lwhite;
 		.sort{
 			color: darken($lwhite, 40%);
+		}
+		.sort-header{
 			border-bottom:1px solid $lwhite;
-			border-top:1px solid $lwhite;
+			border-top:1px solid $lwhite;	
 		}
 	}
 	.list{

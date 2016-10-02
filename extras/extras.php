@@ -19,7 +19,7 @@ class Extras{
 			);
 		session_destroy();
 	}
-	public function formatStatus($flags){
+	public static function formatStatus($flags){
 		$return=array('icon'=>'ion-ios-checkmark-empty', 'status'=>'ok', 'message'=>'Up to date');
 		if(isset($flags['hidden'])){
 			$return['icon']='ion-ios-bolt';
@@ -31,5 +31,37 @@ class Extras{
 		}
 		return $return;
 	}
+	public static function generateChartData($assignments){
+		$labels='[';
+		$series=array('[', '[', '[', '[', '[');
+		foreach($assignments as $assignment){
+			$labels.='"'.$assignment->getName().'",';
+			for($i=0;$i<5;$i++){
+				$series[$i].=round($assignment->getMark($i)*100) ?: 'null';
+				$series[$i].=',';
+			}
+		}
+		for($i=0;$i<5;$i++){
+			$series[$i]=rtrim($series[$i], ',');
+			$series[$i].=']';
+		}
+		$labels=rtrim($labels, ',');
+		$labels.=']';
+		return array('labels'=>$labels, 'series'=>$series);
+	}
+	public static function generatePieData($course){
+		$labels='[';
+		$categories=['K/U', 'T/I', 'Comm', 'App', 'Final'];
+		$series='[';
+		for($i=0;$i<5; $i++){
+			$weight=$course->getWeighting($i);
+			$labels.='"'.$categories[$i].' ('.round($weight*100, 1).'%)",';
+			$series.=$weight.',';
+		}
+		$labels.=']';
+		$series.=']';
+		return array('labels'=>$labels, 'series'=>$series);
+	}
+
 }
 ?>

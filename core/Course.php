@@ -24,7 +24,7 @@ class Course{
 
 	private function resolveMap($input){
 		if(is_int($input) && $input<count($this->map)){
-			return $this->map[$index];
+			return $this->map[$input];
 		}else{
 			foreach ($this->map as $key => $value) {
 				if($value==$input){
@@ -86,7 +86,8 @@ class Course{
 		if(!isset($which)){
 			return $this->weighting;
 		}
-		return $this->getInternal($which, 'weighting');
+		return $this->weighting[$which];
+		// return $this->getInternal($which, 'weighting');
 	}
 
 	public function getAssignment($which=NULL){
