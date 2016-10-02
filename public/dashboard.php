@@ -82,9 +82,19 @@ $user->store();
 				</div>
 			</div>
 
-			<div class="charts">
-				<div class="ct-chart ct-square" id="weighting"></div>
-				<div class="ct-chart ct-square" id="trends"></div>
+			<div class="charts module">
+				<div class="chart">
+					<div class="module-header">
+						Weighting
+					</div>
+					<div class="ct-chart ct-square" id="weighting"></div>
+				</div>
+				<div class="chart">
+					<div class="module-header">
+						Trends
+					</div>
+					<div class="ct-chart ct-square" id="trends"></div>
+				</div>
 			</div>
 
 			<div id="assignments" class="module">
