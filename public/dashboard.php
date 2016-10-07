@@ -1,5 +1,6 @@
 <?php
 //the dashboard
+$time_start=microtime(true);
 require_once '../extras/extras.php';
 require_once '../core/User.php';
 session_start();
@@ -11,11 +12,13 @@ if((isset($_POST['username']) && isset($_POST['password']))){
 		$_SESSION['password']=$_POST['password'];
 		$user = new User($_POST['username'], $_POST['password']);
 	}
-}elseif(isset($_SESSION['username']) && isset($_SESSION['password'])){
-	if(!Extras::auth($_SESSION['username'], $_SESSION['password'])){
+}elseif(isset($_SESSION['user'])){
+	// if(!Extras::auth($_SESSION['username'], $_SESSION['password'])){
+	// }else{
+	$user = unserialize($_SESSION['user']);
+	// }
+	if($user===false){
 		Extras::redirect('/index.php?e=1');
-	}else{
-		$user = new User($_SESSION['username'], $_SESSION['password']);
 	}
 }
 else{
@@ -25,6 +28,9 @@ if($_GET['action']=='logout'){
 	Extras::logout();
 	Extras::redirect('/index.php?m=1');
 }
+
+//save it
+$_SESSION['user']=serialize($user);
 
 $courseId=isset($_GET['course']) ? intval($_GET['course']) : $user->getFirstCourse();
 $course=$user->getCourse($courseId);
@@ -38,12 +44,17 @@ $user->store();
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist.css">
-	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist-plugin-tooltip.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/dashboard.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/theme-default.css">
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist-plugin-tooltip.css">
 	<title>TeachAssist</title>
+	<script type="text/javascript" src="dist/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="dist/vendor/list/list.min.js"></script>
+	<script type="text/javascript" src="dist/vendor/list/list.fuzzysearch.min.js"></script>
+	<script type="text/javascript" src="dist/vendor/chartist/chartist.min.js"></script>
+	<script type="text/javascript" src="dist/vendor/chartist/chartist-plugin-tooltip.min.js"></script>
 </head>
 <body>
 	<div class="top-bar">
@@ -82,23 +93,9 @@ $user->store();
 				</div>
 			</div>
 
-			<div class="charts module">
-				<div class="chart">
-					<div class="module-header">
-						Weighting
-					</div>
-					<div class="ct-chart ct-square" id="weighting"></div>
-				</div>
-				<div class="chart">
-					<div class="module-header">
-						Trends
-					</div>
-					<div class="ct-chart ct-square" id="trends"></div>
-				</div>
-			</div>
-
 			<div id="assignments" class="module">
 				<div class="module-header">
+
 					Assignments
 					<input class="search" placeholder="Search" />
 				</div>
@@ -157,6 +154,20 @@ $user->store();
 					</tbody>
 				</table>
 			</div>
+			<div class="charts module">
+				<div class="chart">
+					<div class="module-header">
+						Weighting
+					</div>
+					<div class="ct-chart ct-square" id="weighting"></div>
+				</div>
+				<div class="chart">
+					<div class="module-header">
+						Trends
+					</div>
+					<div class="ct-chart ct-square" id="trends"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -172,11 +183,12 @@ $user->store();
 			series: [<?=$assignmentData['series'][0]?>,<?=$assignmentData['series'][1]?>,<?=$assignmentData['series'][2]?>,<?=$assignmentData['series'][3]?>,<?=$assignmentData['series'][4]?>]
 		};
 	</script>
-	<script type="text/javascript" src="dist/vendor/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="dist/vendor/list/list.min.js"></script>
-	<script type="text/javascript" src="dist/vendor/list/list.fuzzysearch.min.js"></script>
-	<script type="text/javascript" src="dist/vendor/chartist/chartist.min.js"></script>
-	<script type="text/javascript" src="dist/vendor/chartist/chartist-plugin-tooltip.min.js"></script>
 	<script type="text/javascript" src="dist/js/app.js"></script>
+	
+	<script src="dist/vendor/instantclick.min.js" data-no-instant></script>
+	<script data-no-instant>InstantClick.init();</script>
+
+	<?php //$time_end=microtime(true);?>
+	<?php //var_dump($time_end-$time_start);?>
 </body>
 </html>

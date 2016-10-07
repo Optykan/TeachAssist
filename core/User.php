@@ -64,11 +64,11 @@ class User extends TeachAssist{
 
 	public function store(){
 		$this->storage=new Storage($this->courses);
-		setcookie('storage', serialize($this->storage), time()+31557600);
+		setcookie($this->username, serialize($this->storage), time()+31557600);
 	}
 	public function retrieve(){
-		if($_COOKIE['storage']){
-			$storage=unserialize($_COOKIE['storage']);
+		if($_COOKIE[$this->username]){
+			$storage=unserialize($_COOKIE[$this->username]);
 			$data=$storage->getCourses();
 			return $data;
 		}

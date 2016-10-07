@@ -149,7 +149,10 @@ class Course{
 		$hasFinal=$this->hasFinal();
 		if($hasFinal){
 			for($i=0; $i<5; $i++){
-				$sum+=$this->weighting[$i]*0.7*$this->scraperAchievement[$i];
+				if($i==4)
+					$sum+=$this->weighting[$i]*$this->scraperAchievement[$i];
+				else
+					$sum+=$this->weighting[$i]*0.7*$this->scraperAchievement[$i];
 			}	
 		}
 		else{
