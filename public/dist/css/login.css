@@ -1,0 +1,75 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400|Poiret+One|Roboto";
+.os, .form .error, .form input, .form .smessage {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300; }
+
+.po, .logo {
+  font-family: 'Poiret One', cursive; }
+
+.ro, .form button, .form .message {
+  font-family: 'Roboto', sans-serif; }
+
+.logo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 3px solid #27ae60;
+  line-height: 140px;
+  color: #27ae60;
+  font-size: 5rem;
+  text-align: center;
+  margin-bottom: 3rem; }
+
+.form {
+  top: calc(50% - 326.5px);
+  left: calc(50% - 198px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  position: absolute;
+  z-index: 1;
+  background: #FFFFFF;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); }
+  .form .error {
+    margin-top: -1rem;
+    color: red; }
+  .form input {
+    outline: 0;
+    background-color: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1rem; }
+  .form button {
+    text-transform: uppercase;
+    outline: 0;
+    background-color: #27ae60;
+    width: 100%;
+    border: 0;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    transition: background-color 0.3s ease; }
+    .form button:hover, .form button:active, .form button:focus {
+      transition: background-color 0.3s ease;
+      background-color: #43A047; }
+  .form .smessage {
+    margin-top: -1rem;
+    color: #3B82EA; }
+  .form .message {
+    margin: 15px 0 0;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.75rem; }
+    .form .message a {
+      color: #4CAF50;
+      text-decoration: none; }
+
+/*# sourceMappingURL=login.css.map */

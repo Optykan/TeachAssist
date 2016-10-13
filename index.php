@@ -1,5 +1,11 @@
 <?php 
 //home
+session_start();
+if(isset($_SESSION['user'])){
+	http_response_code(301);
+	header('Location: public/dashboard.php');
+	exit(0);
+}
 if(isset($_GET['e'])){
 	switch ($_GET['e']) {
 		case 1:
@@ -29,7 +35,7 @@ elseif(isset($_GET['m'])){
 <html>
 <head>
 	<title>TA Scraper</title>
-	<link rel="stylesheet" type="text/css" href="/dist/css/login.css">
+	<link rel="stylesheet" type="text/css" href="public/dist/css/login.css">
 	<!-- <link rel="stylesheet" type="text/css" href="/css/normalize.css"> -->
 	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
@@ -41,7 +47,7 @@ elseif(isset($_GET['m'])){
 		<?php if(isset($e)): ?>
 			<p class="error">Error: <?=$e?></p>
 		<?php elseif(isset($m)):?>
-			<p class="message"><?=$m?></p>
+			<p class="smessage"><?=$m?></p>
 		<?php endif;?>
 		<input type="text" name="username" placeholder="username"/>
 		<input type="password" name="password" placeholder="password"/>

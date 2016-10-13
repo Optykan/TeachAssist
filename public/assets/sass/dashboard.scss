@@ -13,16 +13,16 @@ $global-radius: 5px;
 	transition-timing-function: ease-in-out;
 }
 
- @mixin breakpoint($point) {
-   @if $point == large {
-     @media (max-width: 71.25em) { @content ; }
-  }
-   @else if $point == medium {
-     @media (max-width: 50em) { @content ; }
-  }
-   @else if $point == small {
-     @media (max-width: 37.5em)  { @content ; }
-  }
+@mixin breakpoint($point) {
+	@if $point == large {
+		@media (max-width: 71.25em) { @content ; }
+	}
+	@else if $point == medium {
+		@media (max-width: 50em) { @content ; }
+	}
+	@else if $point == small {
+		@media (max-width: 37.5em)  { @content ; }
+	}
 }
 
 body,html{
@@ -76,7 +76,7 @@ body,html{
 		padding: 2rem 1rem 0;
 		box-sizing:border-box;
 		height:100%;
-		@include breakpoint(medium)
+		// @include breakpoint(medium)
 		.nav-header{
 			text-transform: uppercase;
 			margin-left: 1rem;
