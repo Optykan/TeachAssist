@@ -15,7 +15,11 @@ if((isset($_POST['username']) && isset($_POST['password']))){
 }elseif(isset($_SESSION['user'])){
 	// if(!Extras::auth($_SESSION['username'], $_SESSION['password'])){
 	// }else{
-	$user = unserialize($_SESSION['user']);
+	if(isset($_GET['refresh'])){
+		$user= new User($_SESSION['username'], $_SESSION['password']);
+	}else{
+		$user = unserialize($_SESSION['user']);
+	}
 	// }
 	if($user===false){
 		Extras::redirect('/index.php?e=1');
@@ -59,9 +63,9 @@ $user->store();
 <body>
 	<div class="top-bar">
 		<div class="logo"><span class="teach">Teach</span><span class="assist">Assist</span></div>
-		<div class="header-center">Dashboard</div>
+		<div class="header-center"><?=$course->getName()?></div>
 		<div class="account">
-			<a href="dashboard.php?action=logout"><i class="icon ion-log-out"></i></a>
+			<a data-no-instant href="dashboard.php?action=logout"><i class="icon ion-log-out"></i></a>
 		</div>
 	</div>
 	<div class="site-wrapper">
@@ -186,7 +190,7 @@ $user->store();
 	<script type="text/javascript" src="dist/js/app.js"></script>
 	
 	<script src="dist/vendor/instantclick.min.js" data-no-instant></script>
-	<script data-no-instant>InstantClick.init();</script>
+	<script data-no-instant>InstantClick.init('mousedown');</script>
 
 	<?php //$time_end=microtime(true);?>
 	<?php //var_dump($time_end-$time_start);?>

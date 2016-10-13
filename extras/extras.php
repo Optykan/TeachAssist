@@ -55,7 +55,7 @@ class Extras{
 		$series='[';
 		for($i=0;$i<5; $i++){
 			$weight=$course->getWeighting($i);
-			$labels.='"'.$categories[$i].' ('.round($weight*70, 1).'%)",';
+			$labels.='"'.$categories[$i].' ('.round($weight*($i<4?70:100), 1).'%)",';
 			$series.=$weight.',';
 		}
 		$labels.=']';
