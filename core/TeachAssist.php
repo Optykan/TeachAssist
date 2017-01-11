@@ -47,7 +47,9 @@ class TeachAssist extends Network{
 		$course=new Course($id, $name);
 
 		$dom=new DOMDocument();
-		@$dom->loadHTML($this->get($this->baseUrl.'students/'.$url));
+
+		$html = $this->get($this->baseUrl.'students/'.$url);
+		@$dom->loadHTML($html);
 
 		$tables=$dom->getElementsByTagName('table');
 		$marks=$tables->item($tables->length-2); //second last table is the one with the overall marks
@@ -74,7 +76,14 @@ class TeachAssist extends Network{
 			}
 		}
 
-		$assignments=$tables->item(1)->childNodes;
+		//turns out sometimes a big ol learning skills and word habits will show up, adding another table to the dom
+		//why can't they use IDs or even classes
+		if(preg_match('/Learning Skills and Work Habits/', $html) === 1){
+			$assignments=$tables->item(2)->childNodes;
+		}else{
+			$assignments=$tables->item(1)->childNodes;
+		}
+
 
 		if(!is_null($assignments)){
 			foreach ($assignments as $key=>$assignment) {

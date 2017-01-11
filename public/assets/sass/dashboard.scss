@@ -1,29 +1,6 @@
+@import 'util';
 $nav-width:200px;
 $global-radius: 5px;
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600';
-.os{
-	font-family: 'Open Sans', sans-serif;
-}
-.ss{
-	font-family: 'Source Sans Pro', sans-serif;
-}
-@mixin t($type...){
-	transition-property: $type;
-	transition-duration: 0.25s;
-	transition-timing-function: ease-in-out;
-}
-
-@mixin breakpoint($point) {
-	@if $point == large {
-		@media (max-width: 71.25em) { @content ; }
-	}
-	@else if $point == medium {
-		@media (max-width: 50em) { @content ; }
-	}
-	@else if $point == small {
-		@media (max-width: 37.5em)  { @content ; }
-	}
-}
 
 body,html{
 	margin:0;
@@ -64,11 +41,11 @@ body,html{
 .site-wrapper{
 	display:flex;
 	position:absolute;
-	height:calc(100% - 55px);
+	height:calc(100% - 54px);
 	width:100%;
 	.course-navigation{
 		position:fixed;
-		margin-top:55px;
+		margin-top:54px;
 		min-width: $nav-width;
 		width: $nav-width;
 		display:flex;
@@ -144,8 +121,19 @@ body,html{
 				}
 			}
 			.teachassist{
-				font-weight:300;
-				font-size: 5rem;
+				display:flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items:center;
+				h1{
+					font-weight:300;
+					font-size: 5rem;
+					margin:0;
+				}
+				p{
+					margin:0;
+					@extend .os;
+				}
 			}
 		}
 		.charts{

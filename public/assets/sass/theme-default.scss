@@ -5,9 +5,10 @@ $blue: #5CACE0;
 $orange: #e67e22;
 $lwhite: #F3F3F3;
 $active: #273037;
+$hr: 1px solid rgba(0,0,0,.1);
+
 @import 'chartist-settings';
 
-$hr: 1px solid rgba(0,0,0,.1);
 body{
 	background-color: $lwhite;
 }
@@ -27,8 +28,8 @@ body{
 		color: $text;
 	}
 	.account{
-	    border: 1px solid $blue;
-	 	background-color:$blue;
+		border: 1px solid $blue;
+		background-color:$blue;
 		.icon{
 			color: white;
 		}

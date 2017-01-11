@@ -31,6 +31,13 @@ class Extras{
 		}
 		return $return;
 	}
+	public static function generateJson($assignments){
+		$json=array();
+		foreach($assignments as $assignment){
+			array_push($json, $assignment->fetchData());
+		}
+		return json_encode($json);
+	}
 	public static function generateChartData($assignments){
 		$labels='[';
 		$series=array('[', '[', '[', '[', '[');

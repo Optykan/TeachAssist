@@ -67,5 +67,8 @@ class Assignment{
 		}
 		return '&nbsp;';
 	}
+	public function fetchData(){
+		return array('name'=>$this->name, 'marks'=>$this->marks, 'total'=>$this->total, 'weight'=>$this->weight);
+	}
 }
 ?>

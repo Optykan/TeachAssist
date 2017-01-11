@@ -52,18 +52,18 @@ $user->store();
 	<link rel="stylesheet" type="text/css" href="dist/css/dashboard.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/theme-default.css">
 	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist-plugin-tooltip.css">
+	<!--<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist-plugin-tooltip.css">-->
 	<title>TeachAssist</title>
 	<script type="text/javascript" src="dist/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="dist/vendor/list/list.min.js"></script>
 	<script type="text/javascript" src="dist/vendor/list/list.fuzzysearch.min.js"></script>
 	<script type="text/javascript" src="dist/vendor/chartist/chartist.min.js"></script>
-	<script type="text/javascript" src="dist/vendor/chartist/chartist-plugin-tooltip.min.js"></script>
+	<!--<script type="text/javascript" src="dist/vendor/chartist/chartist-plugin-tooltip.min.js"></script>-->
 </head>
 <body>
 	<div class="top-bar">
 		<div class="logo"><span class="teach">Teach</span><span class="assist">Assist</span></div>
-		<div class="header-center"><?=$course->getName()?></div>
+		<div class="header-center">Dashboard</div>
 		<div class="account">
 			<a data-no-instant href="dashboard.php?action=logout"><i class="icon ion-log-out"></i></a>
 		</div>
@@ -86,7 +86,10 @@ $user->store();
 		<div class="main">
 			<div class="status module">
 				<div class="scraper"><?=round($course->getScraperAverage()*100,2)?>%</div>
-				<div class="teachassist"><?=$course->getAverage()?>%</div>
+				<div class="teachassist">
+					<h1><?=$course->getAverage()?>%</h1>
+					<p><?=$course->getName()?></p>
+				</div>
 				<?php $flags=$user->getFlags($courseId);?>
 				<?php $status=Extras::formatStatus($flags);?>
 				<div class="status-circle">
@@ -143,56 +146,59 @@ $user->store();
 							</th>
 						</tr>
 					</thead>
-					<tbody class='list'>
+					<tbody class='list' id="markTable">
 						<?php $assignments=$course->getAssignment();?>
 						<?php foreach($assignments as $assignment):?>
 							<tr class="assignment">
-								<td class="category name"><?=$assignment->getName()?></td>
-								<td class="category cat-ku"><div class="container"><?=$assignment->getFormattedScore(0)?></div></td>
-								<td class="category cat-ti"><div class="container"><?=$assignment->getFormattedScore(1)?></div></td>
-								<td class="category cat-comm"><div class="container"><?=$assignment->getFormattedScore(2)?></div></td>
-								<td class="category cat-app"><div class="container"><?=$assignment->getFormattedScore(3)?></div></td>
-								<td class="category cat-final"><div class="container"><?=$assignment->getFormattedScore(4)?></div></td>
+								<td class="category name"><?php echo $assignment->getName()?></td>
+								<td class="category cat-ku"><div class="container"><?php echo $assignment->getFormattedScore(0)?></div></td>
+								<td class="category cat-ti"><div class="container"><?php echo $assignment->getFormattedScore(1)?></div></td>
+								<td class="category cat-comm"><div class="container"><?php echo $assignment->getFormattedScore(2)?></div></td>
+								<td class="category cat-app"><div class="container"><?php echo $assignment->getFormattedScore(3)?></div></td>
+								<td class="category cat-final"><div class="container"><?php echo $assignment->getFormattedScore(4)?></div></td>
 							</tr>
-						<?php endforeach;?>
-					</tbody>
-				</table>
-			</div>
-			<div class="charts module">
-				<div class="chart">
-					<div class="module-header">
-						Weighting
-					</div>
-					<div class="ct-chart ct-square" id="weighting"></div>
+							<?php endforeach;?>
+						</tbody>
+					</table>
 				</div>
-				<div class="chart">
-					<div class="module-header">
-						Trends
+				<div class="charts module">
+					<div class="chart">
+						<div class="module-header">
+							Weighting
+						</div>
+						<div class="ct-chart ct-square" id="weighting"></div>
 					</div>
-					<div class="ct-chart ct-square" id="trends"></div>
+					<div class="chart">
+						<div class="module-header">
+							Trends
+						</div>
+						<div class="ct-chart ct-square" id="trends"></div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script type="text/javascript">
-		var pieData = {
-			<?php $pieData=Extras::generatePieData($course)?>
+		<script type="text/javascript">
+			var pieData = {
+				<?php $pieData=Extras::generatePieData($course)?>
 
-			labels: <?=$pieData['labels']?>,
-			series: <?=$pieData['series']?>
-		};
-		var assignmentData = {
-			<?php $assignmentData=Extras::generateChartData($course->getAssignment());?>
-			labels: <?=$assignmentData['labels']?>,
-			series: [<?=$assignmentData['series'][0]?>,<?=$assignmentData['series'][1]?>,<?=$assignmentData['series'][2]?>,<?=$assignmentData['series'][3]?>,<?=$assignmentData['series'][4]?>]
-		};
-	</script>
-	<script type="text/javascript" src="dist/js/app.js"></script>
-	
-	<script src="dist/vendor/instantclick.min.js" data-no-instant></script>
-	<script data-no-instant>InstantClick.init('mousedown');</script>
+				labels: <?=$pieData['labels']?>,
+				series: <?=$pieData['series']?>
+			};
+			var assignmentData = {
+				<?php $assignmentData=Extras::generateChartData($course->getAssignment());?>
+				labels: <?=$assignmentData['labels']?>,
+				series: [<?=$assignmentData['series'][0]?>,<?=$assignmentData['series'][1]?>,<?=$assignmentData['series'][2]?>,<?=$assignmentData['series'][3]?>,<?=$assignmentData['series'][4]?>]
+			};
+		</script>
+		<script type="application/json" id="markData" data-no-instant>
+			<?=Extras::generateJson($course->getAssignment())?>
+		</script>
+		<script type="text/javascript" src="dist/js/app.js"></script>
+		
+		<script src="dist/vendor/instantclick.min.js" data-no-instant></script>
+		<script data-no-instant>InstantClick.init('mousedown');</script>
 
-	<?php //$time_end=microtime(true);?>
-	<?php //var_dump($time_end-$time_start);?>
-</body>
-</html>
+		<?php //$time_end=microtime(true);?>
+		<?php //var_dump($time_end-$time_start);?>
+	</body>
+	</html>

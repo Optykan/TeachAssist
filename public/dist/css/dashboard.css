@@ -1,5 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600";
-.os, .top-bar .logo, .site-wrapper #assignments .table-header .sort {
+.os, .top-bar .logo, .site-wrapper .main .status .teachassist p, .site-wrapper #assignments .table-header .sort {
   font-family: 'Open Sans', sans-serif; }
 
 .ss, body, html {
@@ -37,11 +37,11 @@ body, html {
 .site-wrapper {
   display: flex;
   position: absolute;
-  height: calc(100% - 55px);
+  height: calc(100% - 54px);
   width: 100%; }
   .site-wrapper .course-navigation {
     position: fixed;
-    margin-top: 55px;
+    margin-top: 54px;
     min-width: 200px;
     width: 200px;
     display: flex;
@@ -103,8 +103,16 @@ body, html {
           .site-wrapper .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
             font-size: 3.5rem; }
       .site-wrapper .main .status .teachassist {
-        font-weight: 300;
-        font-size: 5rem; }
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+        .site-wrapper .main .status .teachassist h1 {
+          font-weight: 300;
+          font-size: 5rem;
+          margin: 0; }
+        .site-wrapper .main .status .teachassist p {
+          margin: 0; }
     .site-wrapper .main .charts {
       display: flex; }
       .site-wrapper .main .charts .chart {
