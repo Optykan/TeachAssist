@@ -64,5 +64,5 @@
 
 
 	new Chartist.Pie('#weighting', pieData);
-	new Chartist.Line('#trends', assignmentData, {high:100, low:0, lineSmooth: Chartist.Interpolation.cardinal({ fillHoles: true }), plugins: [Chartist.plugins.tooltip()]});
+	new Chartist.Line('#trends', assignmentData, {high:100, low:0, lineSmooth: Chartist.Interpolation.cardinal({ fillHoles: true })});
 // })();
