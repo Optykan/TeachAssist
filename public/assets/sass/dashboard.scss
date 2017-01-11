@@ -1,35 +1,6 @@
-<<<<<<< HEAD
 @import 'util';
 $nav-width:200px;
 $global-radius: 5px;
-=======
-$nav-width:200px;
-$global-radius: 5px;
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600';
-.os{
-	font-family: 'Open Sans', sans-serif;
-}
-.ss{
-	font-family: 'Source Sans Pro', sans-serif;
-}
-@mixin t($type...){
-	transition-property: $type;
-	transition-duration: 0.25s;
-	transition-timing-function: ease-in-out;
-}
-
-@mixin breakpoint($point) {
-	@if $point == large {
-		@media (max-width: 71.25em) { @content ; }
-	}
-	@else if $point == medium {
-		@media (max-width: 50em) { @content ; }
-	}
-	@else if $point == small {
-		@media (max-width: 37.5em)  { @content ; }
-	}
-}
->>>>>>> e600a99c8965398e2de49341a9238b7fb68bd8d4
 
 body,html{
 	margin:0;
