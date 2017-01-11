@@ -146,6 +146,7 @@ $user->store();
 							</th>
 						</tr>
 					</thead>
+
 					<tbody class='list' id="markTable">
 						<?php $assignments=$course->getAssignment();?>
 						<?php foreach($assignments as $assignment):?>

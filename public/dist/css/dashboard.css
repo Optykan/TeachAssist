@@ -1,5 +1,9 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Source+Sans+Pro:300,400,600";
+<<<<<<< HEAD
 .os, .top-bar .logo, .site-wrapper .main .status .teachassist p, .site-wrapper #assignments .table-header .sort {
+=======
+.os, .top-bar .logo, .site-wrapper #assignments .table-header .sort {
+>>>>>>> e600a99c8965398e2de49341a9238b7fb68bd8d4
   font-family: 'Open Sans', sans-serif; }
 
 .ss, body, html {
@@ -37,11 +41,19 @@ body, html {
 .site-wrapper {
   display: flex;
   position: absolute;
+<<<<<<< HEAD
   height: calc(100% - 54px);
   width: 100%; }
   .site-wrapper .course-navigation {
     position: fixed;
     margin-top: 54px;
+=======
+  height: calc(100% - 55px);
+  width: 100%; }
+  .site-wrapper .course-navigation {
+    position: fixed;
+    margin-top: 55px;
+>>>>>>> e600a99c8965398e2de49341a9238b7fb68bd8d4
     min-width: 200px;
     width: 200px;
     display: flex;
@@ -103,6 +115,7 @@ body, html {
           .site-wrapper .main .status .status-circle .circle .icon.ion-ios-checkmark-empty {
             font-size: 3.5rem; }
       .site-wrapper .main .status .teachassist {
+<<<<<<< HEAD
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -113,6 +126,10 @@ body, html {
           margin: 0; }
         .site-wrapper .main .status .teachassist p {
           margin: 0; }
+=======
+        font-weight: 300;
+        font-size: 5rem; }
+>>>>>>> e600a99c8965398e2de49341a9238b7fb68bd8d4
     .site-wrapper .main .charts {
       display: flex; }
       .site-wrapper .main .charts .chart {
