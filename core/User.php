@@ -17,7 +17,7 @@ class User extends TeachAssist{
 
 	public function __construct($username, $password){
 		$this->username=$username;
-		parent::__construct('https://ta.yrdsb.ca/live/', $username);
+		parent::__construct('https://ta.yrdsb.ca/live/', '/cookies/'.$username);
 		$this->coursesFromStorage=$this->retrieve();
 		$this->init($username, $password);
 	}

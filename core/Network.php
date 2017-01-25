@@ -9,8 +9,8 @@ class Network{
 		// curl_setopt($this->handle, CURLOPT_HEADER, 1);
 		curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $cookiejar.'.txt'); //there's probably a security hole in here somewhere
-		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $cookiejar.'.txt'); //but teachassist seems to cover it, just reauth every time
+		curl_setopt($this->handle, CURLOPT_COOKIEJAR, $cookiejar.'.cookie'); //there's probably a security hole in here somewhere
+		curl_setopt($this->handle, CURLOPT_COOKIEFILE, $cookiejar.'.cookie'); //but teachassist seems to cover it, just reauth every time
 	}  
 	private function curl($method, $url, $params=array()){
 		$params=http_build_query($params);
