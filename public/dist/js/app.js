@@ -9,9 +9,8 @@
 			this.table=new List(table, {valueNames: [ 'name', 'cat-ku', 'cat-ti', 'cat-comm', 'cat-app', 'cat-final', 'weight-ku', 'weight-ti', 'weight-comm', 'weight-app', 'weight-final']});
 		},
 		load: function(jsonSource){
-			// this.marks=$.parseJSON(jsonSource.html());
+			this.marks=$.parseJSON(jsonSource.html());
 			// var that=this;
-			// console.log(this);
 			// for (var i = this.marks.length - 1; i >= 0; i--) {
 			// 	var toAdd = {
 			// 		'name':that.marks[i].name,
@@ -29,19 +28,7 @@
 			// 	this.table.add(toAdd);
 			// 	console.log(toAdd);
 			//}
-			this.table.sort('name', { order: 'asc'});
-
-			// var cell=$('<td></td>');
-			// for (var assignment = this.marks.length - 1; assignment >= 0; assignment--) {
-			// 	var current=$('<tr class="assignment"></tr>');
-			// 	current.append(cell.clone().addClass('category name').html(this.marks[assignment].name));
-			// 	for (var i = this.classes.length - 1; i >= 0; i--) {
-			// 		current.append(cell.clone().addClass('category '+this.classes[i]));
-			// 	}
-			// 	this.table.append(current);
-			// 	// this.table.append()
-			// 	// this.marks[assignment]
-			// }
+			// this.table.sort('name', { order: 'asc'});
 		}
 
 	};
