@@ -34,12 +34,12 @@ class TeachAssist extends Network{
 	}
 	public function getIds($data){
 		$matches=array();
-		preg_match_all('/([A-Za-z]{3}[0-9][A-Za-z][0-z]-[0-9]{2}) : (.*) | SHAL/', $data, $matches);
+		preg_match_all('/([A-Za-z]{3}[0-9][A-Za-z][0-z]-[0-9]{2}) : (.*) | (SHAL .*) /', $data, $matches);
 		return $matches[1];
 	}
 	public function getNames($data){
 		$matches=array();
-		preg_match_all('/([A-Za-z]{3}[0-9][A-Za-z][0-z]-[0-9]{2}) : (.*) | SHAL/', $data, $matches);
+		preg_match_all('/([A-Za-z]{3}[0-9][A-Za-z][0-z]-[0-9]{2}) : (.*) | (SHAL .*) /', $data, $matches);
 		return $matches[2];
 	}
 
