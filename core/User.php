@@ -3,6 +3,7 @@
 require_once 'Course.php';
 require_once 'TeachAssist.php';
 require_once 'Storage.php';
+require_once "Config.php";
 
 class User extends TeachAssist{
 	private $numberOfCourses;
@@ -14,12 +15,14 @@ class User extends TeachAssist{
 	private $courseNames=array();
 	private $flags=array();
 	private $storage;
+	private $database;
 
 	public function __construct($username, $password){
 		$this->username=$username;
 		parent::__construct('https://ta.yrdsb.ca/live/', '/cookies/'.$username);
 		$this->coursesFromStorage=$this->retrieve();
 		$this->init($username, $password);
+		// $this->database=new Database($username, $password);
 	}
 
 	private function init($username, $password){

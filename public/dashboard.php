@@ -51,7 +51,7 @@ $user->store();
 	<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/dashboard.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/theme-default.css">
-	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" type="text/css" href="dist/vendor/ionicons.min.css">
 	<!--<link rel="stylesheet" type="text/css" href="dist/vendor/chartist/chartist-plugin-tooltip.css">-->
 	<title>TeachAssist</title>
 	<script type="text/javascript" src="dist/vendor/jquery.min.js"></script>
